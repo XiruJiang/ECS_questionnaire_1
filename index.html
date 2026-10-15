@@ -15,6 +15,7 @@
 
   <!-- 基本情報の自由記述 -->
   <script src="https://unpkg.com/@jspsych/plugin-survey-text@1.1.3"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-survey-html-form@1.0.3"></script>
 
   <!-- 尺度の質問 -->
   <script src="https://unpkg.com/@jspsych/plugin-survey-likert@1.1.3"></script>
@@ -50,66 +51,384 @@ jsPsych.data.addProperties({
   let consentGiven = false;
 
 
-  // ====================================
-  // 2. 研究の説明と同意
-  // ====================================
 
-  const consent = {
-    type: jsPsychHtmlButtonResponse,
+// ====================================
+// 研究の説明・確認事項・同意
+// ====================================
 
-    stimulus: `
-      <h2>「Emotion Crafting Scale（ECS）日本語版の作成および信頼性・妥当性の検討　ー成人の愛着傾向との関連に着目してー」に関する研究協力のお願い</h2>
-      <p>【練習用】ここに研究の説明文を入れます。</p>
-      <p>研究の目的、所要時間、参加の任意性、</p>
-      <p>データの取扱い、問い合わせ先などを記載します。</p>
-      <p>説明を読み、参加に同意する場合は、</p>
-      <p>「同意して進む」を押してください。</p>
-    `,
+const consent = {
+  type: jsPsychHtmlButtonResponse,
 
-    choices: ["同意して進む", "同意しない"],
+  stimulus: `
+    <div style="
+      max-width: 850px;
+      margin: 0 auto;
+      text-align: left;
+      line-height: 1.8;
+    ">
+     <h2 style="text-align: center; font-size: 24px;">
+  研究協力のお願い
+</h2>
 
-    data: {
-      section: "consent"
-    },
+<p style="font-weight: bold;">
+  「Emotion Crafting Scale（ECS）日本語版の作成および
+  信頼性・妥当性の検討
+  ―成人の愛着傾向との関連に着目して―」
+</p>
 
-    on_finish: function(data) {
-      // 最初のボタンの番号は0
-      consentGiven = (data.response === 0);
-      data.consented = consentGiven;
+<div style="margin: 24px 0;">
+  <p>【ここに研究の説明文を入れてください】</p>
+
+  <p>【説明文は、段落ごとにこのように分けて入力できます】</p>
+
+  <p>【研究目的、所要時間、データの取扱い、謝礼、
+  問い合わせ先などの説明を記載します】</p>
+</div>
+
+      <hr>
+
+      <h3>説明事項の確認</h3>
+
+      <p>
+        上記の説明を読み、各項目の内容を理解したうえで、
+        チェックを入れてください。
+      </p>
+
+      <div id="consent-checklist">
+        ${[
+          "本研究の概要と目的",
+
+          "本人の自由意思による参加であること",
+
+          "本調査の対象者が、日本語で質問内容を理解し回答できる18歳以上の成人であること",
+
+          "本調査は無記名のオンラインアンケート調査であり、回答者と回答データを結び付ける情報が収集されないため、回答送信後は該当する回答データを特定できず、同意の撤回および回答データの削除には対応できないこと",
+
+          "回答送信前であれば、調査画面を閉じることでいつでも参加を中止でき、中止した場合にも不利益を受けないこと",
+
+          "個人情報は厳重に管理され、保護されること",
+
+          "本調査への協力に対する謝礼の支払条件について",
+
+          "感情や対人関係、抑うつおよび不安等に関する質問によって、一時的な不快感や心理的負担が生じる可能性があること"
+        ].map(function(text, index) {
+          return `
+            <label style="
+              display: flex;
+              align-items: flex-start;
+              gap: 12px;
+              margin-bottom: 18px;
+              cursor: pointer;
+            ">
+              <input
+                type="checkbox"
+                name="consent_item_${index + 1}"
+                style="
+                  width: 20px;
+                  height: 20px;
+                  flex-shrink: 0;
+                  margin-top: 5px;
+                "
+              >
+              <span>${text}</span>
+            </label>
+          `;
+        }).join("")}
+      </div>
+
+      <p
+        id="consent-status"
+        role="status"
+        style="font-weight: bold;"
+      >
+        すべての項目を確認すると「本研究への参加に同意する」を押せます。
+      </p>
+    </div>
+  `,
+
+  choices: ["本研究への参加に同意する", "同意しない"],
+
+  data: {
+    section: "consent"
+  },
+
+  on_load: function() {
+    const display = jsPsych.getDisplayElement();
+
+    const checkboxes = display.querySelectorAll(
+      '#consent-checklist input[type="checkbox"]'
+    );
+
+    // 最初のボタン＝「本研究への参加に同意する」
+    const agreeButton = display.querySelector(
+      '#jspsych-html-button-response-button-0 button'
+    );
+
+    const status = display.querySelector("#consent-status");
+
+    function updateConsentButton() {
+      const checkedCount = Array.from(checkboxes).filter(
+        function(checkbox) {
+          return checkbox.checked;
+        }
+      ).length;
+
+      const allChecked = checkedCount === checkboxes.length;
+
+      // 全項目にチェックがあるときだけ有効にする
+      agreeButton.disabled = !allChecked;
+
+      // ボタンの見た目
+      agreeButton.style.opacity = allChecked ? "1" : "0.4";
+      agreeButton.style.cursor = allChecked
+        ? "pointer"
+        : "not-allowed";
+
+      // 各確認項目を回答データに記録する
+      const confirmationData = {};
+
+      checkboxes.forEach(function(checkbox, index) {
+        confirmationData[`consent_item_${index + 1}`] =
+          checkbox.checked;
+      });
+
+      Object.assign(consent.data, confirmationData);
+
+      status.textContent = allChecked
+        ? "すべての項目を確認しました。本調査への参加に同意いただける方は、「本研究への参加に同意する」を押して回答画面へお進みください。本調査への参加に同意いただけない場合は、そのまま画面を閉じて調査を終了してください。なお、参加に同意されないことによって、不利益を受けることはありません。"
+        : `確認済み：${checkedCount}／${checkboxes.length}項目。すべての項目にチェックを入れてください。`;
     }
-  };
 
+    // 最初はチェックがないため、同意ボタンを無効にする
+    updateConsentButton();
 
-  // ====================================
-  // 3. 基本情報
-  // ====================================
+    // チェックを付ける・外すたびに状態を更新する
+    checkboxes.forEach(function(checkbox) {
+      checkbox.addEventListener("change", updateConsentButton);
+    });
+  },
 
-  const demographics = {
-    type: jsPsychSurveyText,
+  on_finish: function(data) {
+    consentGiven = (data.response === 0);
+    data.consented = consentGiven;
+  }
+};
+// ====================================
+// 3. 基本情報
+// ====================================
 
-    preamble: "<h2>基本情報</h2>",
+const demographics = {
+  type: jsPsychSurveyHtmlForm,
 
-    questions: [
-      {
-        prompt: "年齢を入力してください。",
-        name: "age",
-        required: false
-      },
-      {
-        prompt: "現在の職業を入力してください。",
-        name: "occupation",
-        required: false
+  preamble: `
+    <h2>基本情報</h2>
+    <p>
+      年齢を入力し、各質問についてあてはまるものを
+      1つずつ選んでください。
+    </p>
+  `,
+
+  html: `
+    <style>
+      #demographics-form {
+        max-width: 850px;
+        margin: 0 auto;
+        text-align: left;
+        line-height: 1.8;
       }
-    ],
 
-    button_label: "次へ",
+      #demographics-form fieldset {
+        margin: 0 0 24px;
+        padding: 16px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+      }
 
-    data: {
-      section: "demographics"
-    }
-  };
+      #demographics-form legend {
+        padding: 0 8px;
+        font-weight: bold;
+      }
 
+      #demographics-form .options {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px 20px;
+      }
 
+      #demographics-form .options label {
+        display: flex;
+        align-items: baseline;
+        gap: 8px;
+        cursor: pointer;
+      }
+
+      #demographics-form input[type="number"] {
+        width: 100px;
+        padding: 6px;
+        font-size: 18px;
+      }
+
+      @media (max-width: 600px) {
+        #demographics-form .options {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+
+    <div id="demographics-form">
+
+      <!-- 年齢 -->
+      <fieldset>
+        <legend>1．年齢</legend>
+
+        <label>
+          <input
+            type="number"
+            name="age"
+            min="18"
+            step="1"
+            required
+          >
+          歳
+        </label>
+
+        <p style="font-size: 14px; margin-bottom: 0;">
+          本調査の対象は18歳以上の方です。
+        </p>
+      </fieldset>
+
+      <!-- 性別 -->
+      <fieldset>
+        <legend>2．性別</legend>
+
+        <div class="options">
+          ${[
+            "男性",
+            "女性",
+            "その他",
+            "回答しない"
+          ].map(function(option) {
+            return `
+              <label>
+                <input
+                  type="radio"
+                  name="gender"
+                  value="${option}"
+                  required
+                >
+                <span>${option}</span>
+              </label>
+            `;
+          }).join("")}
+        </div>
+      </fieldset>
+
+      <!-- 最終学歴 -->
+      <fieldset>
+        <legend>
+          3．あなたの最終学歴（中退含む）は何ですか。
+        </legend>
+
+        <div class="options">
+          ${[
+            "中学・高校",
+            "専修・高専・短大",
+            "四年制大学",
+            "大学院",
+            "その他",
+            "回答しない"
+          ].map(function(option) {
+            return `
+              <label>
+                <input
+                  type="radio"
+                  name="education"
+                  value="${option}"
+                  required
+                >
+                <span>${option}</span>
+              </label>
+            `;
+          }).join("")}
+        </div>
+      </fieldset>
+
+      <!-- 婚姻状況 -->
+      <fieldset>
+        <legend>
+          4．あなたの婚姻状況をお知らせください。
+        </legend>
+
+        <div class="options">
+          ${[
+            "既婚／同居中",
+            "独身",
+            "交際相手がいる",
+            "別居／離婚",
+            "死別",
+            "回答しない"
+          ].map(function(option) {
+            return `
+              <label>
+                <input
+                  type="radio"
+                  name="marital_status"
+                  value="${option}"
+                  required
+                >
+                <span>${option}</span>
+              </label>
+            `;
+          }).join("")}
+        </div>
+      </fieldset>
+
+      <!-- 収入 -->
+      <fieldset>
+        <legend>
+          5．昨年のあなたの収入に最も近いのは、
+          次のうちどれですか。
+        </legend>
+
+        <div class="options">
+          ${[
+            "100万円未満",
+            "100～200万円未満",
+            "200～300万円未満",
+            "300～400万円未満",
+            "400～500万円未満",
+            "500～600万円未満",
+            "600～700万円未満",
+            "700～800万円未満",
+            "800～900万円未満",
+            "900～1000万円未満",
+            "1000万円以上",
+            "回答しない"
+          ].map(function(option) {
+            return `
+              <label>
+                <input
+                  type="radio"
+                  name="income"
+                  value="${option}"
+                  required
+                >
+                <span>${option}</span>
+              </label>
+            `;
+          }).join("")}
+        </div>
+      </fieldset>
+
+    </div>
+  `,
+
+  button_label: "次へ",
+
+  data: {
+    section: "demographics"
+  }
+};
   // ====================================
   // 4. 回答の選択肢
   // ====================================
