@@ -2254,6 +2254,45 @@ jsPsych.data.addProperties({
 
       restoreLikertResponse(scale);
 
+      const display = jsPsych.getDisplayElement();
+      const nextButton = display.querySelector(".jspsych-btn");
+
+      if (nextButton) {
+        nextButton.addEventListener("click", function(event) {
+          const unansweredIndex = scale.questions.findIndex(function(question, index) {
+            return !display.querySelector(`input[name="Q${index}"]:checked`);
+          });
+
+          if (unansweredIndex === -1) return;
+
+          event.preventDefault();
+          event.stopImmediatePropagation();
+
+          const groupInputs = display.querySelectorAll(
+            `input[name="Q${unansweredIndex}"]`
+          );
+          const firstInput = groupInputs[0];
+
+          if (!firstInput) return;
+
+          groupInputs.forEach(function(input) {
+            input.setCustomValidity("");
+            input.addEventListener("change", function clearRequiredMessage() {
+              groupInputs.forEach(function(groupInput) {
+                groupInput.setCustomValidity("");
+              });
+            }, { once: true });
+          });
+
+          firstInput.setCustomValidity(
+            "これらのオプションから１つ選択してください。"
+          );
+          firstInput.scrollIntoView({ block: "center" });
+          firstInput.focus();
+          firstInput.reportValidity();
+        }, true);
+      }
+
       addPreviousButton(function() {
         jsPsych.finishTrial({
           response: collectLikertResponse(scale.questions),
