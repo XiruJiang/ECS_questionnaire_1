@@ -111,6 +111,100 @@
       border-color: #9dceb9;
     }
 
+    .answer-validation-popover {
+      --popover-arrow-left: 28px;
+      position: fixed;
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: max-content;
+      max-width: calc(100vw - 24px);
+      padding: 11px 14px 11px 10px;
+      box-sizing: border-box;
+      color: #222;
+      background: #fff;
+      border: 1px solid #929292;
+      border-radius: 5px;
+      box-shadow: 0 4px 12px rgb(0 0 0 / 22%);
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.5;
+      text-align: left;
+    }
+
+    .answer-validation-popover::before,
+    .answer-validation-popover::after {
+      content: "";
+      position: absolute;
+      left: var(--popover-arrow-left);
+      width: 0;
+      height: 0;
+      transform: translateX(-50%);
+    }
+
+    .answer-validation-popover::before {
+      top: -11px;
+      border-right: 11px solid transparent;
+      border-bottom: 11px solid #929292;
+      border-left: 11px solid transparent;
+    }
+
+    .answer-validation-popover::after {
+      top: -9px;
+      border-right: 9px solid transparent;
+      border-bottom: 9px solid #fff;
+      border-left: 9px solid transparent;
+    }
+
+    .answer-validation-popover.is-above::before {
+      top: auto;
+      bottom: -11px;
+      border-top: 11px solid #929292;
+      border-bottom: 0;
+    }
+
+    .answer-validation-popover.is-above::after {
+      top: auto;
+      bottom: -9px;
+      border-top: 9px solid #fff;
+      border-bottom: 0;
+    }
+
+    .answer-validation-popover-icon {
+      display: inline-flex;
+      flex: 0 0 28px;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      color: #fff;
+      background: #ed6700;
+      border-radius: 2px;
+      font-size: 20px;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .answer-validation-popover-message {
+      min-width: 0;
+    }
+
+    @media (max-width: 600px) {
+      .answer-validation-popover {
+        gap: 8px;
+        padding: 10px 12px 10px 9px;
+        font-size: 14px;
+      }
+
+      .answer-validation-popover-icon {
+        flex-basis: 26px;
+        width: 26px;
+        height: 26px;
+        font-size: 18px;
+      }
+    }
+
     .cerq-scale .scale-instructions,
     .erq-scale .scale-instructions,
     .eac-scale .scale-instructions,
@@ -2265,6 +2359,96 @@ jsPsych.data.addProperties({
     });
   }
 
+  let activeAnswerValidationCleanup = null;
+
+  function hideAnswerValidationPopover() {
+    const cleanup = activeAnswerValidationCleanup;
+    activeAnswerValidationCleanup = null;
+
+    if (cleanup) cleanup();
+
+    document.querySelectorAll(".answer-validation-popover").forEach(function(popover) {
+      popover.remove();
+    });
+  }
+
+  function showAnswerValidationPopover(target) {
+    hideAnswerValidationPopover();
+
+    if (!target) return;
+
+    target.scrollIntoView({ block: "center", inline: "nearest" });
+    target.focus({ preventScroll: true });
+
+    const popover = document.createElement("div");
+    popover.className = "answer-validation-popover";
+    popover.setAttribute("role", "alert");
+    popover.setAttribute("aria-live", "assertive");
+    popover.innerHTML = `
+      <span class="answer-validation-popover-icon" aria-hidden="true">!</span>
+      <span class="answer-validation-popover-message">
+        これらのオプションのうち、いずれかを選択してください。
+      </span>
+    `;
+    document.body.appendChild(popover);
+
+    const positionPopover = function() {
+      if (!popover.isConnected || !target.isConnected) return;
+
+      const targetRect = target.getBoundingClientRect();
+      const popoverRect = popover.getBoundingClientRect();
+      const viewportPadding = 12;
+      const verticalGap = 14;
+      const targetCenter = targetRect.left + targetRect.width / 2;
+      const left = Math.min(
+        Math.max(targetCenter - 28, viewportPadding),
+        window.innerWidth - popoverRect.width - viewportPadding
+      );
+      const hasRoomBelow =
+        targetRect.bottom + verticalGap + popoverRect.height <=
+        window.innerHeight - viewportPadding;
+      const top = hasRoomBelow
+        ? targetRect.bottom + verticalGap
+        : Math.max(
+            viewportPadding,
+            targetRect.top - popoverRect.height - verticalGap
+          );
+      const arrowLeft = Math.min(
+        Math.max(targetCenter - left, 18),
+        popoverRect.width - 18
+      );
+
+      popover.classList.toggle("is-above", !hasRoomBelow);
+      popover.style.left = `${left}px`;
+      popover.style.top = `${top}px`;
+      popover.style.setProperty("--popover-arrow-left", `${arrowLeft}px`);
+    };
+
+    const dismissPopover = function(event) {
+      if (event && popover.contains(event.target)) return;
+      hideAnswerValidationPopover();
+    };
+
+    const activationTimer = window.setTimeout(function() {
+      document.addEventListener("pointerdown", dismissPopover, true);
+    }, 0);
+
+    window.addEventListener("resize", positionPopover);
+    window.addEventListener("scroll", positionPopover, true);
+    target.addEventListener("change", dismissPopover, { once: true });
+
+    activeAnswerValidationCleanup = function() {
+      window.clearTimeout(activationTimer);
+      document.removeEventListener("pointerdown", dismissPopover, true);
+      window.removeEventListener("resize", positionPopover);
+      window.removeEventListener("scroll", positionPopover, true);
+      target.removeEventListener("change", dismissPopover);
+      popover.remove();
+    };
+
+    window.requestAnimationFrame(positionPopover);
+  }
+
   function enableLikertNavigation(scale, stepIndex) {
     const originalOnLoad = scale.on_load;
     const originalOnFinish = scale.on_finish;
@@ -2275,6 +2459,8 @@ jsPsych.data.addProperties({
 
     scale.on_load = function() {
       if (originalOnLoad) originalOnLoad();
+
+      hideAnswerValidationPopover();
 
       restoreLikertResponse(scale);
 
@@ -2313,7 +2499,10 @@ jsPsych.data.addProperties({
         };
 
         display.querySelectorAll('input[type="radio"]').forEach(function(input) {
-          input.addEventListener("change", updateLikertProgress);
+          input.addEventListener("change", function() {
+            hideAnswerValidationPopover();
+            updateLikertProgress();
+          });
         });
 
         nextButton.disabled = false;
@@ -2333,12 +2522,7 @@ jsPsych.data.addProperties({
             `input[name="Q${unansweredIndex}"]`
           );
 
-          if (firstUnansweredInput) {
-            firstUnansweredInput.scrollIntoView({ block: "center" });
-            firstUnansweredInput.focus();
-          }
-
-          window.alert("これらのオプションから１つ選択してください。");
+          showAnswerValidationPopover(firstUnansweredInput);
         }, true);
 
         updateLikertProgress();
@@ -2814,6 +2998,7 @@ const demographics = {
   },
 
   on_load: function() {
+    hideAnswerValidationPopover();
     restoreHtmlFormResponse(savedDemographicsResponse);
 
     const display = jsPsych.getDisplayElement();
@@ -2868,8 +3053,13 @@ const demographics = {
       };
 
       form.querySelectorAll("input").forEach(function(input) {
-        input.addEventListener("input", updateDemographicProgress);
-        input.addEventListener("change", updateDemographicProgress);
+        const handleDemographicResponse = function() {
+          hideAnswerValidationPopover();
+          updateDemographicProgress();
+        };
+
+        input.addEventListener("input", handleDemographicResponse);
+        input.addEventListener("change", handleDemographicResponse);
       });
 
       nextButton.disabled = false;
@@ -2885,12 +3075,7 @@ const demographics = {
         event.preventDefault();
         event.stopImmediatePropagation();
 
-        if (firstUnanswered.control) {
-          firstUnanswered.control.scrollIntoView({ block: "center" });
-          firstUnanswered.control.focus();
-        }
-
-        window.alert("これらのオプションから１つ選択してください。");
+        showAnswerValidationPopover(firstUnanswered.control);
       }, true);
 
       updateDemographicProgress();
