@@ -1654,7 +1654,8 @@
 
     #jspsych-content.uniform-line-scale .jspsych-survey-likert-opts {
       display: grid;
-      grid-template-columns: repeat(var(--likert-count), minmax(0, 1fr));
+      /* 画面幅に関係なく、全選択肢を必ず同じ1行に収める。 */
+      grid-template-columns: repeat(var(--likert-count), minmax(0, 1fr)) !important;
       position: relative;
       gap: 0;
       width: min(100%, 680px);
@@ -1687,7 +1688,8 @@
       display: block !important;
       position: relative;
       z-index: 1;
-      grid-column: auto;
+      grid-column: auto !important;
+      grid-row: 1 !important;
       width: auto !important;
       margin: 0;
       padding: 0;
@@ -1824,6 +1826,7 @@
 
     #jspsych-content.cerq-scale .jspsych-survey-likert-opt-label,
     #jspsych-content.k6-scale .jspsych-survey-likert-opt-label {
+      justify-content: flex-start;
       gap: 6px;
       min-height: 94px;
       padding: 0 5px;
@@ -2072,7 +2075,7 @@
       }
 
       #jspsych-content.uniform-line-scale .jspsych-survey-likert-opts {
-        grid-template-columns: repeat(var(--likert-count), minmax(0, 1fr));
+        grid-template-columns: repeat(var(--likert-count), minmax(0, 1fr)) !important;
         gap: 0;
         padding-bottom: 48px;
       }
@@ -3800,11 +3803,6 @@ const demographics = {
 
   // 実際の提示順を各尺度のデータに記録する
   randomizedScales.forEach(function(scale, index) {
-    // すべての尺度項目を必須回答にし、未回答のまま「次へ」進めないようにする。
-    scale.questions.forEach(function(question) {
-      question.required = true;
-    });
-
     scale.data.scale_position = index + 1;
     enableLikertNavigation(scale, index + 2);
   });
