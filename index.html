@@ -2246,11 +2246,23 @@ jsPsych.data.addProperties({
     const originalOnFinish = scale.on_finish;
     const navigationKey = `scale_${scale.data.scale_id}`;
 
+    // 必須設定が以前の表示状態に残っていても、尺度を任意回答へ戻す。
+    scale.questions.forEach(function(question) {
+      question.required = false;
+    });
+
     scale.data.navigation_key = navigationKey;
     scale.data.navigation_step = stepIndex;
 
     scale.on_load = function() {
       if (originalOnLoad) originalOnLoad();
+
+      jsPsych.getDisplayElement()
+        .querySelectorAll('input[type="radio"][required]')
+        .forEach(function(input) {
+          input.required = false;
+          input.removeAttribute("required");
+        });
 
       restoreLikertResponse(scale);
 
@@ -2727,6 +2739,13 @@ const demographics = {
 
   on_load: function() {
     restoreHtmlFormResponse(savedDemographicsResponse);
+
+    const demographicsForm = jsPsych.getDisplayElement().querySelector("form");
+    demographicsForm.noValidate = true;
+    demographicsForm.querySelectorAll("[required]").forEach(function(input) {
+      input.required = false;
+      input.removeAttribute("required");
+    });
 
     addPreviousButton(function() {
       const form = jsPsych.getDisplayElement().querySelector("form");
