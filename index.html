@@ -87,6 +87,30 @@
       outline-offset: 2px;
     }
 
+    .likert-progress-status {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 38px;
+      margin: 8px 10px;
+      padding: 0 12px;
+      color: #765224;
+      background: #fff7e6;
+      border: 1px solid #e3c98d;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.4;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+
+    .likert-progress-status.is-complete {
+      color: #27634d;
+      background: #edf8f2;
+      border-color: #9dceb9;
+    }
+
     .cerq-scale .scale-instructions,
     .erq-scale .scale-instructions,
     .eac-scale .scale-instructions,
@@ -2257,7 +2281,44 @@ jsPsych.data.addProperties({
       const display = jsPsych.getDisplayElement();
       const nextButton = display.querySelector(".jspsych-btn");
 
+      addPreviousButton(function() {
+        jsPsych.finishTrial({
+          response: collectLikertResponse(scale.questions),
+          navigation_action: "back"
+        });
+      });
+
       if (nextButton) {
+        const progressStatus = document.createElement("span");
+        progressStatus.className = "likert-progress-status";
+        progressStatus.setAttribute("role", "status");
+        progressStatus.setAttribute("aria-live", "polite");
+
+        nextButton.classList.add("survey-next-button");
+        nextButton.parentNode.insertBefore(progressStatus, nextButton);
+
+        const updateLikertProgress = function() {
+          const answeredCount = scale.questions.reduce(function(count, question, index) {
+            const answered = display.querySelector(
+              `input[name="Q${index}"]:checked`
+            );
+            return count + (answered ? 1 : 0);
+          }, 0);
+          const totalCount = scale.questions.length;
+          const isComplete = answeredCount === totalCount;
+
+          progressStatus.textContent =
+            `回答済み：${answeredCount}/${totalCount}項目`;
+          progressStatus.classList.toggle("is-complete", isComplete);
+        };
+
+        display.querySelectorAll('input[type="radio"]').forEach(function(input) {
+          input.addEventListener("change", updateLikertProgress);
+        });
+
+        nextButton.disabled = false;
+        nextButton.removeAttribute("disabled");
+        nextButton.setAttribute("aria-disabled", "false");
         nextButton.addEventListener("click", function(event) {
           const unansweredIndex = scale.questions.findIndex(function(question, index) {
             return !display.querySelector(`input[name="Q${index}"]:checked`);
@@ -2268,37 +2329,20 @@ jsPsych.data.addProperties({
           event.preventDefault();
           event.stopImmediatePropagation();
 
-          const groupInputs = display.querySelectorAll(
+          const firstUnansweredInput = display.querySelector(
             `input[name="Q${unansweredIndex}"]`
           );
-          const firstInput = groupInputs[0];
 
-          if (!firstInput) return;
+          if (firstUnansweredInput) {
+            firstUnansweredInput.scrollIntoView({ block: "center" });
+            firstUnansweredInput.focus();
+          }
 
-          groupInputs.forEach(function(input) {
-            input.setCustomValidity("");
-            input.addEventListener("change", function clearRequiredMessage() {
-              groupInputs.forEach(function(groupInput) {
-                groupInput.setCustomValidity("");
-              });
-            }, { once: true });
-          });
-
-          firstInput.setCustomValidity(
-            "これらのオプションから１つ選択してください。"
-          );
-          firstInput.scrollIntoView({ block: "center" });
-          firstInput.focus();
-          firstInput.reportValidity();
+          window.alert("これらのオプションから１つ選択してください。");
         }, true);
-      }
 
-      addPreviousButton(function() {
-        jsPsych.finishTrial({
-          response: collectLikertResponse(scale.questions),
-          navigation_action: "back"
-        });
-      });
+        updateLikertProgress();
+      }
     };
 
     scale.on_finish = function(data) {
@@ -2772,14 +2816,85 @@ const demographics = {
   on_load: function() {
     restoreHtmlFormResponse(savedDemographicsResponse);
 
-    addPreviousButton(function() {
-      const form = jsPsych.getDisplayElement().querySelector("form");
+    const display = jsPsych.getDisplayElement();
+    const form = display.querySelector("form");
+    const nextButton = display.querySelector(".jspsych-btn");
 
+    addPreviousButton(function() {
       jsPsych.finishTrial({
         response: collectHtmlFormResponse(form),
         navigation_action: "back"
       });
     });
+
+    if (form && nextButton) {
+      const progressStatus = document.createElement("span");
+      progressStatus.className = "likert-progress-status";
+      progressStatus.setAttribute("role", "status");
+      progressStatus.setAttribute("aria-live", "polite");
+
+      nextButton.classList.add("survey-next-button");
+      nextButton.parentNode.insertBefore(progressStatus, nextButton);
+
+      const demographicFields = [
+        {
+          control: form.querySelector('input[name="age"]'),
+          isAnswered: function() {
+            const ageInput = form.querySelector('input[name="age"]');
+            return Boolean(
+              ageInput && ageInput.value.trim() !== "" && ageInput.checkValidity()
+            );
+          }
+        },
+        ...["gender", "education", "marital_status", "income"].map(function(name) {
+          return {
+            control: form.querySelector(`input[name="${name}"]`),
+            isAnswered: function() {
+              return Boolean(form.querySelector(`input[name="${name}"]:checked`));
+            }
+          };
+        })
+      ];
+
+      const updateDemographicProgress = function() {
+        const answeredCount = demographicFields.filter(function(field) {
+          return field.isAnswered();
+        }).length;
+        const isComplete = answeredCount === demographicFields.length;
+
+        progressStatus.textContent =
+          `回答済み：${answeredCount}/${demographicFields.length}項目`;
+        progressStatus.classList.toggle("is-complete", isComplete);
+      };
+
+      form.querySelectorAll("input").forEach(function(input) {
+        input.addEventListener("input", updateDemographicProgress);
+        input.addEventListener("change", updateDemographicProgress);
+      });
+
+      nextButton.disabled = false;
+      nextButton.removeAttribute("disabled");
+      nextButton.setAttribute("aria-disabled", "false");
+      nextButton.addEventListener("click", function(event) {
+        const firstUnanswered = demographicFields.find(function(field) {
+          return !field.isAnswered();
+        });
+
+        if (!firstUnanswered) return;
+
+        event.preventDefault();
+        event.stopImmediatePropagation();
+
+        if (firstUnanswered.control) {
+          firstUnanswered.control.scrollIntoView({ block: "center" });
+          firstUnanswered.control.focus();
+        }
+
+        window.alert("これらのオプションから１つ選択してください。");
+      }, true);
+
+      updateDemographicProgress();
+    }
   },
 
   on_finish: function(data) {
