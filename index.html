@@ -2460,9 +2460,6 @@ jsPsych.data.addProperties({
   let currentSurveyStep = 0;
   let navigationFinished = false;
 
-  // 一時確認用：true に戻すと、基本情報と尺度項目が再び回答必須になります。
-  const REQUIRE_COMPLETE_RESPONSES = false;
-
   const savedConsentConfirmations = {};
   let savedDemographicsResponse = {};
   const savedLikertResponses = {};
@@ -2717,8 +2714,6 @@ jsPsych.data.addProperties({
         nextButton.removeAttribute("disabled");
         nextButton.setAttribute("aria-disabled", "false");
         nextButton.addEventListener("click", function(event) {
-          if (!REQUIRE_COMPLETE_RESPONSES) return;
-
           const unansweredIndex = scale.questions.findIndex(function(question, index) {
             return !display.querySelector(`input[name="Q${index}"]:checked`);
           });
@@ -3215,12 +3210,6 @@ const demographics = {
     const form = display.querySelector("form");
     const nextButton = display.querySelector(".jspsych-btn");
 
-    if (form && !REQUIRE_COMPLETE_RESPONSES) {
-      form.querySelectorAll("[required]").forEach(function(input) {
-        input.removeAttribute("required");
-      });
-    }
-
     addPreviousButton(function() {
       jsPsych.finishTrial({
         response: collectHtmlFormResponse(form),
@@ -3282,8 +3271,6 @@ const demographics = {
       nextButton.removeAttribute("disabled");
       nextButton.setAttribute("aria-disabled", "false");
       nextButton.addEventListener("click", function(event) {
-        if (!REQUIRE_COMPLETE_RESPONSES) return;
-
         const firstUnanswered = demographicFields.find(function(field) {
           return !field.isAnswered();
         });
@@ -4400,9 +4387,9 @@ const demographics = {
 
   // 実際の提示順を各尺度のデータに記録する
   randomizedScales.forEach(function(scale, index) {
-    // REQUIRE_COMPLETE_RESPONSES で回答必須／一時解除を切り替える。
+    // すべての尺度項目を必須回答にし、未回答のまま「次へ」進めないようにする。
     scale.questions.forEach(function(question) {
-      question.required = REQUIRE_COMPLETE_RESPONSES;
+      question.required = true;
     });
 
     scale.data.scale_position = index + 1;
