@@ -1337,105 +1337,36 @@
       border-left-color: #76558f;
     }
 
-    .ecs-scale .ecs-keyword-card {
-      --keyword-accent: #76558f;
-      --keyword-soft: #f1eafb;
-      display: grid;
-      grid-template-columns: 58px minmax(0, 1fr);
-      gap: 6px 16px;
-      position: relative;
-      overflow: hidden;
+    .ecs-scale .ecs-emotion-guide {
       margin-top: 20px;
-      padding: 18px 20px;
-      color: #33283c;
-      background: linear-gradient(135deg, var(--keyword-soft), #fff 72%);
-      border: 1px solid color-mix(in srgb, var(--keyword-accent) 34%, white);
-      border-radius: 14px;
-      box-shadow: 0 8px 24px rgb(54 38 66 / 10%);
+      padding: 16px 18px;
+      color: #2f3337;
+      background: #fff;
+      border: 1px solid #cfd5db;
+      border-radius: 8px;
     }
 
-    .ecs-scale .ecs-keyword-card::after {
-      content: "";
-      position: absolute;
-      right: -30px;
-      bottom: -42px;
-      width: 120px;
-      height: 120px;
-      background: var(--keyword-accent);
-      border-radius: 50%;
-      opacity: 0.08;
-    }
-
-    .ecs-scale .ecs-keyword-icon {
-      display: inline-flex;
-      grid-row: 1 / 4;
-      align-items: center;
-      justify-content: center;
-      width: 52px;
-      height: 52px;
-      color: #fff;
-      background: var(--keyword-accent);
-      border-radius: 16px;
-      font-size: 27px;
-      box-shadow: 0 5px 14px color-mix(in srgb, var(--keyword-accent) 28%, transparent);
-    }
-
-    .ecs-scale .ecs-keyword-label {
-      color: var(--keyword-accent);
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 0.16em;
-      line-height: 1.2;
-    }
-
-    .ecs-scale .ecs-keyword {
-      color: var(--keyword-accent);
-      font-size: 25px;
-      font-weight: 800;
-      line-height: 1.25;
-    }
-
-    .ecs-scale .ecs-keyword-description {
-      position: relative;
-      z-index: 1;
+    .ecs-scale .ecs-emotion-guide-instruction {
+      display: block;
+      margin-bottom: 10px;
       font-size: 15px;
-      font-weight: 500;
+      font-weight: 600;
       line-height: 1.7;
     }
 
-    .ecs-keyword-card.keyword-happiness {
-      --keyword-accent: #c77918;
-      --keyword-soft: #fff2ce;
+    .ecs-scale .ecs-emotion-name {
+      display: block;
+      margin-bottom: 4px;
+      color: inherit;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.4;
     }
 
-    .ecs-keyword-card.keyword-satisfaction {
-      --keyword-accent: #357c70;
-      --keyword-soft: #dff4ef;
-    }
-
-    .ecs-keyword-card.keyword-enthusiasm {
-      --keyword-accent: #cb5548;
-      --keyword-soft: #ffe6e1;
-    }
-
-    .ecs-keyword-card.keyword-pride {
-      --keyword-accent: #7e5bad;
-      --keyword-soft: #eee5fb;
-    }
-
-    .ecs-keyword-card.keyword-interest {
-      --keyword-accent: #31769c;
-      --keyword-soft: #dff1fa;
-    }
-
-    .ecs-keyword-card.keyword-loved {
-      --keyword-accent: #b54f78;
-      --keyword-soft: #fbe3ed;
-    }
-
-    .ecs-keyword-card.keyword-energy {
-      --keyword-accent: #567a24;
-      --keyword-soft: #eaf4d9;
+    .ecs-scale .ecs-emotion-description {
+      display: block;
+      font-size: 15px;
+      line-height: 1.7;
     }
 
     #jspsych-content.ecs-scale .jspsych-survey-likert-statement {
@@ -1718,24 +1649,16 @@
         font-size: 12px;
       }
 
-      .ecs-scale .ecs-keyword-card {
-        grid-template-columns: 48px minmax(0, 1fr);
-        gap: 5px 12px;
-        padding: 16px;
+      .ecs-scale .ecs-emotion-guide {
+        padding: 14px 16px;
       }
 
-      .ecs-scale .ecs-keyword-icon {
-        width: 44px;
-        height: 44px;
-        border-radius: 13px;
-        font-size: 23px;
+      .ecs-scale .ecs-emotion-name {
+        font-size: 19px;
       }
 
-      .ecs-scale .ecs-keyword {
-        font-size: 22px;
-      }
-
-      .ecs-scale .ecs-keyword-description {
+      .ecs-scale .ecs-emotion-guide-instruction,
+      .ecs-scale .ecs-emotion-description {
         font-size: 14px;
       }
 
@@ -1969,11 +1892,84 @@
       text-wrap: balance;
     }
 
+    /* 全尺度：教示文を淡いベージュ、回答欄の線と選択点を黒に統一する。 */
+    .cerq-scale .scale-instructions,
+    .erq-scale .scale-instructions,
+    .eac-scale .scale-instructions,
+    .panas-scale .scale-instructions,
+    .swls-scale .scale-instructions,
+    .svs-scale .scale-instructions,
+    .pwbs-scale .scale-instructions,
+    .ecr-scale .scale-instructions,
+    .k6-scale .scale-instructions,
+    .ecs-scale .scale-instructions {
+      color: #302c27;
+      background: #f6efe3;
+      border-color: #d8c9b2;
+      border-left-color: #a78f6d;
+    }
+
+    .scale-instructions .instruction-context,
+    .scale-instructions .response-guidance,
+    .scale-instructions.long-instructions .response-guidance.form10-guidance,
+    .scale-instructions .response-guidance.form10-guidance {
+      color: #302c27;
+    }
+
+    .scale-instructions .instruction-important,
+    .ecs-scale .ecs-emotion-guide {
+      color: #302c27;
+      background: #fffaf1;
+      border-color: #d8c9b2;
+      border-left-color: #a78f6d;
+    }
+
+    .scale-instructions p + p,
+    .scale-instructions .instruction-context + .form10-guidance,
+    .scale-instructions .instruction-important + .form10-guidance,
+    .response-option-key {
+      border-top-color: rgb(115 91 60 / 20%);
+    }
+
+    #jspsych-content.uniform-line-scale .jspsych-survey-likert-opts::before {
+      background: #111;
+    }
+
+    #jspsych-content.uniform-line-scale .jspsych-survey-likert-opt-label,
+    #jspsych-content.uniform-line-scale .jspsych-survey-likert-opt-label:hover,
+    #jspsych-content.uniform-line-scale .jspsych-survey-likert-opt-label:has(input:checked),
+    #jspsych-content.uniform-line-scale .jspsych-survey-likert-opts li:first-child::after,
+    #jspsych-content.uniform-line-scale .jspsych-survey-likert-opts li:last-child::after,
+    #jspsych-content.cerq-scale .choice-text,
+    #jspsych-content.k6-scale .choice-text {
+      color: #111;
+    }
+
+    #jspsych-content.uniform-line-scale .jspsych-survey-likert-opt-label:hover input {
+      border-color: #111;
+      box-shadow: 0 0 0 4px rgb(17 17 17 / 12%);
+    }
+
+    #jspsych-content.uniform-line-scale .jspsych-survey-likert-opts li input[type="radio"] {
+      accent-color: #111;
+      border-color: #111;
+    }
+
+    #jspsych-content.uniform-line-scale .jspsych-survey-likert-opts li input[type="radio"]:checked {
+      background: radial-gradient(circle, #111 0 5px, #fff 6px);
+      border-color: #111;
+      box-shadow: 0 0 0 4px rgb(17 17 17 / 16%);
+    }
+
+    #jspsych-content.uniform-line-scale .jspsych-survey-likert-opts li input[type="radio"]:focus-visible {
+      outline-color: #111;
+    }
+
     /* 研究説明画面：長い説明文を内容を変えずに読み進めやすくする */
     .consent-page {
       max-width: 850px;
       margin: 0 auto;
-      color: #263746;
+      color: #3b3329;
       text-align: left;
       line-height: 1.9;
     }
@@ -1983,10 +1979,11 @@
       overflow: hidden;
       margin-bottom: 28px;
       padding: 30px 28px 26px;
-      color: #fff;
-      background: linear-gradient(135deg, #4e3f78 0%, #6e5aa2 48%, #397c8e 100%);
+      color: #3f3427;
+      background: linear-gradient(135deg, #f7eedf 0%, #ead9bd 52%, #ddc59e 100%);
+      border: 1px solid #d2ba92;
       border-radius: 20px;
-      box-shadow: 0 14px 34px rgb(52 54 95 / 20%);
+      box-shadow: 0 14px 34px rgb(96 73 42 / 16%);
       text-align: center;
       isolation: isolate;
     }
@@ -1996,7 +1993,7 @@
       content: "";
       position: absolute;
       z-index: -1;
-      border: 1px solid rgb(255 255 255 / 28%);
+      border: 1px solid rgb(111 82 46 / 20%);
       border-radius: 50%;
     }
 
@@ -2005,7 +2002,7 @@
       right: -24px;
       width: 160px;
       height: 160px;
-      box-shadow: 0 0 0 24px rgb(255 255 255 / 6%);
+      box-shadow: 0 0 0 24px rgb(255 250 241 / 24%);
     }
 
     .consent-hero::after {
@@ -2013,16 +2010,16 @@
       left: -24px;
       width: 130px;
       height: 130px;
-      box-shadow: 0 0 0 18px rgb(255 255 255 / 6%);
+      box-shadow: 0 0 0 18px rgb(255 250 241 / 22%);
     }
 
     .consent-document-label {
       display: inline-block;
       margin-bottom: 10px;
       padding: 4px 12px;
-      color: #fff;
-      background: rgb(255 255 255 / 15%);
-      border: 1px solid rgb(255 255 255 / 36%);
+      color: #59452f;
+      background: rgb(255 250 241 / 58%);
+      border: 1px solid rgb(132 100 60 / 32%);
       border-radius: 999px;
       font-size: 12px;
       font-weight: 700;
@@ -2040,7 +2037,7 @@
     .consent-study-title {
       max-width: 680px;
       margin: 14px auto 0;
-      color: rgb(255 255 255 / 94%);
+      color: #514232;
       font-size: 15px;
       font-weight: 600;
       line-height: 1.75;
@@ -2055,10 +2052,10 @@
 
     .research-info-section {
       padding: 22px 24px;
-      background: #fff;
-      border: 1px solid #dce4ec;
+      background: #fffaf2;
+      border: 1px solid #ded0b9;
       border-radius: 14px;
-      box-shadow: 0 5px 16px rgb(43 62 80 / 7%);
+      box-shadow: 0 5px 16px rgb(91 70 43 / 7%);
     }
 
     .research-info-section h3 {
@@ -2066,7 +2063,7 @@
       align-items: center;
       gap: 10px;
       margin: 0 0 14px;
-      color: #443566;
+      color: #604a31;
       font-size: 19px;
       line-height: 1.5;
     }
@@ -2076,7 +2073,7 @@
       width: 10px;
       height: 10px;
       flex: 0 0 10px;
-      background: linear-gradient(135deg, #8067ad, #3f8a98);
+      background: linear-gradient(135deg, #b5986c, #80633f);
       border-radius: 3px;
       transform: rotate(45deg);
     }
@@ -2104,7 +2101,7 @@
       position: relative;
       margin: 0;
       padding: 13px 15px 13px 42px;
-      background: #f7f8fc;
+      background: #f7efe2;
       border-radius: 10px;
       font-size: 16px;
       line-height: 1.9;
@@ -2117,25 +2114,25 @@
       left: 18px;
       width: 9px;
       height: 9px;
-      background: #6f5a9d;
+      background: #8a6a43;
       border-radius: 50%;
-      box-shadow: 0 0 0 4px rgb(111 90 157 / 12%);
+      box-shadow: 0 0 0 4px rgb(138 106 67 / 13%);
     }
 
     .research-info-section.is-important {
-      background: linear-gradient(135deg, #fffdf7, #fff);
-      border-color: #e8d9aa;
+      background: linear-gradient(135deg, #fff6e5, #fffaf2);
+      border-color: #dfc99f;
     }
 
     .research-info-section.is-contact {
-      background: linear-gradient(135deg, #f3f7fc, #f8f5fc);
-      border-color: #cfdbea;
+      background: linear-gradient(135deg, #f5ead8, #fffaf2);
+      border-color: #d9c4a5;
     }
 
     .research-contact-block {
       padding: 14px 16px;
-      background: rgb(255 255 255 / 72%);
-      border-left: 4px solid #6f5a9d;
+      background: rgb(255 250 242 / 82%);
+      border-left: 4px solid #8a6a43;
       border-radius: 8px;
       overflow-wrap: anywhere;
     }
@@ -2147,13 +2144,40 @@
     .consent-confirmation {
       margin-top: 30px;
       padding-top: 28px;
-      border-top: 2px solid #e1e7ed;
+      border-top: 2px solid #ddcfb9;
     }
 
     .consent-confirmation > h3 {
       margin: 0 0 10px;
-      color: #443566;
+      color: #604a31;
       font-size: 22px;
+    }
+
+    .consent-page input[type="checkbox"] {
+      accent-color: #80633f;
+    }
+
+    #jspsych-content:has(.consent-page) .jspsych-btn {
+      color: #3f3427;
+      background: #ead9bd;
+      border: 1px solid #b99d72;
+      box-shadow: none;
+    }
+
+    #jspsych-content:has(.consent-page) .jspsych-btn:hover:not(:disabled) {
+      background: #ddc49c;
+      border-color: #94744b;
+    }
+
+    #jspsych-content:has(.consent-page) .jspsych-btn:focus-visible {
+      outline: 2px solid #80633f;
+      outline-offset: 3px;
+    }
+
+    #jspsych-content:has(.consent-page) .jspsych-btn:disabled {
+      color: #83796d;
+      background: #eee7dc;
+      border-color: #d5cabb;
     }
 
     @media (max-width: 600px) {
@@ -2227,6 +2251,187 @@
         line-height: 1.35;
       }
     }
+
+    /* 全画面：文字色を黒に統一し、サイズと太さで情報の階層を示す。 */
+    #jspsych-content,
+    #jspsych-content * {
+      color: #000 !important;
+    }
+
+    .answer-validation-popover,
+    .answer-validation-popover * {
+      color: #000 !important;
+    }
+
+    #jspsych-content *::before,
+    #jspsych-content *::after {
+      color: #000 !important;
+    }
+
+    #jspsych-content h1,
+    #jspsych-content h2,
+    #jspsych-content h3,
+    #jspsych-content legend {
+      font-weight: 800;
+    }
+
+    #jspsych-content h2 {
+      line-height: 1.45;
+    }
+
+    #jspsych-content h3,
+    #jspsych-content legend {
+      line-height: 1.55;
+    }
+
+    #jspsych-content .scale-instructions p,
+    #jspsych-content .ecs-emotion-description {
+      font-size: 16px;
+    }
+
+    #jspsych-content .scale-instructions .response-guidance,
+    #jspsych-content .scale-instructions .form10-guidance,
+    #jspsych-content .ecs-emotion-guide-instruction {
+      font-weight: 700;
+    }
+
+    #jspsych-content .jspsych-survey-likert-statement {
+      font-size: 17px;
+      font-weight: 650;
+    }
+
+    #jspsych-content .jspsych-btn,
+    #jspsych-content .likert-progress-status {
+      font-weight: 700;
+    }
+
+    #jspsych-content .consent-hero h2 {
+      font-weight: 800;
+    }
+
+    #jspsych-content .research-info-section h3,
+    #jspsych-content .consent-confirmation > h3 {
+      font-weight: 750;
+    }
+
+    #jspsych-content #demographics-form legend {
+      font-size: 17px;
+    }
+
+    /* 別紙様式3・4：点の説明ツールチップと、選択後の説明表示。 */
+    #jspsych-content.eac-scale .jspsych-survey-likert-opts,
+    #jspsych-content.panas-scale .jspsych-survey-likert-opts {
+      padding-bottom: 76px;
+    }
+
+    #jspsych-content.eac-scale .jspsych-survey-likert-opts li:first-child::after,
+    #jspsych-content.eac-scale .jspsych-survey-likert-opts li:last-child::after,
+    #jspsych-content.panas-scale .jspsych-survey-likert-opts li:first-child::after,
+    #jspsych-content.panas-scale .jspsych-survey-likert-opts li:last-child::after {
+      display: block !important;
+      color: #000 !important;
+      font-weight: 700;
+    }
+
+    #jspsych-content.eac-scale .jspsych-survey-likert-opt-label,
+    #jspsych-content.panas-scale .jspsych-survey-likert-opt-label {
+      position: relative;
+      overflow: visible;
+    }
+
+    .choice-hover-tooltip {
+      display: none;
+      position: absolute;
+      z-index: 20;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      width: max-content;
+      max-width: 220px;
+      padding: 7px 10px;
+      color: #000 !important;
+      background: #fff;
+      border: 1px solid #222;
+      border-radius: 5px;
+      box-shadow: 0 4px 12px rgb(0 0 0 / 16%);
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.45;
+      text-align: center;
+      white-space: normal;
+      pointer-events: none;
+      transform: translateX(-50%);
+    }
+
+    #jspsych-content .selected-choice-text {
+      display: none;
+      position: absolute;
+      z-index: 3;
+      top: 50px;
+      left: 50%;
+      width: max-content;
+      max-width: 220px;
+      color: #777 !important;
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.45;
+      text-align: center;
+      white-space: normal;
+      pointer-events: none;
+      transform: translateX(-50%);
+    }
+
+    #jspsych-content.eac-scale .jspsych-survey-likert-opt-label:has(input:checked) .selected-choice-text,
+    #jspsych-content.panas-scale .jspsych-survey-likert-opt-label:has(input:checked) .selected-choice-text {
+      display: block;
+    }
+
+    #jspsych-content.eac-scale .jspsych-survey-likert-opts li:first-child .jspsych-survey-likert-opt-label:has(input:checked) .selected-choice-text,
+    #jspsych-content.eac-scale .jspsych-survey-likert-opts li:last-child .jspsych-survey-likert-opt-label:has(input:checked) .selected-choice-text,
+    #jspsych-content.panas-scale .jspsych-survey-likert-opts li:first-child .jspsych-survey-likert-opt-label:has(input:checked) .selected-choice-text,
+    #jspsych-content.panas-scale .jspsych-survey-likert-opts li:last-child .jspsych-survey-likert-opt-label:has(input:checked) .selected-choice-text {
+      display: none;
+    }
+
+    #jspsych-content.eac-scale .jspsych-survey-likert-opts li:first-child .choice-hover-tooltip,
+    #jspsych-content.eac-scale .jspsych-survey-likert-opts li:first-child .selected-choice-text,
+    #jspsych-content.panas-scale .jspsych-survey-likert-opts li:first-child .choice-hover-tooltip,
+    #jspsych-content.panas-scale .jspsych-survey-likert-opts li:first-child .selected-choice-text {
+      left: 0;
+      transform: none;
+    }
+
+    #jspsych-content.eac-scale .jspsych-survey-likert-opts li:last-child .choice-hover-tooltip,
+    #jspsych-content.eac-scale .jspsych-survey-likert-opts li:last-child .selected-choice-text,
+    #jspsych-content.panas-scale .jspsych-survey-likert-opts li:last-child .choice-hover-tooltip,
+    #jspsych-content.panas-scale .jspsych-survey-likert-opts li:last-child .selected-choice-text {
+      right: 0;
+      left: auto;
+      transform: none;
+    }
+
+    #jspsych-content.eac-scale .jspsych-survey-likert-opt-label:has(input:focus-visible) .choice-hover-tooltip,
+    #jspsych-content.panas-scale .jspsych-survey-likert-opt-label:has(input:focus-visible) .choice-hover-tooltip {
+      display: block;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      #jspsych-content.eac-scale .jspsych-survey-likert-opt-label:hover .choice-hover-tooltip,
+      #jspsych-content.panas-scale .jspsych-survey-likert-opt-label:hover .choice-hover-tooltip {
+        display: block;
+      }
+    }
+
+    @media (max-width: 600px) {
+      #jspsych-content.eac-scale .jspsych-survey-likert-opts,
+      #jspsych-content.panas-scale .jspsych-survey-likert-opts {
+        padding-bottom: 86px;
+      }
+
+      #jspsych-content .selected-choice-text {
+        max-width: 150px;
+        font-size: 12px;
+      }
+    }
   </style>
 </head>
 
@@ -2254,6 +2459,9 @@ jsPsych.data.addProperties({
   let consentGiven = false;
   let currentSurveyStep = 0;
   let navigationFinished = false;
+
+  // 一時確認用：true に戻すと、基本情報と尺度項目が再び回答必須になります。
+  const REQUIRE_COMPLETE_RESPONSES = false;
 
   const savedConsentConfirmations = {};
   let savedDemographicsResponse = {};
@@ -2509,6 +2717,8 @@ jsPsych.data.addProperties({
         nextButton.removeAttribute("disabled");
         nextButton.setAttribute("aria-disabled", "false");
         nextButton.addEventListener("click", function(event) {
+          if (!REQUIRE_COMPLETE_RESPONSES) return;
+
           const unansweredIndex = scale.questions.findIndex(function(question, index) {
             return !display.querySelector(`input[name="Q${index}"]:checked`);
           });
@@ -3005,6 +3215,12 @@ const demographics = {
     const form = display.querySelector("form");
     const nextButton = display.querySelector(".jspsych-btn");
 
+    if (form && !REQUIRE_COMPLETE_RESPONSES) {
+      form.querySelectorAll("[required]").forEach(function(input) {
+        input.removeAttribute("required");
+      });
+    }
+
     addPreviousButton(function() {
       jsPsych.finishTrial({
         response: collectHtmlFormResponse(form),
@@ -3066,6 +3282,8 @@ const demographics = {
       nextButton.removeAttribute("disabled");
       nextButton.setAttribute("aria-disabled", "false");
       nextButton.addEventListener("click", function(event) {
+        if (!REQUIRE_COMPLETE_RESPONSES) return;
+
         const firstUnanswered = demographicFields.find(function(field) {
           return !field.isAnswered();
         });
@@ -3111,9 +3329,54 @@ const demographics = {
     "1", "2", "3", "4"
   ];
 
+  const optionMeaningsEAC = [
+    "まったく行っていない",
+    "あまり行っていない",
+    "ときどき行っている",
+    "よく行っている"
+  ];
+
   const labelsPANAS = [
     "1", "2", "3", "4", "5", "6"
   ];
+
+  const optionMeaningsPANAS = [
+    "全く当てはまらない",
+    "当てはまらない",
+    "どちらかといえば当てはまらない",
+    "どちらかといえば当てはまる",
+    "当てはまる",
+    "非常によく当てはまる"
+  ];
+
+  function addOptionMeaningFeedback(optionMeanings) {
+    const display = jsPsych.getDisplayElement();
+
+    display.querySelectorAll(".jspsych-survey-likert-opts").forEach(function(options) {
+      options.querySelectorAll("li").forEach(function(item, index) {
+        const label = item.querySelector(".jspsych-survey-likert-opt-label");
+        const input = item.querySelector('input[type="radio"]');
+        const meaning = optionMeanings[index];
+
+        if (!label || !input || !meaning) return;
+
+        input.setAttribute("aria-label", `${index + 1}：${meaning}`);
+
+        const tooltip = document.createElement("span");
+        tooltip.className = "choice-hover-tooltip";
+        tooltip.setAttribute("aria-hidden", "true");
+        tooltip.textContent = meaning;
+
+        const selectedText = document.createElement("span");
+        selectedText.className = "selected-choice-text";
+        selectedText.setAttribute("aria-hidden", "true");
+        selectedText.textContent = meaning;
+
+        label.appendChild(tooltip);
+        label.appendChild(selectedText);
+      });
+    });
+  }
 
   const labelsSWLS = ["1", "2", "3", "4", "5", "6", "7"];
 
@@ -3475,6 +3738,10 @@ const demographics = {
     button_label: "次へ",
     data: { section: "scale", scale_id: "C" },
 
+    on_load: function() {
+      addOptionMeaningFeedback(optionMeaningsEAC);
+    },
+
     on_finish: function(data) {
       // PDFの表と同じく、1〜4として保存する。
       storeNumberedLikertResponses(data, 1);
@@ -3566,6 +3833,10 @@ const demographics = {
 
     button_label: "次へ",
     data: { section: "scale", scale_id: "D" },
+
+    on_load: function() {
+      addOptionMeaningFeedback(optionMeaningsPANAS);
+    },
 
     on_finish: function(data) {
       // PDFの表と同じく、左から1〜6として保存する。
@@ -3886,15 +4157,16 @@ const demographics = {
     }).join("");
   }
 
-  function createEcsKeywordCard(config) {
+  function createEcsEmotionGuide(config) {
     if (!config.keyword) return "";
 
     return `
-      <div class="ecs-keyword-card keyword-${config.tone}">
-        <span class="ecs-keyword-icon" aria-hidden="true">${config.icon}</span>
-        <span class="ecs-keyword-label">今回のキーワード</span>
-        <strong class="ecs-keyword">${config.keyword}</strong>
-        <span class="ecs-keyword-description">${config.description}</span>
+      <div class="ecs-emotion-guide">
+        <span class="ecs-emotion-guide-instruction">
+          次の感情の意味を確認してから、各項目に回答してください。
+        </span>
+        <strong class="ecs-emotion-name">${config.keyword}</strong>
+        <span class="ecs-emotion-description">${config.description}</span>
       </div>
     `;
   }
@@ -3906,7 +4178,7 @@ const demographics = {
       preamble: `
         <div class="scale-instructions">
           ${createInstructionParagraphs(config.instruction)}
-          ${createEcsKeywordCard(config)}
+          ${createEcsEmotionGuide(config)}
         </div>
       `,
 
@@ -3958,8 +4230,6 @@ const demographics = {
       instruction: ecsEmotionInstruction,
       keyword: "幸福",
       description: "喜びや楽しさ、調和を感じている状態。",
-      icon: "☀️",
-      tone: "happiness",
       items: [
         "私は、幸せな気持ちにしてくれる事柄について、意図的に考えるようにしている。",
         "私は、幸せな気持ちにしてくれる活動が何なのか、よく分かっている。",
@@ -3979,8 +4249,6 @@ const demographics = {
       instruction: ecsEmotionInstruction,
       keyword: "満足",
       description: "欲求・期待・必要が満たされたときに生じる安定した良い感覚。",
-      icon: "🌿",
-      tone: "satisfaction",
       items: [
         "私は、満ち足りた気持ちにしてくれる事柄について、意図的に考える。",
         "私は、満ち足りた気持ちにしてくれる活動が何なのか、よく分かっている。",
@@ -4000,8 +4268,6 @@ const demographics = {
       instruction: ecsEmotionInstruction,
       keyword: "熱意",
       description: "強い関心や意欲を伴う高揚した感情。",
-      icon: "🔥",
-      tone: "enthusiasm",
       items: [
         "私は、自分が熱意を持てる事柄について、意図的に考える。",
         "私は、私に熱意を感じさせる活動が何なのか、よく分かっている。",
@@ -4021,8 +4287,6 @@ const demographics = {
       instruction: ecsEmotionInstruction,
       keyword: "誇り",
       description: "自身の成果、あるいは広く称賛される資質や所有物から生じる、深い喜びや満足感。",
-      icon: "✨",
-      tone: "pride",
       items: [
         "私は、誇らしさを感じさせる事柄について、意図的に考える。",
         "私は、誇らしさを感じさせる活動が何なのか、よく分かっている。",
@@ -4042,8 +4306,6 @@ const demographics = {
       instruction: ecsEmotionInstruction,
       keyword: "強い関心",
       description: "ものや人についてもっと知りたいと思う強い気持ち。",
-      icon: "🔎",
-      tone: "interest",
       items: [
         "私は、強い関心を抱かせる事柄について、意図的に考える。",
         "私は、強い関心を抱かせる活動が何なのか、よく分かっている。",
@@ -4063,8 +4325,6 @@ const demographics = {
       instruction: ecsEmotionInstruction,
       keyword: "愛されている感覚",
       description: "他者から大切されていると感じる体験。その際、自分が価値を認められ、存在を認められ、理解されていると感じる。",
-      icon: "🤝",
-      tone: "loved",
       items: [
         "私は、愛されていると感じさせる事柄について、意図的に考える。",
         "私は、愛されていると感じさせる活動が何なのか、よく分かっている。",
@@ -4084,8 +4344,6 @@ const demographics = {
       instruction: ecsEmotionInstruction,
       keyword: "エネルギッシュ",
       description: "生き生きとして、意欲があり、困難な課題にも取り組めると感じる状態。",
-      icon: "⚡",
-      tone: "energy",
       items: [
         "私は、エネルギッシュな気持ちにさせる事柄について、意図的に考える。",
         "私は、エネルギッシュな気持ちにさせる活動が何なのか、よく分かっている。",
@@ -4142,9 +4400,9 @@ const demographics = {
 
   // 実際の提示順を各尺度のデータに記録する
   randomizedScales.forEach(function(scale, index) {
-    // すべての尺度項目を必須回答にし、未回答のまま「次へ」進めないようにする。
+    // REQUIRE_COMPLETE_RESPONSES で回答必須／一時解除を切り替える。
     scale.questions.forEach(function(question) {
-      question.required = true;
+      question.required = REQUIRE_COMPLETE_RESPONSES;
     });
 
     scale.data.scale_position = index + 1;
