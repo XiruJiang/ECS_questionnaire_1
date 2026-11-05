@@ -2552,6 +2552,7 @@ jsPsych.data.addProperties({
 
   function restoreLikertResponse(scale) {
     const savedResponse = savedLikertResponses[scale.data.scale_id];
+    const firstOptionNumber = scale.data.scale_id === "Q" ? 0 : 1;
 
     if (!savedResponse) return;
 
@@ -2564,7 +2565,7 @@ jsPsych.data.addProperties({
           typeof savedNumber === "undefined") return;
 
       const option = display.querySelector(
-        `input[name="Q${index}"][value="${Number(savedNumber) - 1}"]`
+        `input[name="Q${index}"][value="${Number(savedNumber) - firstOptionNumber}"]`
       );
 
       if (option) option.checked = true;
@@ -3064,6 +3065,7 @@ const demographics = {
             type="number"
             name="age"
             min="18"
+            max="120"
             step="1"
             required
           >
@@ -4312,7 +4314,7 @@ const demographics = {
       sourceForm: "10-7",
       instruction: ecsEmotionInstruction,
       keyword: "愛されている感覚",
-      description: "他者から大切されていると感じる体験。その際、自分が価値を認められ、存在を認められ、理解されていると感じる。",
+      description: "他者から大切にされていると感じる体験。その際、自分が価値を認められ、存在を認められ、理解されていると感じる。",
       items: [
         "私は、愛されていると感じさせる事柄について、意図的に考える。",
         "私は、愛されていると感じさせる活動が何なのか、よく分かっている。",
