@@ -1,0 +1,2 @@
+"participant_id","source_file","exclusion_reason","failed_attention_items","attention_A_13_pass","attention_H_13_pass","attention_H_23_pass"
+"861d80fb-0691-4b23-a6bd-65346e13bb43","861d80fb-0691-4b23-a6bd-65346e13bb43.csv","failed_attention_check","A_13|H_13|H_23","FALSE","FALSE","FALSE"

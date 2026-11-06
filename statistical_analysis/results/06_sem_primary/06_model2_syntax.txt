@@ -1,0 +1,34 @@
+awareness =~ I_02 + I_05 + I_08
+action =~ I_01 + I_03 + I_04 + I_06 + I_07 + I_09 + I_10
+positive_affect =~ PA_parcel_1 + PA_parcel_2 + PA_parcel_3 + PA_parcel_4 + PA_parcel_5
+life_satisfaction =~ E_01 + E_02 + E_03
+vitality =~ F_01 + F_02 + F_03
+eudaimonic =~ EUD_parcel_1 + EUD_parcel_2 + EUD_parcel_3
+distress =~ Q_01 + Q_02 + Q_03 + Q_04 + Q_05 + Q_06
+I_05 ~~ I_08
+adaptive_er =~ CERQ_putting_into_perspective_mean + CERQ_acceptance_mean + CERQ_positive_refocusing_mean + CERQ_refocus_on_planning_mean + CERQ_positive_reappraisal_mean
+maladaptive_er =~ CERQ_catastrophizing_mean + CERQ_other_blame_mean + CERQ_self_blame_mean + CERQ_rumination_mean
+reappraisal =~ ERQ_parcel_1 + ERQ_parcel_2 + ERQ_parcel_3
+emotional_processing =~ EAC_parcel_1 + EAC_parcel_2 + EAC_parcel_3
+awareness ~ age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+action ~ a*awareness + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+positive_affect ~ b*action + er_adaptive*adaptive_er + er_maladaptive*maladaptive_er + er_reappraisal*reappraisal + er_processing*emotional_processing + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+life_satisfaction ~ c1*positive_affect + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+vitality ~ c2*positive_affect + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+eudaimonic ~ c3*positive_affect + direct_processing*emotional_processing + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+distress ~ c4*positive_affect + direct_maladaptive*maladaptive_er + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+life_satisfaction ~~ vitality + eudaimonic + distress
+vitality ~~ eudaimonic + distress
+eudaimonic ~~ distress
+indirect_life_satisfaction := a*b*c1
+indirect_vitality := a*b*c2
+indirect_eudaimonic := a*b*c3
+indirect_distress := a*b*c4
+adaptive_via_pa_life := er_adaptive*c1
+adaptive_via_pa_vitality := er_adaptive*c2
+adaptive_via_pa_eudaimonic := er_adaptive*c3
+adaptive_via_pa_distress := er_adaptive*c4
+maladaptive_via_pa_life := er_maladaptive*c1
+maladaptive_via_pa_vitality := er_maladaptive*c2
+maladaptive_via_pa_eudaimonic := er_maladaptive*c3
+maladaptive_via_pa_distress := er_maladaptive*c4

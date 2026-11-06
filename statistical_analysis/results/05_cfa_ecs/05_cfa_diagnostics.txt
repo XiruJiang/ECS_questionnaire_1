@@ -1,0 +1,8 @@
+general: converged=TRUE; negative residual variances=none; awareness-action r=1.022
+happiness: converged=TRUE; negative residual variances=none; awareness-action r=1.028
+satisfaction: converged=TRUE; negative residual variances=none; awareness-action r=1.044
+enthusiasm: converged=TRUE; negative residual variances=none; awareness-action r=1.018
+pride: converged=TRUE; negative residual variances=none; awareness-action r=1.064
+fascination: converged=TRUE; negative residual variances=none; awareness-action r=1.019
+being_loved: converged=TRUE; negative residual variances=none; awareness-action r=1.018
+feeling_energetic: converged=TRUE; negative residual variances=none; awareness-action r=0.969

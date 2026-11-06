@@ -1,0 +1,22 @@
+awareness =~ I_02 + I_05 + I_08
+action =~ I_01 + I_03 + I_04 + I_06 + I_07 + I_09 + I_10
+positive_affect =~ PA_parcel_1 + PA_parcel_2 + PA_parcel_3 + PA_parcel_4 + PA_parcel_5
+life_satisfaction =~ E_01 + E_02 + E_03
+vitality =~ F_01 + F_02 + F_03
+eudaimonic =~ EUD_parcel_1 + EUD_parcel_2 + EUD_parcel_3
+distress =~ Q_01 + Q_02 + Q_03 + Q_04 + Q_05 + Q_06
+I_05 ~~ I_08
+awareness ~ age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+action ~ a*awareness + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+positive_affect ~ b*action + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+life_satisfaction ~ c1*positive_affect + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+vitality ~ c2*positive_affect + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+eudaimonic ~ c3*positive_affect + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+distress ~ c4*positive_affect + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+life_satisfaction ~~ vitality + eudaimonic + distress
+vitality ~~ eudaimonic + distress
+eudaimonic ~~ distress
+indirect_life_satisfaction := a*b*c1
+indirect_vitality := a*b*c2
+indirect_eudaimonic := a*b*c3
+indirect_distress := a*b*c4

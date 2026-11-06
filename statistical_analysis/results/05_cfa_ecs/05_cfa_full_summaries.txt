@@ -1,0 +1,32 @@
+===== general two-factor CFA =====
+Length  Class   Mode 
+     1 lavaan     S4 
+
+===== happiness two-factor CFA =====
+Length  Class   Mode 
+     1 lavaan     S4 
+
+===== satisfaction two-factor CFA =====
+Length  Class   Mode 
+     1 lavaan     S4 
+
+===== enthusiasm two-factor CFA =====
+Length  Class   Mode 
+     1 lavaan     S4 
+
+===== pride two-factor CFA =====
+Length  Class   Mode 
+     1 lavaan     S4 
+
+===== fascination two-factor CFA =====
+Length  Class   Mode 
+     1 lavaan     S4 
+
+===== being_loved two-factor CFA =====
+Length  Class   Mode 
+     1 lavaan     S4 
+
+===== feeling_energetic two-factor CFA =====
+Length  Class   Mode 
+     1 lavaan     S4 
+

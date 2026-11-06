@@ -1,0 +1,126 @@
+===== happiness =====
+ECS_happiness_action_mean ~ a*ECS_happiness_awareness_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+PANAS_positive_affect_mean ~ b*ECS_happiness_action_mean + er_adaptive*CERQ_adaptive_mean + er_maladaptive*CERQ_maladaptive_mean + er_reappraisal*ERQ_reappraisal_mean + er_processing*EAC_emotional_processing_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+SWLS_life_satisfaction_mean ~ c1*PANAS_positive_affect_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+SVS_vitality_mean ~ c2*PANAS_positive_affect_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+PWBS_eudaimonic_wellbeing_mean ~ c3*PANAS_positive_affect_mean + direct_processing*EAC_emotional_processing_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+K6_psychological_distress_total ~ c4*PANAS_positive_affect_mean + direct_maladaptive*CERQ_maladaptive_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+SWLS_life_satisfaction_mean ~~ SVS_vitality_mean + PWBS_eudaimonic_wellbeing_mean + K6_psychological_distress_total
+SVS_vitality_mean ~~ PWBS_eudaimonic_wellbeing_mean + K6_psychological_distress_total
+PWBS_eudaimonic_wellbeing_mean ~~ K6_psychological_distress_total
+indirect_life_satisfaction := a*b*c1
+indirect_vitality := a*b*c2
+indirect_eudaimonic := a*b*c3
+indirect_distress := a*b*c4
+
+Length  Class   Mode 
+     1 lavaan     S4 
+
+===== satisfaction =====
+ECS_satisfaction_action_mean ~ a*ECS_satisfaction_awareness_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+PANAS_positive_affect_mean ~ b*ECS_satisfaction_action_mean + er_adaptive*CERQ_adaptive_mean + er_maladaptive*CERQ_maladaptive_mean + er_reappraisal*ERQ_reappraisal_mean + er_processing*EAC_emotional_processing_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+SWLS_life_satisfaction_mean ~ c1*PANAS_positive_affect_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+SVS_vitality_mean ~ c2*PANAS_positive_affect_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+PWBS_eudaimonic_wellbeing_mean ~ c3*PANAS_positive_affect_mean + direct_processing*EAC_emotional_processing_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+K6_psychological_distress_total ~ c4*PANAS_positive_affect_mean + direct_maladaptive*CERQ_maladaptive_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+SWLS_life_satisfaction_mean ~~ SVS_vitality_mean + PWBS_eudaimonic_wellbeing_mean + K6_psychological_distress_total
+SVS_vitality_mean ~~ PWBS_eudaimonic_wellbeing_mean + K6_psychological_distress_total
+PWBS_eudaimonic_wellbeing_mean ~~ K6_psychological_distress_total
+indirect_life_satisfaction := a*b*c1
+indirect_vitality := a*b*c2
+indirect_eudaimonic := a*b*c3
+indirect_distress := a*b*c4
+
+Length  Class   Mode 
+     1 lavaan     S4 
+
+===== enthusiasm =====
+ECS_enthusiasm_action_mean ~ a*ECS_enthusiasm_awareness_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+PANAS_positive_affect_mean ~ b*ECS_enthusiasm_action_mean + er_adaptive*CERQ_adaptive_mean + er_maladaptive*CERQ_maladaptive_mean + er_reappraisal*ERQ_reappraisal_mean + er_processing*EAC_emotional_processing_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+SWLS_life_satisfaction_mean ~ c1*PANAS_positive_affect_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+SVS_vitality_mean ~ c2*PANAS_positive_affect_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+PWBS_eudaimonic_wellbeing_mean ~ c3*PANAS_positive_affect_mean + direct_processing*EAC_emotional_processing_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+K6_psychological_distress_total ~ c4*PANAS_positive_affect_mean + direct_maladaptive*CERQ_maladaptive_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+SWLS_life_satisfaction_mean ~~ SVS_vitality_mean + PWBS_eudaimonic_wellbeing_mean + K6_psychological_distress_total
+SVS_vitality_mean ~~ PWBS_eudaimonic_wellbeing_mean + K6_psychological_distress_total
+PWBS_eudaimonic_wellbeing_mean ~~ K6_psychological_distress_total
+indirect_life_satisfaction := a*b*c1
+indirect_vitality := a*b*c2
+indirect_eudaimonic := a*b*c3
+indirect_distress := a*b*c4
+
+Length  Class   Mode 
+     1 lavaan     S4 
+
+===== pride =====
+ECS_pride_action_mean ~ a*ECS_pride_awareness_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+PANAS_positive_affect_mean ~ b*ECS_pride_action_mean + er_adaptive*CERQ_adaptive_mean + er_maladaptive*CERQ_maladaptive_mean + er_reappraisal*ERQ_reappraisal_mean + er_processing*EAC_emotional_processing_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+SWLS_life_satisfaction_mean ~ c1*PANAS_positive_affect_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+SVS_vitality_mean ~ c2*PANAS_positive_affect_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+PWBS_eudaimonic_wellbeing_mean ~ c3*PANAS_positive_affect_mean + direct_processing*EAC_emotional_processing_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+K6_psychological_distress_total ~ c4*PANAS_positive_affect_mean + direct_maladaptive*CERQ_maladaptive_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+SWLS_life_satisfaction_mean ~~ SVS_vitality_mean + PWBS_eudaimonic_wellbeing_mean + K6_psychological_distress_total
+SVS_vitality_mean ~~ PWBS_eudaimonic_wellbeing_mean + K6_psychological_distress_total
+PWBS_eudaimonic_wellbeing_mean ~~ K6_psychological_distress_total
+indirect_life_satisfaction := a*b*c1
+indirect_vitality := a*b*c2
+indirect_eudaimonic := a*b*c3
+indirect_distress := a*b*c4
+
+Length  Class   Mode 
+     1 lavaan     S4 
+
+===== fascination =====
+ECS_fascination_action_mean ~ a*ECS_fascination_awareness_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+PANAS_positive_affect_mean ~ b*ECS_fascination_action_mean + er_adaptive*CERQ_adaptive_mean + er_maladaptive*CERQ_maladaptive_mean + er_reappraisal*ERQ_reappraisal_mean + er_processing*EAC_emotional_processing_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+SWLS_life_satisfaction_mean ~ c1*PANAS_positive_affect_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+SVS_vitality_mean ~ c2*PANAS_positive_affect_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+PWBS_eudaimonic_wellbeing_mean ~ c3*PANAS_positive_affect_mean + direct_processing*EAC_emotional_processing_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+K6_psychological_distress_total ~ c4*PANAS_positive_affect_mean + direct_maladaptive*CERQ_maladaptive_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+SWLS_life_satisfaction_mean ~~ SVS_vitality_mean + PWBS_eudaimonic_wellbeing_mean + K6_psychological_distress_total
+SVS_vitality_mean ~~ PWBS_eudaimonic_wellbeing_mean + K6_psychological_distress_total
+PWBS_eudaimonic_wellbeing_mean ~~ K6_psychological_distress_total
+indirect_life_satisfaction := a*b*c1
+indirect_vitality := a*b*c2
+indirect_eudaimonic := a*b*c3
+indirect_distress := a*b*c4
+
+Length  Class   Mode 
+     1 lavaan     S4 
+
+===== being_loved =====
+ECS_being_loved_action_mean ~ a*ECS_being_loved_awareness_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+PANAS_positive_affect_mean ~ b*ECS_being_loved_action_mean + er_adaptive*CERQ_adaptive_mean + er_maladaptive*CERQ_maladaptive_mean + er_reappraisal*ERQ_reappraisal_mean + er_processing*EAC_emotional_processing_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+SWLS_life_satisfaction_mean ~ c1*PANAS_positive_affect_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+SVS_vitality_mean ~ c2*PANAS_positive_affect_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+PWBS_eudaimonic_wellbeing_mean ~ c3*PANAS_positive_affect_mean + direct_processing*EAC_emotional_processing_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+K6_psychological_distress_total ~ c4*PANAS_positive_affect_mean + direct_maladaptive*CERQ_maladaptive_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+SWLS_life_satisfaction_mean ~~ SVS_vitality_mean + PWBS_eudaimonic_wellbeing_mean + K6_psychological_distress_total
+SVS_vitality_mean ~~ PWBS_eudaimonic_wellbeing_mean + K6_psychological_distress_total
+PWBS_eudaimonic_wellbeing_mean ~~ K6_psychological_distress_total
+indirect_life_satisfaction := a*b*c1
+indirect_vitality := a*b*c2
+indirect_eudaimonic := a*b*c3
+indirect_distress := a*b*c4
+
+Length  Class   Mode 
+     1 lavaan     S4 
+
+===== feeling_energetic =====
+ECS_feeling_energetic_action_mean ~ a*ECS_feeling_energetic_awareness_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+PANAS_positive_affect_mean ~ b*ECS_feeling_energetic_action_mean + er_adaptive*CERQ_adaptive_mean + er_maladaptive*CERQ_maladaptive_mean + er_reappraisal*ERQ_reappraisal_mean + er_processing*EAC_emotional_processing_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+SWLS_life_satisfaction_mean ~ c1*PANAS_positive_affect_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+SVS_vitality_mean ~ c2*PANAS_positive_affect_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+PWBS_eudaimonic_wellbeing_mean ~ c3*PANAS_positive_affect_mean + direct_processing*EAC_emotional_processing_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+K6_psychological_distress_total ~ c4*PANAS_positive_affect_mean + direct_maladaptive*CERQ_maladaptive_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+SWLS_life_satisfaction_mean ~~ SVS_vitality_mean + PWBS_eudaimonic_wellbeing_mean + K6_psychological_distress_total
+SVS_vitality_mean ~~ PWBS_eudaimonic_wellbeing_mean + K6_psychological_distress_total
+PWBS_eudaimonic_wellbeing_mean ~~ K6_psychological_distress_total
+indirect_life_satisfaction := a*b*c1
+indirect_vitality := a*b*c2
+indirect_eudaimonic := a*b*c3
+indirect_distress := a*b*c4
+
+Length  Class   Mode 
+     1 lavaan     S4 
+

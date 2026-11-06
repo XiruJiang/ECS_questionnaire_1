@@ -1,0 +1,17 @@
+Psychological outcomes model (base-R sequential report; primary CSV uses partial Type-II comparisons)
+             Df   Pillai approx F num Df den Df Pr(>F)
+age_c         1 0.017149  0.88636      5    254 0.4907
+gender        1 0.009276  0.47565      5    254 0.7943
+marital       3 0.036053  0.62278     15    768 0.8577
+education_c   1 0.024475  1.27450      5    254 0.2753
+income_c      1 0.017432  0.90124      5    254 0.4808
+Residuals   258                                       
+
+ECS awareness/action model (base-R sequential report; primary CSV uses partial Type-II comparisons)
+             Df    Pillai approx F num Df den Df Pr(>F)
+age_c         1 0.0023575  0.30365      2    257 0.7384
+gender        1 0.0081522  1.05617      2    257 0.3493
+marital       3 0.0180349  0.78256      6    516 0.5839
+education_c   1 0.0069473  0.89897      2    257 0.4083
+income_c      1 0.0006570  0.08448      2    257 0.9190
+Residuals   258                                        
