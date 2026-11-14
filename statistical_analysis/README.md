@@ -1,6 +1,6 @@
 # 统计分析程序
 
-本文件夹用于保存毕业论文统计分析程序和结果。输入数据来自 `../preprocessing/analysis_with_scale_scores.csv`，程序不会改写预处理数据。
+本文件夹用于保存毕业论文统计分析程序和结果。输入数据来自 `../preprocessing/03_analysis_with_scale_scores.csv`，程序不会改写预处理数据。
 
 ## 与原论文的对应关系
 

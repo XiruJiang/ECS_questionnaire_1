@@ -1,9 +1,9 @@
 # Scale and subscale scoring for the prepared questionnaire data
 #
-# Default input:          prepared_analysis_data.csv
-# Default full output:    analysis_with_scale_scores.csv
-# Default compact output: scale_scores.csv
-# Default score codebook: scale_score_codebook.csv
+# Default input:          02_prepared_analysis_data.csv
+# Default full output:    03_analysis_with_scale_scores.csv
+# Default compact output: 03_scale_scores.csv
+# Default score codebook: 03_scale_score_codebook.csv
 #
 # Usage:
 #   Rscript 03_compute_scale_scores.R
@@ -41,25 +41,25 @@ arguments <- commandArgs(trailingOnly = TRUE)
 input_file <- if (length(arguments) >= 1L) {
   normalizePath(arguments[[1]], winslash = "/", mustWork = TRUE)
 } else {
-  file.path(script_directory, "prepared_analysis_data.csv")
+  file.path(script_directory, "02_prepared_analysis_data.csv")
 }
 
 full_output_file <- if (length(arguments) >= 2L) {
   normalizePath(arguments[[2]], winslash = "/", mustWork = FALSE)
 } else {
-  file.path(script_directory, "analysis_with_scale_scores.csv")
+  file.path(script_directory, "03_analysis_with_scale_scores.csv")
 }
 
 compact_output_file <- if (length(arguments) >= 3L) {
   normalizePath(arguments[[3]], winslash = "/", mustWork = FALSE)
 } else {
-  file.path(script_directory, "scale_scores.csv")
+  file.path(script_directory, "03_scale_scores.csv")
 }
 
 codebook_output_file <- if (length(arguments) >= 4L) {
   normalizePath(arguments[[4]], winslash = "/", mustWork = FALSE)
 } else {
-  file.path(script_directory, "scale_score_codebook.csv")
+  file.path(script_directory, "03_scale_score_codebook.csv")
 }
 
 assert_condition <- function(condition, message) {
@@ -276,7 +276,7 @@ assert_condition(!anyDuplicated(score_names), "Scoring specification contains du
 assert_condition(length(score_names) == 38L, "Expected 38 scale/subscale scores")
 
 required_item_columns <- unique(unlist(lapply(specifications, `[[`, "items"), use.names = FALSE))
-required_columns <- c("participant_id", "source_file", "age", "gender", "education", "marital_status", "income", "gender_code", "education_code", "marital_status_code", "income_code", "attention_all_pass", required_item_columns)
+required_columns <- c("participant_id", "source_file", "crowdworks_serial_code", "age", "gender", "education", "marital_status", "income", "gender_code", "education_code", "marital_status_code", "income_code", "attention_all_pass", required_item_columns)
 
 prepared_data <- read_utf8_csv(input_file, all_character = TRUE)
 assert_condition(nrow(prepared_data) > 0L, "Input contains no participant rows")
@@ -368,7 +368,7 @@ for (specification in specifications) {
 full_output <- cbind(prepared_data, score_data, stringsAsFactors = FALSE)
 
 demographic_columns <- c(
-  "participant_id", "source_file", "age", "gender", "education",
+  "participant_id", "source_file", "crowdworks_serial_code", "age", "gender", "education",
   "marital_status", "income", "gender_code", "education_code",
   "marital_status_code", "income_code"
 )

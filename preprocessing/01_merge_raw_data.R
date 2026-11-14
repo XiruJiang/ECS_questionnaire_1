@@ -1,7 +1,7 @@
 # Questionnaire CSV merger
 #
 # Default input:  project demodata/ (beside this script or one level above)
-# Default output: merged_raw_data.csv
+# Default output: 01_merged_raw_data.csv
 #
 # Usage:
 #   Rscript 01_merge_raw_data.R
@@ -46,7 +46,7 @@ input_directory <- if (length(positional_arguments) >= 1L) {
 output_file <- if (length(positional_arguments) >= 2L) {
   normalizePath(positional_arguments[[2]], winslash = "/", mustWork = FALSE)
 } else {
-  file.path(script_directory, "merged_raw_data.csv")
+  file.path(script_directory, "01_merged_raw_data.csv")
 }
 
 reference_file <- "861d80fb-0691-4b23-a6bd-65346e13bb43.csv"
@@ -230,6 +230,26 @@ process_participant <- function(file_path) {
     sprintf("participant_id does not match filename: %s", participant_id)
   )
 
+  crowdworks_serial_code <- ""
+  if ("crowdworks_serial_code" %in% names(data)) {
+    serial_code_values <- unique(
+      data$crowdworks_serial_code[nzchar(data$crowdworks_serial_code)]
+    )
+    assert_condition(
+      length(serial_code_values) == 1L,
+      "Expected exactly one crowdworks_serial_code"
+    )
+    assert_condition(
+      grepl("^[0-9]{6}$", serial_code_values[[1]]),
+      "crowdworks_serial_code must contain exactly six digits"
+    )
+    assert_condition(
+      all(data$crowdworks_serial_code == serial_code_values[[1]]),
+      "crowdworks_serial_code must be identical on every row"
+    )
+    crowdworks_serial_code <- serial_code_values[[1]]
+  }
+
   trial_index <- suppressWarnings(as.integer(data$trial_index))
   assert_condition(
     identical(trial_index, 0:18),
@@ -268,6 +288,7 @@ process_participant <- function(file_path) {
   record <- list(
     participant_id = participant_id,
     source_file = file_name,
+    crowdworks_serial_code = crowdworks_serial_code,
     age = age,
     gender = demographics$gender,
     education = demographics$education,
@@ -398,6 +419,16 @@ assert_condition(
   !anyDuplicated(merged_data$participant_id),
   "Duplicate participant_id values found across files"
 )
+nonblank_serial_codes <- merged_data$crowdworks_serial_code[
+  nzchar(merged_data$crowdworks_serial_code)
+]
+assert_condition(
+  !anyDuplicated(nonblank_serial_codes),
+  paste(
+    "Duplicate crowdworks_serial_code values found across files.",
+    "Inspect the source files before analysis or payment review."
+  )
+)
 assert_condition(
   nrow(merged_data) == length(csv_files),
   "Merged row count does not match input file count"
@@ -429,7 +460,14 @@ verification <- utils::read.csv(
 assert_condition(nrow(verification) == nrow(merged_data), "Saved output row count mismatch")
 assert_condition(identical(names(verification), names(merged_data)), "Saved output columns mismatch")
 assert_condition(!anyDuplicated(verification$participant_id), "Saved output contains duplicate participant_id")
-for (column_name in demographic_columns) {
+saved_nonblank_serial_codes <- verification$crowdworks_serial_code[
+  nzchar(verification$crowdworks_serial_code)
+]
+assert_condition(
+  !anyDuplicated(saved_nonblank_serial_codes),
+  "Saved output contains duplicate crowdworks_serial_code values"
+)
+for (column_name in c("crowdworks_serial_code", demographic_columns)) {
   assert_condition(
     identical(verification[[column_name]], as.character(merged_data[[column_name]])),
     sprintf("Saved output text mismatch in %s", column_name)

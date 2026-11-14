@@ -1,13 +1,14 @@
 # Questionnaire data preprocessing
 #
-# Default input:          merged_raw_data.csv
-# Default prepared data:  prepared_analysis_data.csv
-# Default exclusion log:  preprocessing_exclusions.csv
-# Default codebook:       preprocessing_codebook.csv
+# Default input:          01_merged_raw_data.csv
+# Default prepared data:  02_prepared_analysis_data.csv
+# Default exclusion log:  02_preprocessing_exclusions.csv
+# Default codebook:       02_preprocessing_codebook.csv
+# Default payment review: 02_attention_payment_review.csv
 #
 # Usage:
 #   Rscript 02_prepare_analysis_data.R
-#   Rscript 02_prepare_analysis_data.R input.csv prepared.csv exclusions.csv codebook.csv
+#   Rscript 02_prepare_analysis_data.R input.csv prepared.csv exclusions.csv codebook.csv payment_review.csv
 #
 # This script deliberately does not calculate scale/subscale scores. Those
 # belong in 03_compute_scale_scores.R so that data cleaning and psychometric
@@ -33,25 +34,31 @@ arguments <- commandArgs(trailingOnly = TRUE)
 input_file <- if (length(arguments) >= 1L) {
   normalizePath(arguments[[1]], winslash = "/", mustWork = TRUE)
 } else {
-  file.path(script_directory, "merged_raw_data.csv")
+  file.path(script_directory, "01_merged_raw_data.csv")
 }
 
 prepared_output_file <- if (length(arguments) >= 2L) {
   normalizePath(arguments[[2]], winslash = "/", mustWork = FALSE)
 } else {
-  file.path(script_directory, "prepared_analysis_data.csv")
+  file.path(script_directory, "02_prepared_analysis_data.csv")
 }
 
 exclusion_output_file <- if (length(arguments) >= 3L) {
   normalizePath(arguments[[3]], winslash = "/", mustWork = FALSE)
 } else {
-  file.path(script_directory, "preprocessing_exclusions.csv")
+  file.path(script_directory, "02_preprocessing_exclusions.csv")
 }
 
 codebook_output_file <- if (length(arguments) >= 4L) {
   normalizePath(arguments[[4]], winslash = "/", mustWork = FALSE)
 } else {
-  file.path(script_directory, "preprocessing_codebook.csv")
+  file.path(script_directory, "02_preprocessing_codebook.csv")
+}
+
+payment_review_output_file <- if (length(arguments) >= 5L) {
+  normalizePath(arguments[[5]], winslash = "/", mustWork = FALSE)
+} else {
+  file.path(script_directory, "02_attention_payment_review.csv")
 }
 
 assert_condition <- function(condition, message) {
@@ -60,10 +67,15 @@ assert_condition <- function(condition, message) {
 
 assert_condition(file.exists(input_file), sprintf("Input file not found: %s", input_file))
 
-output_paths <- c(prepared_output_file, exclusion_output_file, codebook_output_file)
+output_paths <- c(
+  prepared_output_file,
+  exclusion_output_file,
+  codebook_output_file,
+  payment_review_output_file
+)
 assert_condition(
   length(unique(tolower(output_paths))) == length(output_paths),
-  "Prepared data, exclusion log, and codebook must use different paths"
+  "Prepared data, exclusion log, codebook, and payment review must use different paths"
 )
 assert_condition(
   !tolower(input_file) %in% tolower(output_paths),
@@ -188,6 +200,24 @@ required_columns <- c(
 
 raw_data <- read_utf8_csv(input_file, all_character = TRUE)
 
+# Questionnaire files created before the CrowdWorks completion-code update do
+# not contain this field. Keep them compatible while preserving the code for
+# all newly collected responses.
+if (!"crowdworks_serial_code" %in% names(raw_data)) {
+  source_file_index <- match("source_file", names(raw_data))
+  assert_condition(
+    !is.na(source_file_index),
+    "Input is missing required column: source_file"
+  )
+  raw_data <- cbind(
+    raw_data[, seq_len(source_file_index), drop = FALSE],
+    crowdworks_serial_code = rep("", nrow(raw_data)),
+    raw_data[, -seq_len(source_file_index), drop = FALSE],
+    stringsAsFactors = FALSE,
+    check.names = FALSE
+  )
+}
+
 assert_condition(nrow(raw_data) > 0L, "Input contains no participant rows")
 assert_condition(!anyDuplicated(names(raw_data)), "Input contains duplicate column names")
 missing_columns <- setdiff(required_columns, names(raw_data))
@@ -233,6 +263,11 @@ attention_A_13_pass <- raw_data$A_13 == 5L
 attention_H_13_pass <- raw_data$H_13 == 7L
 attention_H_23_pass <- raw_data$H_23 == 1L
 attention_all_pass <- attention_A_13_pass & attention_H_13_pass & attention_H_23_pass
+attention_failed_count <-
+  as.integer(!attention_A_13_pass) +
+  as.integer(!attention_H_13_pass) +
+  as.integer(!attention_H_23_pass)
+all_attention_checks_failed <- attention_failed_count == 3L
 
 stored_attention <- list(
   attention_A_13_pass = parse_logical_column(
@@ -281,11 +316,35 @@ excluded_rows <- !attention_all_pass
 exclusion_log <- data.frame(
   participant_id = raw_data$participant_id[excluded_rows],
   source_file = raw_data$source_file[excluded_rows],
+  crowdworks_serial_code = raw_data$crowdworks_serial_code[excluded_rows],
   exclusion_reason = rep("failed_attention_check", sum(excluded_rows)),
   failed_attention_items = failed_attention_items[excluded_rows],
+  attention_failed_count = attention_failed_count[excluded_rows],
+  all_attention_checks_failed = all_attention_checks_failed[excluded_rows],
   attention_A_13_pass = attention_A_13_pass[excluded_rows],
   attention_H_13_pass = attention_H_13_pass[excluded_rows],
   attention_H_23_pass = attention_H_23_pass[excluded_rows],
+  stringsAsFactors = FALSE,
+  check.names = FALSE
+)
+
+payment_review_log <- data.frame(
+  participant_id = raw_data$participant_id[all_attention_checks_failed],
+  source_file = raw_data$source_file[all_attention_checks_failed],
+  crowdworks_serial_code = raw_data$crowdworks_serial_code[all_attention_checks_failed],
+  review_reason = rep(
+    "failed_all_three_attention_checks",
+    sum(all_attention_checks_failed)
+  ),
+  recommended_action = rep(
+    "review_for_possible_nonpayment",
+    sum(all_attention_checks_failed)
+  ),
+  failed_attention_items = failed_attention_items[all_attention_checks_failed],
+  attention_failed_count = attention_failed_count[all_attention_checks_failed],
+  attention_A_13_pass = attention_A_13_pass[all_attention_checks_failed],
+  attention_H_13_pass = attention_H_13_pass[all_attention_checks_failed],
+  attention_H_23_pass = attention_H_23_pass[all_attention_checks_failed],
   stringsAsFactors = FALSE,
   check.names = FALSE
 )
@@ -464,7 +523,21 @@ reverse_codebook <- data.frame(
   stringsAsFactors = FALSE,
   check.names = FALSE
 )
-codebook <- rbind(codebook, reverse_codebook)
+identifier_codebook <- data.frame(
+  source_variable = "crowdworks_serial_code",
+  raw_value = "000000-999999 (six digits; preserve leading zeros)",
+  analysis_variable = "crowdworks_serial_code",
+  code = NA_integer_,
+  measurement_level = "identifier",
+  note = paste(
+    "Six-digit identifier issued by the DataPipe condition counter for",
+    "matching a completed questionnaire to the CrowdWorks submission;",
+    "preserve leading zeros and do not use it in statistical models."
+  ),
+  stringsAsFactors = FALSE,
+  check.names = FALSE
+)
+codebook <- rbind(identifier_codebook, codebook, reverse_codebook)
 
 assert_condition(
   nrow(prepared_data) + nrow(exclusion_log) == nrow(raw_data),
@@ -482,11 +555,16 @@ assert_condition(
 write_utf8_csv(prepared_data, prepared_output_file)
 write_utf8_csv(exclusion_log, exclusion_output_file)
 write_utf8_csv(codebook, codebook_output_file)
+write_utf8_csv(payment_review_log, payment_review_output_file)
 
 # Read back saved files to catch encoding, row-count, and column-order errors.
 prepared_verification <- read_utf8_csv(prepared_output_file, all_character = TRUE)
 exclusion_verification <- read_utf8_csv(exclusion_output_file, all_character = TRUE)
 codebook_verification <- read_utf8_csv(codebook_output_file, all_character = TRUE)
+payment_review_verification <- read_utf8_csv(
+  payment_review_output_file,
+  all_character = TRUE
+)
 
 assert_condition(
   nrow(prepared_verification) == nrow(prepared_data),
@@ -517,10 +595,25 @@ assert_condition(
   nrow(codebook_verification) == nrow(codebook),
   "Saved codebook row count mismatch"
 )
+assert_condition(
+  nrow(payment_review_verification) == nrow(payment_review_log),
+  "Saved payment-review row count mismatch"
+)
+assert_condition(
+  identical(
+    payment_review_verification$participant_id,
+    payment_review_log$participant_id
+  ),
+  "Saved payment-review participant IDs mismatch"
+)
 
 cat(sprintf("Input file: %s\n", normalizePath(input_file, winslash = "/")))
 cat(sprintf("Participants before preprocessing: %d\n", nrow(raw_data)))
 cat(sprintf("Excluded for failed attention checks: %d\n", nrow(exclusion_log)))
+cat(sprintf(
+  "Payment review (failed all three attention checks): %d\n",
+  nrow(payment_review_log)
+))
 cat(sprintf("Participants retained: %d\n", nrow(prepared_data)))
 cat(sprintf("Reverse-scored item columns added: %d\n", length(reverse_items)))
 cat("Raw demographic labels and raw questionnaire items preserved: yes\n")
@@ -536,4 +629,8 @@ cat(sprintf(
 cat(sprintf(
   "Codebook: %s\n",
   normalizePath(codebook_output_file, winslash = "/", mustWork = TRUE)
+))
+cat(sprintf(
+  "Payment review: %s\n",
+  normalizePath(payment_review_output_file, winslash = "/", mustWork = TRUE)
 ))

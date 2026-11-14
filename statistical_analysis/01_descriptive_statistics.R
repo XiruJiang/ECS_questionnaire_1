@@ -69,8 +69,8 @@ demographic_frequencies <- do.call(rbind, frequency_rows)
 row.names(demographic_frequencies) <- NULL
 write_utf8_csv(demographic_frequencies, file.path(output_directory, "01_demographic_frequencies.csv"))
 
-merged_file <- file.path(preprocessing_directory, "merged_raw_data.csv")
-exclusion_file <- file.path(preprocessing_directory, "preprocessing_exclusions.csv")
+merged_file <- file.path(preprocessing_directory, "01_merged_raw_data.csv")
+exclusion_file <- file.path(preprocessing_directory, "02_preprocessing_exclusions.csv")
 merged_n <- nrow(read_utf8_csv(merged_file, all_character = TRUE))
 excluded_n <- nrow(read_utf8_csv(exclusion_file, all_character = TRUE))
 sample_flow <- data.frame(

@@ -15,8 +15,8 @@ get_script_directory <- function() {
 analysis_directory <- get_script_directory()
 project_directory <- dirname(analysis_directory)
 preprocessing_directory <- file.path(project_directory, "preprocessing")
-analysis_data_file <- file.path(preprocessing_directory, "analysis_with_scale_scores.csv")
-score_codebook_file <- file.path(preprocessing_directory, "scale_score_codebook.csv")
+analysis_data_file <- file.path(preprocessing_directory, "03_analysis_with_scale_scores.csv")
+score_codebook_file <- file.path(preprocessing_directory, "03_scale_score_codebook.csv")
 results_directory <- file.path(analysis_directory, "results")
 
 assert_condition <- function(condition, message) {
