@@ -2309,9 +2309,10 @@
       max-width: 560px;
       margin: 28px auto;
       padding: 22px 24px;
-      border: 3px solid #000;
-      border-radius: 8px;
-      background: #fff;
+      border: 1px solid #d2ba92;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #f7eedf 0%, #fffaf2 100%);
+      box-shadow: 0 8px 22px rgb(96 73 42 / 12%);
       text-align: center;
     }
 
@@ -2338,13 +2339,16 @@
       text-align: left;
     }
 
+    #jspsych-content .completion-save-reminder {
+      margin-top: 24px;
+      font-weight: 800;
+    }
+
     #jspsych-content .completion-warning {
       max-width: 680px;
-      margin: 22px auto 0;
-      padding: 14px 16px;
-      border: 2px solid #000;
-      border-radius: 6px;
-      font-weight: 700;
+      margin: 26px auto 0;
+      font-size: 14px;
+      font-weight: 400;
       line-height: 1.7;
       text-align: left;
     }
@@ -4601,24 +4605,24 @@ const saveData = {
         <h2>ご協力ありがとうございました</h2>
         <p>回答の送信を受け付けました。</p>
 
+        <p class="completion-instruction completion-save-reminder">
+          このページを閉じる前に、以下のシリアルコードをメモするか、写真またはスクリーンショットで保存してください。
+          コードを記録したことを確認してから、このページを閉じてください。
+        </p>
+
         <div class="completion-code-panel">
           <p class="completion-code-label">クラウドワークス提出用シリアルコード（6桁）</p>
           <p class="completion-code" aria-label="6桁のシリアルコード">${crowdworksSerialCode}</p>
         </div>
 
         <p class="completion-instruction">
-          上記の6桁のシリアルコードを、クラウドワークスの
-          <strong>【シリアルコード記入欄】</strong>に入力して提出してください。
-        </p>
-        <p class="completion-instruction">
-          このページを閉じる前に、コードをメモするか、
-          <strong>写真またはスクリーンショットで保存してください。</strong>
-          コードを記録したことを確認してから、このページを閉じてください。
+          上記の6桁のシリアルコードを、
+          クラウドワークスの<strong>【シリアルコード記入欄】</strong>に入力して提出してください。
         </p>
 
         <p class="completion-warning">
-          シリアルコードが正しく入力されている場合でも、私たちの基準に照らして
-          明らかに不誠実な回答と判断された場合は、謝金をお支払いできないことがあります。
+          シリアルコードが正しく入力されている場合でも、
+          基準に照らして明らかに不誠実な回答と判断された場合は、謝金をお支払いできないことがあります。
         </p>
       `;
     }
