@@ -1,0 +1,11 @@
+Figure 1. Hypothesized structural model.
+ECR-GO attachment anxiety and intimacy avoidance predict EC awareness, which predicts EC action, positive affect, and four psychological outcomes.
+
+Figure 2. Primary structural model.
+Standardized coefficients before and after the slash are from Model 1 and Model 2, respectively. Model 2 includes other emotion-regulation measures. Background covariates, measurement loadings, and outcome residual covariances are omitted for clarity.
+
+Figure 3. Emotion-specific structural models.
+Each panel replaces general EC awareness/action with one emotion-specific version while retaining ECR-GO attachment anxiety and intimacy avoidance upstream.
+
+Significance: * p < .05; ** p < .01; *** p < .001.
+The current figures are generated from the current analysis output. Re-run after formal data collection and verify all model diagnostics before thesis reporting.

@@ -1,3 +1,5 @@
+attachment_anxiety =~ ECR_ANX_parcel_1 + ECR_ANX_parcel_2 + ECR_ANX_parcel_3
+intimacy_avoidance =~ ECR_AVO_parcel_1 + ECR_AVO_parcel_2 + ECR_AVO_parcel_3
 awareness =~ I_02 + I_05 + I_08
 action =~ I_01 + I_03 + I_04 + I_06 + I_07 + I_09 + I_10
 positive_affect =~ PA_parcel_1 + PA_parcel_2 + PA_parcel_3 + PA_parcel_4 + PA_parcel_5
@@ -10,13 +12,14 @@ adaptive_er =~ CERQ_putting_into_perspective_mean + CERQ_acceptance_mean + CERQ_
 maladaptive_er =~ CERQ_catastrophizing_mean + CERQ_other_blame_mean + CERQ_self_blame_mean + CERQ_rumination_mean
 reappraisal =~ ERQ_parcel_1 + ERQ_parcel_2 + ERQ_parcel_3
 emotional_processing =~ EAC_parcel_1 + EAC_parcel_2 + EAC_parcel_3
-awareness ~ age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+awareness ~ d1*attachment_anxiety + d2*intimacy_avoidance + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
 action ~ a*awareness + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
 positive_affect ~ b*action + er_adaptive*adaptive_er + er_maladaptive*maladaptive_er + er_reappraisal*reappraisal + er_processing*emotional_processing + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
 life_satisfaction ~ c1*positive_affect + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
 vitality ~ c2*positive_affect + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
 eudaimonic ~ c3*positive_affect + direct_processing*emotional_processing + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
 distress ~ c4*positive_affect + direct_maladaptive*maladaptive_er + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+attachment_anxiety ~~ intimacy_avoidance
 life_satisfaction ~~ vitality + eudaimonic + distress
 vitality ~~ eudaimonic + distress
 eudaimonic ~~ distress
@@ -24,6 +27,14 @@ indirect_life_satisfaction := a*b*c1
 indirect_vitality := a*b*c2
 indirect_eudaimonic := a*b*c3
 indirect_distress := a*b*c4
+ecr_anxiety_indirect_life := d1*a*b*c1
+ecr_anxiety_indirect_vitality := d1*a*b*c2
+ecr_anxiety_indirect_eudaimonic := d1*a*b*c3
+ecr_anxiety_indirect_distress := d1*a*b*c4
+ecr_avoidance_indirect_life := d2*a*b*c1
+ecr_avoidance_indirect_vitality := d2*a*b*c2
+ecr_avoidance_indirect_eudaimonic := d2*a*b*c3
+ecr_avoidance_indirect_distress := d2*a*b*c4
 adaptive_via_pa_life := er_adaptive*c1
 adaptive_via_pa_vitality := er_adaptive*c2
 adaptive_via_pa_eudaimonic := er_adaptive*c3

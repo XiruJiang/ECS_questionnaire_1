@@ -29,9 +29,11 @@ scripts <- c(
   "02_reliability_analysis.R",
   "03_correlation_analysis.R",
   "04_mancova.R",
+  "05_efa_ecs.R",
   "05_cfa_ecs.R",
   "06_sem_primary_model.R",
-  "07_sem_emotion_specific_sensitivity.R"
+  "07_sem_emotion_specific_sensitivity.R",
+  "08_generate_sem_figures.R"
 )
 
 run_started <- Sys.time()

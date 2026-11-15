@@ -1,4 +1,4 @@
-# MANCOVA for background characteristics, psychological outcomes, and ECS.
+# MANCOVA for background characteristics, psychological outcomes, ECS, and ECR-GO.
 
 command <- commandArgs(trailingOnly = FALSE)
 file_argument <- grep("^--file=", command, value = TRUE)
@@ -19,7 +19,11 @@ outcome_variables <- c(
   "K6_psychological_distress_total"
 )
 ecs_variables <- c("ECS_general_awareness_mean", "ECS_general_action_mean")
-required_scores <- c(outcome_variables, ecs_variables)
+ecr_variables <- c(
+  "ECRGO_attachment_anxiety_mean",
+  "ECRGO_avoidance_of_intimacy_mean"
+)
+required_scores <- c(outcome_variables, ecs_variables, ecr_variables)
 missing_scores <- setdiff(required_scores, names(data))
 assert_condition(length(missing_scores) == 0L, sprintf("Missing MANCOVA scores: %s", paste(missing_scores, collapse = ", ")))
 
@@ -153,21 +157,30 @@ fit_mancova <- function(model_data, outcomes, model_name) {
 
 outcome_model <- fit_mancova(model_data, outcome_variables, "psychological_outcomes")
 ecs_model <- fit_mancova(model_data, ecs_variables, "ecs_awareness_action")
+ecr_model <- fit_mancova(model_data, ecr_variables, "ecr_attachment_dimensions")
+
+all_models <- list(outcome_model, ecs_model, ecr_model)
 
 write_utf8_csv(
-  round_numeric_columns(rbind(outcome_model$multivariate, ecs_model$multivariate), digits = 4L),
+  round_numeric_columns(
+    do.call(rbind, lapply(all_models, `[[`, "multivariate")),
+    digits = 4L
+  ),
   file.path(output_directory, "04_multivariate_tests.csv")
 )
 write_utf8_csv(
-  round_numeric_columns(rbind(outcome_model$univariate, ecs_model$univariate), digits = 4L),
+  round_numeric_columns(
+    do.call(rbind, lapply(all_models, `[[`, "univariate")),
+    digits = 4L
+  ),
   file.path(output_directory, "04_univariate_followups.csv")
 )
 write_utf8_csv(
-  rbind(outcome_model$exclusions, ecs_model$exclusions),
+  do.call(rbind, lapply(all_models, `[[`, "exclusions")),
   file.path(output_directory, "04_analysis_exclusions.csv")
 )
 write_utf8_csv(
-  rbind(outcome_model$group_counts, ecs_model$group_counts),
+  do.call(rbind, lapply(all_models, `[[`, "group_counts")),
   file.path(output_directory, "04_group_counts.csv")
 )
 write_utf8_text(
@@ -176,7 +189,10 @@ write_utf8_text(
     outcome_model$model_summary,
     "",
     "ECS awareness/action model (base-R sequential report; primary CSV uses partial Type-II comparisons)",
-    ecs_model$model_summary
+    ecs_model$model_summary,
+    "",
+    "ECR-GO attachment dimensions model (thesis extension; base-R sequential report; primary CSV uses partial Type-II comparisons)",
+    ecr_model$model_summary
   ),
   file.path(output_directory, "04_model_summaries.txt")
 )
@@ -185,12 +201,19 @@ write_analysis_session_info(
   c(
     sprintf("Outcome MANCOVA complete cases: %d", outcome_model$n),
     sprintf("ECS MANCOVA complete cases: %d", ecs_model$n),
+    sprintf("ECR-GO MANCOVA complete cases: %d", ecr_model$n),
     "Fixed factors: binary gender and marital status.",
     "Covariates: centered age, education code, and income code.",
     "Location is unavailable in the current questionnaire and is omitted.",
-    "The original HSCL-25 outcome is replaced by K6 total score."
+    "The original HSCL-25 outcome is replaced by K6 total score.",
+    "The ECR-GO attachment anxiety / intimacy avoidance MANCOVA is a thesis extension and was not included in the original paper."
   )
 )
 
-message(sprintf("MANCOVA complete: outcome n=%d, ECS n=%d", outcome_model$n, ecs_model$n))
+message(sprintf(
+  "MANCOVA complete: outcome n=%d, ECS n=%d, ECR-GO n=%d",
+  outcome_model$n,
+  ecs_model$n,
+  ecr_model$n
+))
 

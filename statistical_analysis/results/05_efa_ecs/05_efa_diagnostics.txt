@@ -1,0 +1,9 @@
+Primary EFA follows the original paper: robust maximum likelihood, 1-4 requested factors.
+The original paper did not state its rotation method. Geomin oblique rotation is used here to mimic standard Mplus EFA practice.
+The current questionnaire contains the final 10 ECS items, not the original pre-deletion 12-item pool.
+KMO and Bartlett tests are supplemental diagnostics and were not reported in the original paper.
+
+1_factor: converged=TRUE; admissible_post_check=TRUE; df=35
+2_factor: converged=TRUE; admissible_post_check=TRUE; df=26
+3_factor: converged=TRUE; admissible_post_check=TRUE; df=18
+4_factor: converged=TRUE; admissible_post_check=TRUE; df=11

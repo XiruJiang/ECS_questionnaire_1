@@ -1,4 +1,4 @@
-# Latent SEM following the original awareness -> action -> positive affect model.
+# Latent SEM with attachment upstream of awareness -> action -> positive affect.
 
 command <- commandArgs(trailingOnly = FALSE)
 file_argument <- grep("^--file=", command, value = TRUE)
@@ -50,15 +50,44 @@ pa_parcels <- make_balanced_parcels(analysis_data, make_item_names("D", 1:10), 5
 eud_parcels <- make_balanced_parcels(analysis_data, c("G_01_rev", "G_02", "G_03", "G_04_rev", "G_05", "G_06_rev"), 3L, "EUD")
 erq_parcels <- make_balanced_parcels(analysis_data, make_item_names("B", 1:6), 3L, "ERQ")
 eac_parcels <- make_balanced_parcels(analysis_data, make_item_names("C", 1:8), 3L, "EAC")
+ecr_anxiety_parcels <- make_balanced_parcels(
+  analysis_data,
+  c("H_02", "H_04", "H_05", "H_06", "H_08", "H_09", "H_10", "H_12", "H_15", "H_17", "H_19_rev", "H_21", "H_24", "H_26", "H_28", "H_30", "H_31", "H_32"),
+  3L,
+  "ECR_ANX"
+)
+ecr_avoidance_parcels <- make_balanced_parcels(
+  analysis_data,
+  c("H_01", "H_03_rev", "H_07", "H_11_rev", "H_14", "H_16_rev", "H_18", "H_20", "H_22_rev", "H_25_rev", "H_27_rev", "H_29_rev"),
+  3L,
+  "ECR_AVO"
+)
 
-analysis_data <- cbind(analysis_data, pa_parcels$data, eud_parcels$data, erq_parcels$data, eac_parcels$data)
-parcel_assignments <- rbind(pa_parcels$assignment, eud_parcels$assignment, erq_parcels$assignment, eac_parcels$assignment)
+analysis_data <- cbind(
+  analysis_data,
+  pa_parcels$data,
+  eud_parcels$data,
+  erq_parcels$data,
+  eac_parcels$data,
+  ecr_anxiety_parcels$data,
+  ecr_avoidance_parcels$data
+)
+parcel_assignments <- rbind(
+  pa_parcels$assignment,
+  eud_parcels$assignment,
+  erq_parcels$assignment,
+  eac_parcels$assignment,
+  ecr_anxiety_parcels$assignment,
+  ecr_avoidance_parcels$assignment
+)
 write_utf8_csv(round_numeric_columns(parcel_assignments, 4L), file.path(output_directory, "06_parcel_assignments.csv"))
 
 covariates <- active_covariates(background)
 covariate_rhs <- paste(covariates, collapse = " + ")
 
 measurement_model <- c(
+  "attachment_anxiety =~ ECR_ANX_parcel_1 + ECR_ANX_parcel_2 + ECR_ANX_parcel_3",
+  "intimacy_avoidance =~ ECR_AVO_parcel_1 + ECR_AVO_parcel_2 + ECR_AVO_parcel_3",
   "awareness =~ I_02 + I_05 + I_08",
   "action =~ I_01 + I_03 + I_04 + I_06 + I_07 + I_09 + I_10",
   "positive_affect =~ PA_parcel_1 + PA_parcel_2 + PA_parcel_3 + PA_parcel_4 + PA_parcel_5",
@@ -77,18 +106,27 @@ outcome_covariances <- c(
 
 model1_lines <- c(
   measurement_model,
-  paste0("awareness ~ ", covariate_rhs),
+  paste0("awareness ~ d1*attachment_anxiety + d2*intimacy_avoidance + ", covariate_rhs),
   paste0("action ~ a*awareness + ", covariate_rhs),
   paste0("positive_affect ~ b*action + ", covariate_rhs),
   paste0("life_satisfaction ~ c1*positive_affect + ", covariate_rhs),
   paste0("vitality ~ c2*positive_affect + ", covariate_rhs),
   paste0("eudaimonic ~ c3*positive_affect + ", covariate_rhs),
   paste0("distress ~ c4*positive_affect + ", covariate_rhs),
+  "attachment_anxiety ~~ intimacy_avoidance",
   outcome_covariances,
   "indirect_life_satisfaction := a*b*c1",
   "indirect_vitality := a*b*c2",
   "indirect_eudaimonic := a*b*c3",
-  "indirect_distress := a*b*c4"
+  "indirect_distress := a*b*c4",
+  "ecr_anxiety_indirect_life := d1*a*b*c1",
+  "ecr_anxiety_indirect_vitality := d1*a*b*c2",
+  "ecr_anxiety_indirect_eudaimonic := d1*a*b*c3",
+  "ecr_anxiety_indirect_distress := d1*a*b*c4",
+  "ecr_avoidance_indirect_life := d2*a*b*c1",
+  "ecr_avoidance_indirect_vitality := d2*a*b*c2",
+  "ecr_avoidance_indirect_eudaimonic := d2*a*b*c3",
+  "ecr_avoidance_indirect_distress := d2*a*b*c4"
 )
 
 control_measurement <- c(
@@ -101,18 +139,27 @@ control_measurement <- c(
 model2_lines <- c(
   measurement_model,
   control_measurement,
-  paste0("awareness ~ ", covariate_rhs),
+  paste0("awareness ~ d1*attachment_anxiety + d2*intimacy_avoidance + ", covariate_rhs),
   paste0("action ~ a*awareness + ", covariate_rhs),
   paste0("positive_affect ~ b*action + er_adaptive*adaptive_er + er_maladaptive*maladaptive_er + er_reappraisal*reappraisal + er_processing*emotional_processing + ", covariate_rhs),
   paste0("life_satisfaction ~ c1*positive_affect + ", covariate_rhs),
   paste0("vitality ~ c2*positive_affect + ", covariate_rhs),
   paste0("eudaimonic ~ c3*positive_affect + direct_processing*emotional_processing + ", covariate_rhs),
   paste0("distress ~ c4*positive_affect + direct_maladaptive*maladaptive_er + ", covariate_rhs),
+  "attachment_anxiety ~~ intimacy_avoidance",
   outcome_covariances,
   "indirect_life_satisfaction := a*b*c1",
   "indirect_vitality := a*b*c2",
   "indirect_eudaimonic := a*b*c3",
   "indirect_distress := a*b*c4",
+  "ecr_anxiety_indirect_life := d1*a*b*c1",
+  "ecr_anxiety_indirect_vitality := d1*a*b*c2",
+  "ecr_anxiety_indirect_eudaimonic := d1*a*b*c3",
+  "ecr_anxiety_indirect_distress := d1*a*b*c4",
+  "ecr_avoidance_indirect_life := d2*a*b*c1",
+  "ecr_avoidance_indirect_vitality := d2*a*b*c2",
+  "ecr_avoidance_indirect_eudaimonic := d2*a*b*c3",
+  "ecr_avoidance_indirect_distress := d2*a*b*c4",
   "adaptive_via_pa_life := er_adaptive*c1",
   "adaptive_via_pa_vitality := er_adaptive*c2",
   "adaptive_via_pa_eudaimonic := er_adaptive*c3",
@@ -132,7 +179,7 @@ all_model_variables <- unique(c(
   unlist(regmatches(paste(model2_lines, collapse = " "), gregexpr("[A-Za-z][A-Za-z0-9_]*", paste(model2_lines, collapse = " ")))),
   covariates
 ))
-reserved_words <- c("awareness", "action", "positive_affect", "life_satisfaction", "vitality", "eudaimonic", "distress", "adaptive_er", "maladaptive_er", "reappraisal", "emotional_processing")
+reserved_words <- c("attachment_anxiety", "intimacy_avoidance", "awareness", "action", "positive_affect", "life_satisfaction", "vitality", "eudaimonic", "distress", "adaptive_er", "maladaptive_er", "reappraisal", "emotional_processing")
 observed_candidates <- intersect(all_model_variables, names(analysis_data))
 complete_variables <- unique(c(observed_candidates, covariates))
 complete_rows <- stats::complete.cases(analysis_data[complete_variables])
@@ -145,10 +192,12 @@ exclusion_log <- data.frame(
 )
 write_utf8_csv(exclusion_log, file.path(output_directory, "06_sem_exclusions.csv"))
 
+lavaan_summary_method <- methods::selectMethod("summary", "lavaan")
+
 fit_sem_model <- function(model_syntax, model_name) {
   fit <- lavaan::sem(
     model_syntax, data = sem_data, estimator = "MLR", meanstructure = TRUE,
-    missing = "fiml", fixed.x = FALSE
+    missing = "fiml", fixed.x = FALSE, bounds = "pos.var"
   )
   saveRDS(fit, file.path(output_directory, paste0("06_", model_name, "_fit.rds")))
   parameters <- lavaan::parameterEstimates(fit, standardized = TRUE, ci = TRUE)
@@ -158,7 +207,16 @@ fit_sem_model <- function(model_syntax, model_name) {
     file.path(output_directory, paste0("06_", model_name, "_parameters.csv"))
   )
   write_utf8_text(
-    capture.output(summary(fit, fit.measures = TRUE, standardized = TRUE, rsquare = TRUE)),
+    capture.output(
+      print(
+        lavaan_summary_method(
+          fit,
+          fit.measures = TRUE,
+          standardized = TRUE,
+          rsquare = TRUE
+        )
+      )
+    ),
     file.path(output_directory, paste0("06_", model_name, "_full_summary.txt"))
   )
   list(fit = fit, fit_row = lavaan_fit_row(fit, model_name, "primary_sem"))
@@ -168,6 +226,32 @@ model1 <- fit_sem_model(model1_syntax, "model1_sequential")
 model2 <- fit_sem_model(model2_syntax, "model2_er_controls")
 fit_results <- rbind(model1$fit_row, model2$fit_row)
 write_utf8_csv(round_numeric_columns(fit_results, 4L), file.path(output_directory, "06_sem_fit_indices.csv"))
+
+sem_diagnostic_lines <- unlist(lapply(
+  list(model1_sequential = model1$fit, model2_er_controls = model2$fit),
+  function(fit) {
+    parameters <- lavaan::parameterEstimates(fit, standardized = TRUE)
+    negative_variances <- parameters[
+      parameters$op == "~~" &
+        parameters$lhs == parameters$rhs &
+        parameters$est < 0,
+      "lhs"
+    ]
+    c(
+      sprintf("converged=%s", lavaan::lavInspect(fit, "converged")),
+      sprintf("admissible_post_check=%s", lavaan::lavInspect(fit, "post.check")),
+      sprintf(
+        "negative_variances=%s",
+        if (length(negative_variances)) paste(negative_variances, collapse = "|") else "none"
+      )
+    )
+  }
+))
+diagnostic_names <- rep(c("model1_sequential", "model2_er_controls"), each = 3L)
+write_utf8_text(
+  paste0(diagnostic_names, ": ", sem_diagnostic_lines),
+  file.path(output_directory, "06_sem_diagnostics.txt")
+)
 
 bootstrap_draws <- suppressWarnings(as.integer(Sys.getenv("SEM_BOOTSTRAP_DRAWS", "1000")))
 if (is.na(bootstrap_draws) || bootstrap_draws < 0L) bootstrap_draws <- 1000L
@@ -195,7 +279,7 @@ if (bootstrap_draws > 0L) {
       lavaan::sem(
         syntax, data = sem_data, estimator = "ML", meanstructure = TRUE,
         missing = "fiml", fixed.x = FALSE, se = "bootstrap",
-        bootstrap = bootstrap_draws
+        bootstrap = bootstrap_draws, bounds = "pos.var"
       ),
       error = function(error) error
     )
@@ -222,7 +306,8 @@ write_analysis_session_info(
   c(
     sprintf("SEM complete cases: %d of %d", nrow(sem_data), nrow(analysis_data)),
     sprintf("Bootstrap draws: %d", bootstrap_draws),
-    "Primary chain: ECS awareness -> ECS action -> positive affect -> four outcomes.",
+    "Primary chain: ECR-GO attachment anxiety / intimacy avoidance -> ECS awareness -> ECS action -> positive affect -> four outcomes.",
+    "ECR-GO attachment anxiety and intimacy avoidance are separate correlated latent predictors, each measured by three balanced parcels.",
     "Model 2 adds adaptive/maladaptive CERQ, ERQ reappraisal, and EAC emotional processing.",
     "EAC emotional processing substitutes for the original paper's integrative ER measure.",
     "K6 substitutes for the original paper's HSCL-25 internalizing-symptoms measure.",

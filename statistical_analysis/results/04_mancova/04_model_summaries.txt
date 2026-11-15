@@ -15,3 +15,12 @@ marital       3 0.0180349  0.78256      6    516 0.5839
 education_c   1 0.0069473  0.89897      2    257 0.4083
 income_c      1 0.0006570  0.08448      2    257 0.9190
 Residuals   258                                        
+
+ECR-GO attachment dimensions model (thesis extension; base-R sequential report; primary CSV uses partial Type-II comparisons)
+             Df    Pillai approx F num Df den Df Pr(>F)
+age_c         1 0.0161056  2.10345      2    257 0.1241
+gender        1 0.0039619  0.51113      2    257 0.6004
+marital       3 0.0137208  0.59407      6    516 0.7352
+education_c   1 0.0167667  2.19126      2    257 0.1139
+income_c      1 0.0028184  0.36319      2    257 0.6958
+Residuals   258                                        

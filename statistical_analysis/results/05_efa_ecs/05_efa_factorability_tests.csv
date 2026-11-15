@@ -1,0 +1,5 @@
+"test","value","note"
+"KMO_overall","0.9371","Supplemental diagnostic; not reported in the original paper."
+"Bartlett_chisq","1128.0723","Supplemental diagnostic; H0 is an identity correlation matrix."
+"Bartlett_df","45","Degrees of freedom for Bartlett test."
+"Bartlett_p_value","0","Supplemental diagnostic; not a factor-retention rule."
