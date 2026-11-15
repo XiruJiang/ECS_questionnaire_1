@@ -530,7 +530,8 @@ identifier_codebook <- data.frame(
   code = NA_integer_,
   measurement_level = "identifier",
   note = paste(
-    "Six-digit identifier issued by the DataPipe condition counter for",
+    "Six-digit identifier produced by a one-to-one scrambling of the",
+    "DataPipe condition counter for",
     "matching a completed questionnaire to the CrowdWorks submission;",
     "preserve leading zeros and do not use it in statistical models."
   ),

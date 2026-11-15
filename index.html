@@ -2507,9 +2507,47 @@ const participantId = crypto.randomUUID();
 const filename = `${participantId}.csv`;
 
 // クラウドワークス提出用コードは、調査開始時にDataPipeの
-// サーバー側カウンターから取得する。ランダム値へのフォールバックは
-// 行わず、取得できない場合は重複防止のため調査を開始しない。
+// サーバー側カウンターから取得する。連番をそのまま表示せず、
+// 1対1対応の可逆な置換で乱序化することで、見た目を推測しにくくしつつ
+// 重複しない6桁コードにする。ランダム値へのフォールバックは行わない。
 let crowdworksSerialCode = null;
+let crowdworksConditionNumber = null;
+
+const crowdworksSerialCodeCapacity = 900000;
+const crowdworksScrambleRounds = [
+  { upperMultiplier: 5, lowerOffset: 48271 },
+  { upperMultiplier: 7, lowerOffset: 19337 },
+  { upperMultiplier: 4, lowerOffset: 76103 },
+  { upperMultiplier: 8, lowerOffset: 52057 },
+  { upperMultiplier: 2, lowerOffset: 84701 },
+  { upperMultiplier: 1, lowerOffset: 31627 }
+];
+
+// 0～899999を同じ範囲内で1対1に並べ替える。
+// 各処理は加算による置換なので、全体も必ず重複のない置換になる。
+function scrambleCrowdworksCondition(conditionNumber) {
+  let upper = Math.floor(conditionNumber / 100000); // 0～8
+  let lower = conditionNumber % 100000;             // 0～99999
+
+  crowdworksScrambleRounds.forEach(function(round, roundIndex) {
+    const upperShift = (
+      (lower % 9) * round.upperMultiplier +
+      Math.floor(lower / 9) +
+      round.lowerOffset +
+      roundIndex
+    ) % 9;
+    upper = (upper + upperShift) % 9;
+
+    const lowerShift = (
+      round.lowerOffset +
+      (upper + 1) * round.upperMultiplier * 7919 +
+      (upper * upper + roundIndex) * 104729
+    ) % 100000;
+    lower = (lower + lowerShift) % 100000;
+  });
+
+  return upper * 100000 + lower;
+}
 
 async function requestUniqueCrowdworksSerialCode() {
   const response = await fetch(
@@ -2534,12 +2572,18 @@ async function requestUniqueCrowdworksSerialCode() {
   if (
     !Number.isInteger(result.condition) ||
     result.condition < 0 ||
-    result.condition > 999999
+    result.condition >= crowdworksSerialCodeCapacity
   ) {
     throw new Error("DataPipe returned an invalid serial-code number");
   }
 
-  return String(result.condition).padStart(6, "0");
+  crowdworksConditionNumber = result.condition;
+
+  // 100000～999999に写像するため、旧方式の000001などとも重複しない。
+  const scrambledCodeNumber =
+    100000 + scrambleCrowdworksCondition(result.condition);
+
+  return String(scrambledCodeNumber).padStart(6, "0");
 }
 
   let consentGiven = false;
@@ -4683,6 +4727,7 @@ const saveData = {
       // クラウドワークスの提出内容と照合できるようにする。
       jsPsych.data.addProperties({
         participant_id: participantId,
+        crowdworks_condition_number: crowdworksConditionNumber,
         crowdworks_serial_code: crowdworksSerialCode
       });
 
