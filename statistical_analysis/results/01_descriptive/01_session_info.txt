@@ -1,4 +1,4 @@
-Run time: 2026-11-15 01:35:59 JST
+Run time: 2026-11-16 23:28:28 JST
 Input: C:/survey/ECS_questionnaire_1/preprocessing/03_analysis_with_scale_scores.csv
 Participants: 300
 Score variables: 38

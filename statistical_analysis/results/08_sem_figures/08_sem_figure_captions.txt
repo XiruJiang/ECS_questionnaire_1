@@ -1,11 +1,12 @@
-Figure 1. Hypothesized structural model.
-ECR-GO attachment anxiety and intimacy avoidance predict EC awareness, which predicts EC action, positive affect, and four psychological outcomes.
+図1　仮説構造モデル。
+ECR-GOの見捨てられ不安と親密性回避がECの気づきを予測し、それがEC行動、ポジティブ感情、4つの心理的結果を予測する。
+矢印上の+／-は仮説上の関連方向を示す。
 
-Figure 2. Primary structural model.
-Standardized coefficients before and after the slash are from Model 1 and Model 2, respectively. Model 2 includes other emotion-regulation measures. Background covariates, measurement loadings, and outcome residual covariances are omitted for clarity.
+図2　主要構造モデル。
+斜線の前後はそれぞれモデル1とモデル2の標準化係数を示す。モデル2は他の感情調整尺度を含む。背景属性、因子負荷、結果変数の残差共分散は省略した。
 
-Figure 3. Emotion-specific structural models.
-Each panel replaces general EC awareness/action with one emotion-specific version while retaining ECR-GO attachment anxiety and intimacy avoidance upstream.
+図3　感情別構造モデル。
+各パネルでは、一般的なECの気づき／行動を7種類の感情別尺度に置き換え、ECR-GOの見捨てられ不安と親密性回避を上流に配置した。
 
-Significance: * p < .05; ** p < .01; *** p < .001.
-The current figures are generated from the current analysis output. Re-run after formal data collection and verify all model diagnostics before thesis reporting.
+有意水準：* p < .05; ** p < .01; *** p < .001。
+現在の図は現在の分析結果から作成した。正式データ収集後に再実行し、論文で報告する前にすべてのモデル診断を確認すること。

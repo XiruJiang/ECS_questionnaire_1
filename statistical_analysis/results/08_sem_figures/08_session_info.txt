@@ -1,4 +1,4 @@
-Run time: 2026-11-15 22:12:04 JST
+Run time: 2026-11-17 01:08:50 JST
 Input: C:/survey/ECS_questionnaire_1/preprocessing/03_analysis_with_scale_scores.csv
 Figures generated: hypothesized model, primary SEM, seven emotion-specific models.
 Primary coefficients are standardized estimates shown as Model 1 / Model 2.
