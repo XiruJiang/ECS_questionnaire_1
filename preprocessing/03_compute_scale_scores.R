@@ -288,6 +288,14 @@ assert_condition(
 )
 assert_condition(all(nzchar(prepared_data$participant_id)), "participant_id contains blank values")
 assert_condition(!anyDuplicated(prepared_data$participant_id), "participant_id contains duplicates")
+assert_condition(
+  all(grepl("^[0-9]{6}$", prepared_data$crowdworks_serial_code)),
+  "crowdworks_serial_code must be nonblank and contain exactly six digits"
+)
+assert_condition(
+  !anyDuplicated(prepared_data$crowdworks_serial_code),
+  "crowdworks_serial_code contains duplicates"
+)
 
 attention_all_pass <- parse_logical_column(prepared_data$attention_all_pass, "attention_all_pass")
 assert_condition(all(attention_all_pass), "Prepared input still contains failed attention checks")

@@ -207,7 +207,7 @@ process_participant <- function(file_path) {
 
   required_metadata <- c(
     "participant_id", "section", "scale_id", "scale_position",
-    "trial_index", "question_order", "response"
+    "trial_index", "question_order", "response", "crowdworks_serial_code"
   )
   missing_metadata <- setdiff(required_metadata, names(data))
   assert_condition(
@@ -230,25 +230,22 @@ process_participant <- function(file_path) {
     sprintf("participant_id does not match filename: %s", participant_id)
   )
 
-  crowdworks_serial_code <- ""
-  if ("crowdworks_serial_code" %in% names(data)) {
-    serial_code_values <- unique(
-      data$crowdworks_serial_code[nzchar(data$crowdworks_serial_code)]
-    )
-    assert_condition(
-      length(serial_code_values) == 1L,
-      "Expected exactly one crowdworks_serial_code"
-    )
-    assert_condition(
-      grepl("^[0-9]{6}$", serial_code_values[[1]]),
-      "crowdworks_serial_code must contain exactly six digits"
-    )
-    assert_condition(
-      all(data$crowdworks_serial_code == serial_code_values[[1]]),
-      "crowdworks_serial_code must be identical on every row"
-    )
-    crowdworks_serial_code <- serial_code_values[[1]]
-  }
+  serial_code_values <- unique(
+    data$crowdworks_serial_code[nzchar(data$crowdworks_serial_code)]
+  )
+  assert_condition(
+    length(serial_code_values) == 1L,
+    "Expected exactly one nonblank crowdworks_serial_code"
+  )
+  assert_condition(
+    grepl("^[0-9]{6}$", serial_code_values[[1]]),
+    "crowdworks_serial_code must contain exactly six digits"
+  )
+  assert_condition(
+    all(data$crowdworks_serial_code == serial_code_values[[1]]),
+    "crowdworks_serial_code must be identical on every row"
+  )
+  crowdworks_serial_code <- serial_code_values[[1]]
 
   trial_index <- suppressWarnings(as.integer(data$trial_index))
   assert_condition(
@@ -419,11 +416,8 @@ assert_condition(
   !anyDuplicated(merged_data$participant_id),
   "Duplicate participant_id values found across files"
 )
-nonblank_serial_codes <- merged_data$crowdworks_serial_code[
-  nzchar(merged_data$crowdworks_serial_code)
-]
 assert_condition(
-  !anyDuplicated(nonblank_serial_codes),
+  !anyDuplicated(merged_data$crowdworks_serial_code),
   paste(
     "Duplicate crowdworks_serial_code values found across files.",
     "Inspect the source files before analysis or payment review."
@@ -460,11 +454,9 @@ verification <- utils::read.csv(
 assert_condition(nrow(verification) == nrow(merged_data), "Saved output row count mismatch")
 assert_condition(identical(names(verification), names(merged_data)), "Saved output columns mismatch")
 assert_condition(!anyDuplicated(verification$participant_id), "Saved output contains duplicate participant_id")
-saved_nonblank_serial_codes <- verification$crowdworks_serial_code[
-  nzchar(verification$crowdworks_serial_code)
-]
 assert_condition(
-  !anyDuplicated(saved_nonblank_serial_codes),
+  all(grepl("^[0-9]{6}$", verification$crowdworks_serial_code)) &&
+    !anyDuplicated(verification$crowdworks_serial_code),
   "Saved output contains duplicate crowdworks_serial_code values"
 )
 for (column_name in c("crowdworks_serial_code", demographic_columns)) {

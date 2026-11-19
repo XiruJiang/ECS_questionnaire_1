@@ -50,6 +50,15 @@
 
 也可以单独运行任一编号程序。所有结果保存在 `results/` 的对应子文件夹。
 
+## 正式分析后的完成检查
+
+- `results/run_all_log.txt` 必须包含01至09各程序的 `completed` 记录和最后的 `Run finished`，且不得停在某个中间程序。
+- `results/01_descriptive/01_sample_flow.csv` 中，合并人数减去注意力题排除人数必须等于分析样本人数。
+- MANCOVA与SEM会因背景信息为“其他”“回答しない”或缺失而使用更小的完整案例样本；以各自的排除CSV和session info为准，不要把该人数误写成所有分析共通的人数。
+- `results/06_sem_primary/06_sem_diagnostics.txt` 中每个正式报告模型都必须同时为 `converged=TRUE` 和 `admissible_post_check=TRUE`。
+- `results/09_paper_tables/09_table5_indirect_effects.csv` 的 `final_reporting_ready` 必须为 `TRUE`，并确认 `bootstrap_draws` 至少为1000，才可把间接效果和置信区间作为正式结果使用。
+- 演示数据出现的不收敛、不适解或拟合不足只说明演示数据不适合解释；换成正式数据后必须重新检查，不能沿用演示结果。
+
 ## 报告精度
 
 分析过程使用未取整数据。输出表通常将M、SD和模型系数显示至2–3位小数，p值显示至3–4位；不得在相关、回归、CFA或SEM之前先对量表得分四舍五入。

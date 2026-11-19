@@ -1,5 +1,5 @@
 "source_variable","raw_value","analysis_variable","code","measurement_level","note"
-"crowdworks_serial_code","000000-999999 (six digits; preserve leading zeros)","crowdworks_serial_code","","identifier","Six-digit identifier issued by the DataPipe condition counter for matching a completed questionnaire to the CrowdWorks submission; preserve leading zeros and do not use it in statistical models."
+"crowdworks_serial_code","000000-999999 (six digits; preserve leading zeros)","crowdworks_serial_code","","identifier","Six-digit identifier produced by a one-to-one scrambling of the DataPipe condition counter for matching a completed questionnaire to the CrowdWorks submission; preserve leading zeros and do not use it in statistical models."
 "gender","男性","gender_code","1","nominal","Codes identify categories; use factor/dummy coding in statistical models."
 "gender","女性","gender_code","2","nominal","Codes identify categories; use factor/dummy coding in statistical models."
 "gender","その他","gender_code","3","nominal","Codes identify categories; use factor/dummy coding in statistical models."

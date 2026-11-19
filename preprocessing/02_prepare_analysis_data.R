@@ -192,31 +192,14 @@ names(expected_items_by_scale) <- names(expected_item_counts)
 expected_item_columns <- unlist(expected_items_by_scale, use.names = FALSE)
 
 required_columns <- c(
-  "participant_id", "source_file", "age", "gender", "education",
+  "participant_id", "source_file", "crowdworks_serial_code",
+  "age", "gender", "education",
   "marital_status", "income", expected_item_columns,
   "attention_A_13_pass", "attention_H_13_pass",
   "attention_H_23_pass", "attention_all_pass"
 )
 
 raw_data <- read_utf8_csv(input_file, all_character = TRUE)
-
-# Questionnaire files created before the CrowdWorks completion-code update do
-# not contain this field. Keep them compatible while preserving the code for
-# all newly collected responses.
-if (!"crowdworks_serial_code" %in% names(raw_data)) {
-  source_file_index <- match("source_file", names(raw_data))
-  assert_condition(
-    !is.na(source_file_index),
-    "Input is missing required column: source_file"
-  )
-  raw_data <- cbind(
-    raw_data[, seq_len(source_file_index), drop = FALSE],
-    crowdworks_serial_code = rep("", nrow(raw_data)),
-    raw_data[, -seq_len(source_file_index), drop = FALSE],
-    stringsAsFactors = FALSE,
-    check.names = FALSE
-  )
-}
 
 assert_condition(nrow(raw_data) > 0L, "Input contains no participant rows")
 assert_condition(!anyDuplicated(names(raw_data)), "Input contains duplicate column names")
@@ -232,6 +215,14 @@ assert_condition(
 assert_condition(
   !anyDuplicated(raw_data$participant_id),
   "participant_id contains duplicates"
+)
+assert_condition(
+  all(grepl("^[0-9]{6}$", raw_data$crowdworks_serial_code)),
+  "crowdworks_serial_code must be nonblank and contain exactly six digits"
+)
+assert_condition(
+  !anyDuplicated(raw_data$crowdworks_serial_code),
+  "crowdworks_serial_code contains duplicates"
 )
 
 raw_data$age <- parse_integer_column(raw_data$age, "age")
