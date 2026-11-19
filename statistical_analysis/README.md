@@ -24,8 +24,9 @@
 5a. `05_efa_ecs.R`：按照原论文先对ECS一般版实施EFA。对当前最终版10项请求1–4因子，使用MLR和Geomin斜交旋转；重点比较1因子与2因子，同时输出交叉负荷、KMO与Bartlett补充诊断。原论文最初对12项实施EFA并据交叉负荷删除2项，当前问卷已不包含被删除的2项，因此本分析是对最终10项结构的探索，不是对原始项目筛选过程的完全复现。
 5b. `05_cfa_ecs.R`：ECS一般版和7种情绪版分别比较一因子与Awareness/Action二因子模型。估计方法为MLR，并按原论文设置第5与第8项残差相关。
 6. `06_sem_primary_model.R`：潜变量主模型。把ECR-GO的依恋不安与亲密性回避作为两个相关的上游潜变量，检验ECR-GO → Awareness → Action → Positive Affect → Life satisfaction/Vitality/Eudaimonic well-being/Distress；第二模型加入其他情绪调节指标。ECR-GO两个下位尺度分别使用3个平衡题包，连续间接效应默认1000次bootstrap。
-7. `07_sem_emotion_specific_sensitivity.R`：把一般版Awareness/Action依次替换为7种情绪版得分，同时保留ECR-GO依恋不安与亲密性回避在路径最上游的补充路径模型。
-8. `08_generate_sem_figures.R`：按照原论文图1–3的功能生成论文插图。图1为追加ECR后的理论模型；图2显示一般版主SEM的标准化系数（斜线前后分别为模型1/模型2）；图3比较7种具体情绪版。每图同时输出180 dpi PNG和矢量PDF，正式数据分析后需重新生成。
+7. `07_sem_emotion_specific_sensitivity.R`：把一般版Awareness/Action依次替换为7种情绪版得分，同时保留ECR-GO依恋不安与亲密性回避在路径最上游。仿照原论文的感情别敏感性分析，统一检验Awareness→Positive Affect以及Awareness/Action→4个结果变量的直接路径，并另行输出显著追加路径表。
+8. `08_generate_sem_figures.R`：按照原论文图1–3的功能生成论文插图。图1为追加ECR后的理论模型；图2显示一般版主SEM的标准化系数（斜线前后分别为模型1/模型2）；图3把7种具体情绪版合并到一个结构图中，以a–g区分感情。主要路径用 `/` 分隔7个模型的系数；追加直接路径的系数右上角字母表示对应的情绪；Positive Affect之后的路径及结果变量间残差相关用 `;` 分隔7个模型中的最小值和最大值。蓝色虚线表示当前数据中显著的追加直接路径，灰色点线表示原论文检验过但当前数据不显著（NS）的路径。每图同时输出180 dpi PNG和矢量PDF，正式数据分析后需重新生成。
+9. `09_generate_paper_tables.R`：将表2、表3、表4、表5所需结果整理为可直接复制到Excel的专用CSV。表2合并EFA、CFA和主要SEM拟合指标；表3合并一般版ECS的标准化因子负荷量、R²、题目M和SD；表4输出M、SD及带显著性星号的下三角相关矩阵，并追加本研究使用的ECR-GO两个下位尺度；表5输出主要SEM模型的间接效果及95%置信区间，并追加ECR-GO相关间接路径；其中`ci_95_display`列按原论文格式生成可直接复制的`[.234, .603]`形式。表5优先读取1000次以上的percentile bootstrap结果；若bootstrap结果不存在，则明确标记为仅供程序检查的delta-method暂定值，不得用于正式报告。
 
 ## 运行方法
 

@@ -1,4 +1,4 @@
-Run time: 2026-11-16 23:28:28 JST
+Run time: 2026-11-19 19:06:16 JST
 Input: C:/survey/ECS_questionnaire_1/preprocessing/03_analysis_with_scale_scores.csv
 Participants: 300
 Score variables: 38
@@ -11,8 +11,9 @@ Matrix products: default
   LAPACK version 3.12.1
 
 locale:
-[1] C
-system code page: 65001
+[1] LC_COLLATE=Japanese_Japan.utf8  LC_CTYPE=Japanese_Japan.utf8   
+[3] LC_MONETARY=Japanese_Japan.utf8 LC_NUMERIC=C                   
+[5] LC_TIME=Japanese_Japan.utf8    
 
 time zone: Asia/Tokyo
 tzcode source: internal

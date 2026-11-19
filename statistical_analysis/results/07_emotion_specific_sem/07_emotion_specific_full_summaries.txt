@@ -1,11 +1,11 @@
 ===== happiness =====
 ECS_happiness_awareness_mean ~ d1*ECRGO_attachment_anxiety_mean + d2*ECRGO_avoidance_of_intimacy_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
 ECS_happiness_action_mean ~ a*ECS_happiness_awareness_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
-PANAS_positive_affect_mean ~ b*ECS_happiness_action_mean + er_adaptive*CERQ_adaptive_mean + er_maladaptive*CERQ_maladaptive_mean + er_reappraisal*ERQ_reappraisal_mean + er_processing*EAC_emotional_processing_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
-SWLS_life_satisfaction_mean ~ c1*PANAS_positive_affect_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
-SVS_vitality_mean ~ c2*PANAS_positive_affect_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
-PWBS_eudaimonic_wellbeing_mean ~ c3*PANAS_positive_affect_mean + direct_processing*EAC_emotional_processing_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
-K6_psychological_distress_total ~ c4*PANAS_positive_affect_mean + direct_maladaptive*CERQ_maladaptive_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+PANAS_positive_affect_mean ~ b*ECS_happiness_action_mean + aw_pa*ECS_happiness_awareness_mean + er_adaptive*CERQ_adaptive_mean + er_maladaptive*CERQ_maladaptive_mean + er_reappraisal*ERQ_reappraisal_mean + er_processing*EAC_emotional_processing_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+SWLS_life_satisfaction_mean ~ c1*PANAS_positive_affect_mean + aw_ls*ECS_happiness_awareness_mean + ac_ls*ECS_happiness_action_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+SVS_vitality_mean ~ c2*PANAS_positive_affect_mean + aw_vit*ECS_happiness_awareness_mean + ac_vit*ECS_happiness_action_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+PWBS_eudaimonic_wellbeing_mean ~ c3*PANAS_positive_affect_mean + aw_eud*ECS_happiness_awareness_mean + ac_eud*ECS_happiness_action_mean + direct_processing*EAC_emotional_processing_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+K6_psychological_distress_total ~ c4*PANAS_positive_affect_mean + aw_dis*ECS_happiness_awareness_mean + ac_dis*ECS_happiness_action_mean + direct_maladaptive*CERQ_maladaptive_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
 ECRGO_attachment_anxiety_mean ~~ ECRGO_avoidance_of_intimacy_mean
 SWLS_life_satisfaction_mean ~~ SVS_vitality_mean + PWBS_eudaimonic_wellbeing_mean + K6_psychological_distress_total
 SVS_vitality_mean ~~ PWBS_eudaimonic_wellbeing_mean + K6_psychological_distress_total
@@ -23,11 +23,11 @@ ecr_avoidance_indirect_vitality := d2*a*b*c2
 ecr_avoidance_indirect_eudaimonic := d2*a*b*c3
 ecr_avoidance_indirect_distress := d2*a*b*c4
 
-lavaan 0.7-3 ended normally after 299 iterations
+lavaan 0.7-3 ended normally after 321 iterations
 
   Estimator                                         ML
   Optimization method                           NLMINB
-  Number of model parameters                       165
+  Number of model parameters                       174
   Row rank of the constraints matrix                20
 
   Number of observations                           266
@@ -35,8 +35,8 @@ lavaan 0.7-3 ended normally after 299 iterations
 
 Model Test User Model:
                                               Standard      Scaled
-  Test Statistic                               269.214     265.504
-  Degrees of freedom                                65          65
+  Test Statistic                               248.815     245.319
+  Degrees of freedom                                56          56
   P-value (Chi-square)                           0.000       0.000
   Scaling correction factor                                  1.014
     Yuan-Bentler correction (Mplus variant)                       
@@ -50,52 +50,52 @@ Model Test Baseline Model:
 
 User Model versus Baseline Model:
 
-  Comparative Fit Index (CFI)                    0.835       0.838
-  Tucker-Lewis Index (TLI)                       0.656       0.663
+  Comparative Fit Index (CFI)                    0.844       0.847
+  Tucker-Lewis Index (TLI)                       0.623       0.631
                                                                   
-  Robust Comparative Fit Index (CFI)                         0.840
-  Robust Tucker-Lewis Index (TLI)                            0.667
+  Robust Comparative Fit Index (CFI)                         0.849
+  Robust Tucker-Lewis Index (TLI)                            0.636
 
 Loglikelihood and Information Criteria:
 
-  Loglikelihood user model (H0)              -5522.362   -5522.362
+  Loglikelihood user model (H0)              -5512.163   -5512.163
   Scaling correction factor                                  1.007
       for the MLR correction                                      
   Loglikelihood unrestricted model (H1)      -5387.755   -5387.755
   Scaling correction factor                                  1.009
       for the MLR correction                                      
                                                                   
-  Akaike (AIC)                               11374.725   11374.725
-  Bayesian (BIC)                             11966.002   11966.002
-  Sample-size adjusted Bayesian (SABIC)      11442.859   11442.859
+  Akaike (AIC)                               11372.326   11372.326
+  Bayesian (BIC)                             11995.854   11995.854
+  Sample-size adjusted Bayesian (SABIC)      11444.176   11444.176
 
 Root Mean Square Error of Approximation:
 
-  RMSEA                                          0.109       0.108
-  90 Percent confidence interval - lower         0.095       0.094
-  90 Percent confidence interval - upper         0.122       0.121
+  RMSEA                                          0.114       0.113
+  90 Percent confidence interval - lower         0.100       0.099
+  90 Percent confidence interval - upper         0.128       0.127
   P-value H_0: RMSEA <= 0.050                    0.000       0.000
   P-value H_0: RMSEA >= 0.080                    1.000       1.000
                                                                   
-  Robust RMSEA                                               0.106
-  90 Percent confidence interval - lower                     0.091
-  90 Percent confidence interval - upper                     0.121
+  Robust RMSEA                                               0.111
+  90 Percent confidence interval - lower                     0.095
+  90 Percent confidence interval - upper                     0.127
   P-value H_0: Robust RMSEA <= 0.050                         0.000
-  P-value H_0: Robust RMSEA >= 0.080                         0.998
+  P-value H_0: Robust RMSEA >= 0.080                         0.999
 
 Standardized Root Mean Square Residual:
 
-  SRMR                                           0.111       0.111
+  SRMR                                           0.107       0.107
 
 Goodness of Fit Index:
 
-  Goodness of Fit Index (GFI)                    0.929            
-  90 Percent confidence interval - lower         0.911            
-  90 Percent confidence interval - upper         0.944            
+  Goodness of Fit Index (GFI)                    0.932            
+  90 Percent confidence interval - lower         0.915            
+  90 Percent confidence interval - upper         0.947            
                                                                   
-  Robust GFI                                                 0.932
-  90 Percent confidence interval - lower                     0.913
-  90 Percent confidence interval - upper                     0.948
+  Robust GFI                                                 0.936
+  90 Percent confidence interval - lower                     0.917
+  90 Percent confidence interval - upper                     0.952
 
 Parameter Estimates:
 
@@ -125,56 +125,65 @@ Regressions:
     mrtl_                             -0.043    0.062   -0.699    0.484
     mrt__                              0.124    0.071    1.749    0.080
   PANAS_positive_affect_mean ~                                         
-    ECS__      (b)                     0.334    0.088    3.806    0.000
-    CERQ_   (er_d)                     0.281    0.143    1.962    0.050
-    CERQ_   (er_m)                    -0.136    0.096   -1.417    0.157
-    ERQ__   (er_r)                     0.027    0.064    0.428    0.669
-    EAC__   (er_p)                     0.142    0.091    1.564    0.118
-    age_c                              0.003    0.004    0.876    0.381
-    gndr_                              0.056    0.076    0.733    0.463
-    edct_                              0.037    0.047    0.793    0.428
-    incm_                             -0.041    0.029   -1.392    0.164
-    mrtl_                             -0.227    0.088   -2.589    0.010
-    mrtl_                             -0.034    0.116   -0.296    0.767
-    mrt__                             -0.107    0.159   -0.669    0.504
+    ECS__      (b)                     0.223    0.122    1.826    0.068
+    ECS__   (aw_p)                     0.137    0.108    1.275    0.202
+    CERQ_   (er_d)                     0.297    0.142    2.088    0.037
+    CERQ_   (er_m)                    -0.136    0.096   -1.412    0.158
+    ERQ__   (er_r)                     0.015    0.064    0.233    0.816
+    EAC__   (er_p)                     0.144    0.090    1.588    0.112
+    age_c                              0.004    0.004    0.932    0.352
+    gndr_                              0.054    0.076    0.711    0.477
+    edct_                              0.038    0.047    0.821    0.412
+    incm_                             -0.042    0.029   -1.454    0.146
+    mrtl_                             -0.226    0.088   -2.575    0.010
+    mrtl_                             -0.041    0.116   -0.351    0.725
+    mrt__                             -0.086    0.162   -0.534    0.593
   SWLS_life_satisfaction_mean ~                                        
-    PANAS     (c1)                     0.682    0.064   10.718    0.000
-    age_c                             -0.001    0.004   -0.130    0.897
-    gndr_                              0.065    0.092    0.711    0.477
-    edct_                              0.005    0.051    0.106    0.915
-    incm_                              0.048    0.034    1.394    0.163
-    mrtl_                             -0.010    0.106   -0.098    0.922
-    mrtl_                             -0.203    0.144   -1.409    0.159
-    mrt__                              0.177    0.300    0.589    0.556
+    PANAS     (c1)                     0.628    0.066    9.486    0.000
+    ECS__   (aw_l)                    -0.013    0.120   -0.106    0.916
+    ECS__   (ac_l)                     0.221    0.136    1.625    0.104
+    age_c                             -0.001    0.004   -0.292    0.770
+    gndr_                              0.075    0.091    0.828    0.408
+    edct_                              0.009    0.050    0.177    0.859
+    incm_                              0.041    0.034    1.198    0.231
+    mrtl_                             -0.046    0.107   -0.433    0.665
+    mrtl_                             -0.198    0.142   -1.394    0.163
+    mrt__                              0.157    0.307    0.511    0.609
   SVS_vitality_mean ~                                                  
-    PANAS     (c2)                     0.876    0.062   14.228    0.000
-    age_c                              0.001    0.005    0.146    0.884
-    gndr_                              0.116    0.096    1.212    0.226
-    edct_                             -0.082    0.052   -1.560    0.119
-    incm_                             -0.002    0.034   -0.067    0.946
-    mrtl_                              0.076    0.111    0.682    0.496
-    mrtl_                             -0.211    0.158   -1.339    0.181
-    mrt__                              0.160    0.263    0.606    0.545
+    PANAS     (c2)                     0.839    0.063   13.276    0.000
+    ECS__   (aw_v)                    -0.011    0.117   -0.093    0.926
+    ECS__   (ac_v)                     0.154    0.135    1.139    0.255
+    age_c                              0.000    0.004    0.050    0.960
+    gndr_                              0.123    0.095    1.293    0.196
+    edct_                             -0.079    0.052   -1.526    0.127
+    incm_                             -0.007    0.034   -0.206    0.837
+    mrtl_                              0.051    0.111    0.459    0.646
+    mrtl_                             -0.207    0.159   -1.301    0.193
+    mrt__                              0.145    0.271    0.536    0.592
   PWBS_eudaimonic_wellbeing_mean ~                                     
-    PANAS     (c3)                     0.653    0.069    9.504    0.000
-    EAC__ (drct_p)                     0.102    0.065    1.571    0.116
-    age_c                              0.000    0.004    0.079    0.937
-    gndr_                              0.092    0.089    1.033    0.302
-    edct_                              0.009    0.051    0.171    0.864
-    incm_                              0.033    0.034    0.963    0.335
-    mrtl_                             -0.004    0.107   -0.041    0.968
-    mrtl_                             -0.070    0.157   -0.445    0.656
-    mrt__                              0.130    0.239    0.544    0.587
+    PANAS     (c3)                     0.591    0.070    8.449    0.000
+    ECS__  (aw_ed)                     0.007    0.113    0.065    0.948
+    ECS__  (ac_ed)                     0.269    0.134    2.007    0.045
+    EAC__ (drct_p)                     0.055    0.073    0.762    0.446
+    age_c                             -0.000    0.004   -0.113    0.910
+    gndr_                              0.104    0.089    1.172    0.241
+    edct_                              0.012    0.051    0.243    0.808
+    incm_                              0.025    0.034    0.734    0.463
+    mrtl_                             -0.046    0.108   -0.431    0.667
+    mrtl_                             -0.058    0.159   -0.368    0.713
+    mrt__                              0.116    0.249    0.467    0.641
   K6_psychological_distress_total ~                                    
-    PANAS     (c4)                    -0.611    0.229   -2.665    0.008
-    CERQ_ (drct_m)                     4.898    0.372   13.170    0.000
-    age_c                             -0.030    0.014   -2.115    0.034
-    gndr_                             -0.138    0.330   -0.417    0.677
-    edct_                             -0.035    0.171   -0.206    0.837
-    incm_                              0.145    0.114    1.267    0.205
-    mrtl_                              0.754    0.411    1.832    0.067
-    mrtl_                              0.747    0.555    1.346    0.178
-    mrt__                              1.243    0.826    1.506    0.132
+    PANAS     (c4)                    -0.310    0.249   -1.247    0.213
+    ECS__  (aw_ds)                     0.315    0.411    0.765    0.444
+    ECS__  (ac_ds)                    -1.496    0.471   -3.174    0.002
+    CERQ_ (drct_m)                     4.847    0.369   13.136    0.000
+    age_c                             -0.025    0.014   -1.816    0.069
+    gndr_                             -0.196    0.320   -0.612    0.541
+    edct_                             -0.054    0.168   -0.321    0.748
+    incm_                              0.181    0.110    1.646    0.100
+    mrtl_                              0.965    0.395    2.445    0.014
+    mrtl_                              0.699    0.527    1.327    0.184
+    mrt__                              1.389    0.815    1.703    0.089
    Std.lv  Std.all
                   
    -0.111   -0.181
@@ -196,70 +205,79 @@ Regressions:
    -0.043   -0.027
     0.124    0.055
                   
-    0.334    0.251
-    0.281    0.156
+    0.223    0.167
+    0.137    0.114
+    0.297    0.165
    -0.136   -0.085
-    0.027    0.036
-    0.142    0.098
-    0.003    0.065
-    0.056    0.041
-    0.037    0.054
-   -0.041   -0.109
-   -0.227   -0.157
-   -0.034   -0.016
-   -0.107   -0.035
+    0.015    0.020
+    0.144    0.099
+    0.004    0.070
+    0.054    0.040
+    0.038    0.055
+   -0.042   -0.113
+   -0.226   -0.156
+   -0.041   -0.019
+   -0.086   -0.029
                   
-    0.682    0.521
-   -0.001   -0.008
-    0.065    0.037
-    0.005    0.006
-    0.048    0.098
-   -0.010   -0.005
-   -0.203   -0.072
-    0.177    0.045
-                  
-    0.876    0.600
-    0.001    0.009
-    0.116    0.059
-   -0.082   -0.080
-   -0.002   -0.004
-    0.076    0.036
-   -0.211   -0.067
-    0.160    0.036
-                  
-    0.653    0.510
-    0.102    0.055
-    0.000    0.005
-    0.092    0.053
+    0.628    0.483
+   -0.013   -0.008
+    0.221    0.127
+   -0.001   -0.017
+    0.075    0.043
     0.009    0.010
-    0.033    0.068
-   -0.004   -0.002
-   -0.070   -0.025
-    0.130    0.034
+    0.041    0.084
+   -0.046   -0.025
+   -0.198   -0.070
+    0.157    0.040
                   
-   -0.611   -0.119
-    4.898    0.598
-   -0.030   -0.114
-   -0.138   -0.020
-   -0.035   -0.010
-    0.145    0.075
-    0.754    0.102
-    0.747    0.067
-    1.243    0.080
+    0.839    0.577
+   -0.011   -0.006
+    0.154    0.079
+    0.000    0.003
+    0.123    0.063
+   -0.079   -0.078
+   -0.007   -0.013
+    0.051    0.024
+   -0.207   -0.066
+    0.145    0.033
+                  
+    0.591    0.463
+    0.007    0.005
+    0.269    0.158
+    0.055    0.030
+   -0.000   -0.006
+    0.104    0.060
+    0.012    0.014
+    0.025    0.052
+   -0.046   -0.025
+   -0.058   -0.021
+    0.116    0.030
+                  
+   -0.310   -0.061
+    0.315    0.052
+   -1.496   -0.221
+    4.847    0.598
+   -0.025   -0.098
+   -0.196   -0.029
+   -0.054   -0.015
+    0.181    0.095
+    0.965    0.131
+    0.699    0.064
+    1.389    0.091
 
 Covariances:
                                     Estimate  Std.Err  z-value  P(>|z|)
   ECRGO_attachment_anxiety_mean ~~                                     
     ECRGO_vdnc_f__                     0.093    0.048    1.959    0.050
  .SWLS_life_satisfaction_mean ~~                                       
-   .SVS_vitalty_mn                     0.275    0.038    7.207    0.000
-   .PWBS_dmnc_wll_                     0.408    0.039   10.356    0.000
-   .K6_psychlgcl__                    -0.365    0.119   -3.080    0.002
+   .SVS_vitalty_mn                     0.268    0.038    7.061    0.000
+   .PWBS_dmnc_wll_                     0.399    0.039   10.242    0.000
+   .K6_psychlgcl__                    -0.312    0.112   -2.775    0.006
  .SVS_vitality_mean ~~                                                 
-   .PWBS_dmnc_wll_                     0.253    0.035    7.252    0.000
-   .K6_psychlgcl__                    -0.276    0.135   -2.052    0.040
+   .PWBS_dmnc_wll_                     0.247    0.034    7.155    0.000
+   .K6_psychlgcl__                    -0.238    0.130   -1.828    0.068
  .PWBS_eudaimonic_wellbeing_mean ~~                                    
-   .K6_psychlgcl__                    -0.276    0.121   -2.283    0.022
+   .K6_psychlgcl__                    -0.218    0.115   -1.888    0.059
   age_c ~~                                                             
     gender_female                     -0.310    0.403   -0.770    0.441
     education_c                        0.790    0.743    1.063    0.288
@@ -274,7 +292,7 @@ Covariances:
   gender_female ~~                                                     
     education_c                       -0.033    0.029   -1.126    0.260
     income_c                          -0.087    0.055   -1.588    0.112
-    marital_single                     0.014    0.014    0.989    0.322
+    marital_single                     0.014    0.014    0.990    0.322
     marital_partnr                     0.004    0.010    0.420    0.675
     mrtl_sprtd_dvr                    -0.001    0.007   -0.116    0.908
     CERQ_adaptv_mn                    -0.019    0.011   -1.627    0.104
@@ -329,14 +347,14 @@ Covariances:
                   
     0.093    0.115
                   
-    0.275    0.476
-    0.408    0.758
-   -0.365   -0.186
+    0.268    0.471
+    0.399    0.755
+   -0.312   -0.164
                   
-    0.253    0.445
-   -0.276   -0.134
+    0.247    0.441
+   -0.238   -0.118
                   
-   -0.276   -0.143
+   -0.218   -0.117
                   
    -0.310   -0.047
     0.790    0.062
@@ -407,11 +425,11 @@ Intercepts:
                    Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
    .ECS_hppnss_wr_    3.713    0.222   16.736    0.000    3.713    6.642
    .ECS_hppnss_ct_    0.962    0.114    8.452    0.000    0.962    1.910
-   .PANAS_pstv_ff_    1.601    0.539    2.968    0.003    1.601    2.380
-   .SWLS_lf_stsfc_    1.555    0.233    6.675    0.000    1.555    1.768
-   .SVS_vitalty_mn    0.748    0.231    3.241    0.001    0.748    0.762
-   .PWBS_dmnc_wll_    1.373    0.276    4.974    0.000    1.373    1.592
-   .K6_psychlgcl__   -6.108    1.562   -3.910    0.000   -6.108   -1.769
+   .PANAS_pstv_ff_    1.515    0.538    2.817    0.005    1.515    2.253
+   .SWLS_lf_stsfc_    1.128    0.334    3.383    0.001    1.128    1.290
+   .SVS_vitalty_mn    0.454    0.331    1.372    0.170    0.454    0.465
+   .PWBS_dmnc_wll_    0.887    0.322    2.753    0.006    0.887    1.033
+   .K6_psychlgcl__   -3.516    1.764   -1.993    0.046   -3.516   -1.030
     ECRGO_ttchmn__    4.121    0.056   74.119    0.000    4.121    4.545
     ECRGO_vdnc_f__    4.222    0.055   77.059    0.000    4.222    4.725
     age_c            -0.264    0.812   -0.325    0.746   -0.264   -0.020
@@ -430,11 +448,11 @@ Variances:
                    Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
    .ECS_hppnss_wr_    0.291    0.025   11.626    0.000    0.291    0.931
    .ECS_hppnss_ct_    0.107    0.009   11.306    0.000    0.107    0.421
-   .PANAS_pstv_ff_    0.378    0.033   11.569    0.000    0.378    0.836
-   .SWLS_lf_stsfc_    0.547    0.045   12.113    0.000    0.547    0.708
-   .SVS_vitalty_mn    0.607    0.049   12.353    0.000    0.607    0.631
-   .PWBS_dmnc_wll_    0.530    0.044   12.118    0.000    0.530    0.714
-   .K6_psychlgcl__    7.033    0.555   12.671    0.000    7.033    0.590
+   .PANAS_pstv_ff_    0.376    0.032   11.662    0.000    0.376    0.831
+   .SWLS_lf_stsfc_    0.538    0.044   12.100    0.000    0.538    0.703
+   .SVS_vitalty_mn    0.603    0.049   12.321    0.000    0.603    0.631
+   .PWBS_dmnc_wll_    0.519    0.043   12.063    0.000    0.519    0.704
+   .K6_psychlgcl__    6.696    0.556   12.054    0.000    6.696    0.574
     ECRGO_ttchmn__    0.822    0.069   11.841    0.000    0.822    1.000
     ECRGO_vdnc_f__    0.799    0.057   14.023    0.000    0.799    1.000
     age_c           175.556   14.057   12.489    0.000  175.556    1.000
@@ -453,36 +471,36 @@ R-Square:
                    Estimate
     ECS_hppnss_wr_    0.069
     ECS_hppnss_ct_    0.579
-    PANAS_pstv_ff_    0.164
-    SWLS_lf_stsfc_    0.292
+    PANAS_pstv_ff_    0.169
+    SWLS_lf_stsfc_    0.297
     SVS_vitalty_mn    0.369
-    PWBS_dmnc_wll_    0.286
-    K6_psychlgcl__    0.410
+    PWBS_dmnc_wll_    0.296
+    K6_psychlgcl__    0.426
 
 Defined Parameters:
                    Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
-    indrct_lf_stsf    0.153    0.042    3.632    0.000    0.153    0.097
-    indirect_vtlty    0.197    0.054    3.646    0.000    0.197    0.112
-    indirect_edmnc    0.147    0.043    3.424    0.001    0.147    0.095
-    indirct_dstrss   -0.137    0.064   -2.155    0.031   -0.137   -0.022
-    ecr_nxty_ndrc_   -0.017    0.009   -1.965    0.049   -0.017   -0.018
-    ecr_nxty_ndrc_   -0.022    0.011   -2.012    0.044   -0.022   -0.020
-    ecr_nxty_ndrc_   -0.016    0.008   -1.938    0.053   -0.016   -0.017
-    ecr_nxty_ndrc_    0.015    0.010    1.522    0.128    0.015    0.004
-    ecr_vdnc_ndrc_   -0.011    0.006   -1.819    0.069   -0.011   -0.011
-    ecr_vdnc_ndrc_   -0.014    0.008   -1.824    0.068   -0.014   -0.012
-    ecr_vdnc_ndrc_   -0.010    0.006   -1.803    0.071   -0.010   -0.011
-    ecr_vdnc_ndrc_    0.010    0.007    1.422    0.155    0.010    0.002
+    indrct_lf_stsf    0.094    0.050    1.877    0.061    0.094    0.060
+    indirect_vtlty    0.126    0.069    1.817    0.069    0.126    0.072
+    indirect_edmnc    0.089    0.048    1.837    0.066    0.089    0.058
+    indirct_dstrss   -0.046    0.039   -1.193    0.233   -0.046   -0.008
+    ecr_nxty_ndrc_   -0.010    0.007   -1.514    0.130   -0.010   -0.011
+    ecr_nxty_ndrc_   -0.014    0.009   -1.497    0.134   -0.014   -0.013
+    ecr_nxty_ndrc_   -0.010    0.007   -1.497    0.134   -0.010   -0.010
+    ecr_nxty_ndrc_    0.005    0.005    1.073    0.283    0.005    0.001
+    ecr_vdnc_ndrc_   -0.007    0.004   -1.474    0.140   -0.007   -0.007
+    ecr_vdnc_ndrc_   -0.009    0.006   -1.449    0.147   -0.009   -0.008
+    ecr_vdnc_ndrc_   -0.006    0.004   -1.461    0.144   -0.006   -0.006
+    ecr_vdnc_ndrc_    0.003    0.003    1.007    0.314    0.003    0.001
 
 
 ===== satisfaction =====
 ECS_satisfaction_awareness_mean ~ d1*ECRGO_attachment_anxiety_mean + d2*ECRGO_avoidance_of_intimacy_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
 ECS_satisfaction_action_mean ~ a*ECS_satisfaction_awareness_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
-PANAS_positive_affect_mean ~ b*ECS_satisfaction_action_mean + er_adaptive*CERQ_adaptive_mean + er_maladaptive*CERQ_maladaptive_mean + er_reappraisal*ERQ_reappraisal_mean + er_processing*EAC_emotional_processing_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
-SWLS_life_satisfaction_mean ~ c1*PANAS_positive_affect_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
-SVS_vitality_mean ~ c2*PANAS_positive_affect_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
-PWBS_eudaimonic_wellbeing_mean ~ c3*PANAS_positive_affect_mean + direct_processing*EAC_emotional_processing_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
-K6_psychological_distress_total ~ c4*PANAS_positive_affect_mean + direct_maladaptive*CERQ_maladaptive_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+PANAS_positive_affect_mean ~ b*ECS_satisfaction_action_mean + aw_pa*ECS_satisfaction_awareness_mean + er_adaptive*CERQ_adaptive_mean + er_maladaptive*CERQ_maladaptive_mean + er_reappraisal*ERQ_reappraisal_mean + er_processing*EAC_emotional_processing_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+SWLS_life_satisfaction_mean ~ c1*PANAS_positive_affect_mean + aw_ls*ECS_satisfaction_awareness_mean + ac_ls*ECS_satisfaction_action_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+SVS_vitality_mean ~ c2*PANAS_positive_affect_mean + aw_vit*ECS_satisfaction_awareness_mean + ac_vit*ECS_satisfaction_action_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+PWBS_eudaimonic_wellbeing_mean ~ c3*PANAS_positive_affect_mean + aw_eud*ECS_satisfaction_awareness_mean + ac_eud*ECS_satisfaction_action_mean + direct_processing*EAC_emotional_processing_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+K6_psychological_distress_total ~ c4*PANAS_positive_affect_mean + aw_dis*ECS_satisfaction_awareness_mean + ac_dis*ECS_satisfaction_action_mean + direct_maladaptive*CERQ_maladaptive_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
 ECRGO_attachment_anxiety_mean ~~ ECRGO_avoidance_of_intimacy_mean
 SWLS_life_satisfaction_mean ~~ SVS_vitality_mean + PWBS_eudaimonic_wellbeing_mean + K6_psychological_distress_total
 SVS_vitality_mean ~~ PWBS_eudaimonic_wellbeing_mean + K6_psychological_distress_total
@@ -500,11 +518,11 @@ ecr_avoidance_indirect_vitality := d2*a*b*c2
 ecr_avoidance_indirect_eudaimonic := d2*a*b*c3
 ecr_avoidance_indirect_distress := d2*a*b*c4
 
-lavaan 0.7-3 ended normally after 298 iterations
+lavaan 0.7-3 ended normally after 312 iterations
 
   Estimator                                         ML
   Optimization method                           NLMINB
-  Number of model parameters                       165
+  Number of model parameters                       174
   Row rank of the constraints matrix                20
 
   Number of observations                           266
@@ -512,10 +530,10 @@ lavaan 0.7-3 ended normally after 298 iterations
 
 Model Test User Model:
                                               Standard      Scaled
-  Test Statistic                               249.755     250.787
-  Degrees of freedom                                65          65
+  Test Statistic                               231.921     231.707
+  Degrees of freedom                                56          56
   P-value (Chi-square)                           0.000       0.000
-  Scaling correction factor                                  0.996
+  Scaling correction factor                                  1.001
     Yuan-Bentler correction (Mplus variant)                       
 
 Model Test Baseline Model:
@@ -527,52 +545,52 @@ Model Test Baseline Model:
 
 User Model versus Baseline Model:
 
-  Comparative Fit Index (CFI)                    0.847       0.848
-  Tucker-Lewis Index (TLI)                       0.682       0.684
+  Comparative Fit Index (CFI)                    0.854       0.856
+  Tucker-Lewis Index (TLI)                       0.649       0.654
                                                                   
-  Robust Comparative Fit Index (CFI)                         0.852
-  Robust Tucker-Lewis Index (TLI)                            0.692
+  Robust Comparative Fit Index (CFI)                         0.859
+  Robust Tucker-Lewis Index (TLI)                            0.660
 
 Loglikelihood and Information Criteria:
 
-  Loglikelihood user model (H0)              -5520.420   -5520.420
-  Scaling correction factor                                  1.007
+  Loglikelihood user model (H0)              -5511.503   -5511.503
+  Scaling correction factor                                  1.005
       for the MLR correction                                      
   Loglikelihood unrestricted model (H1)      -5395.542   -5395.542
   Scaling correction factor                                  1.004
       for the MLR correction                                      
                                                                   
-  Akaike (AIC)                               11370.839   11370.839
-  Bayesian (BIC)                             11962.116   11962.116
-  Sample-size adjusted Bayesian (SABIC)      11438.973   11438.973
+  Akaike (AIC)                               11371.006   11371.006
+  Bayesian (BIC)                             11994.534   11994.534
+  Sample-size adjusted Bayesian (SABIC)      11442.856   11442.856
 
 Root Mean Square Error of Approximation:
 
-  RMSEA                                          0.103       0.104
-  90 Percent confidence interval - lower         0.090       0.090
-  90 Percent confidence interval - upper         0.117       0.117
+  RMSEA                                          0.109       0.109
+  90 Percent confidence interval - lower         0.094       0.094
+  90 Percent confidence interval - upper         0.123       0.123
   P-value H_0: RMSEA <= 0.050                    0.000       0.000
-  P-value H_0: RMSEA >= 0.080                    0.998       0.998
+  P-value H_0: RMSEA >= 0.080                    0.999       0.999
                                                                   
-  Robust RMSEA                                               0.101
-  90 Percent confidence interval - lower                     0.086
-  90 Percent confidence interval - upper                     0.116
+  Robust RMSEA                                               0.106
+  90 Percent confidence interval - lower                     0.090
+  90 Percent confidence interval - upper                     0.122
   P-value H_0: Robust RMSEA <= 0.050                         0.000
-  P-value H_0: Robust RMSEA >= 0.080                         0.991
+  P-value H_0: Robust RMSEA >= 0.080                         0.996
 
 Standardized Root Mean Square Residual:
 
-  SRMR                                           0.105       0.105
+  SRMR                                           0.103       0.103
 
 Goodness of Fit Index:
 
-  Goodness of Fit Index (GFI)                    0.935            
-  90 Percent confidence interval - lower         0.918            
-  90 Percent confidence interval - upper         0.950            
+  Goodness of Fit Index (GFI)                    0.938            
+  90 Percent confidence interval - lower         0.921            
+  90 Percent confidence interval - upper         0.952            
                                                                   
-  Robust GFI                                                 0.938
-  90 Percent confidence interval - lower                     0.920
-  90 Percent confidence interval - upper                     0.954
+  Robust GFI                                                 0.941
+  90 Percent confidence interval - lower                     0.923
+  90 Percent confidence interval - upper                     0.956
 
 Parameter Estimates:
 
@@ -602,56 +620,65 @@ Regressions:
     mrtl_                             -0.018    0.059   -0.311    0.756
     mrt__                              0.023    0.075    0.307    0.759
   PANAS_positive_affect_mean ~                                         
-    ECS__      (b)                     0.294    0.081    3.621    0.000
-    CERQ_   (er_d)                     0.246    0.140    1.764    0.078
-    CERQ_   (er_m)                    -0.149    0.097   -1.545    0.122
-    ERQ__   (er_r)                     0.044    0.063    0.696    0.487
-    EAC__   (er_p)                     0.200    0.094    2.120    0.034
-    age_c                              0.004    0.004    1.060    0.289
-    gndr_                              0.041    0.077    0.529    0.597
-    edct_                              0.046    0.048    0.970    0.332
-    incm_                             -0.036    0.030   -1.227    0.220
-    mrtl_                             -0.194    0.088   -2.191    0.028
-    mrtl_                             -0.054    0.119   -0.453    0.651
-    mrt__                             -0.068    0.166   -0.409    0.683
+    ECS__      (b)                     0.132    0.123    1.076    0.282
+    ECS__   (aw_p)                     0.205    0.111    1.843    0.065
+    CERQ_   (er_d)                     0.247    0.138    1.792    0.073
+    CERQ_   (er_m)                    -0.152    0.095   -1.599    0.110
+    ERQ__   (er_r)                     0.032    0.062    0.513    0.608
+    EAC__   (er_p)                     0.186    0.094    1.989    0.047
+    age_c                              0.004    0.004    1.072    0.284
+    gndr_                              0.034    0.077    0.440    0.660
+    edct_                              0.045    0.047    0.958    0.338
+    incm_                             -0.035    0.029   -1.215    0.224
+    mrtl_                             -0.220    0.088   -2.514    0.012
+    mrtl_                             -0.059    0.120   -0.488    0.625
+    mrt__                             -0.043    0.166   -0.261    0.794
   SWLS_life_satisfaction_mean ~                                        
-    PANAS     (c1)                     0.682    0.064   10.718    0.000
-    age_c                             -0.001    0.004   -0.130    0.897
-    gndr_                              0.065    0.092    0.711    0.477
-    edct_                              0.005    0.051    0.106    0.915
-    incm_                              0.048    0.034    1.394    0.163
-    mrtl_                             -0.010    0.106   -0.098    0.922
-    mrtl_                             -0.203    0.144   -1.409    0.159
-    mrt__                              0.177    0.300    0.589    0.556
+    PANAS     (c1)                     0.624    0.066    9.433    0.000
+    ECS__   (aw_l)                     0.158    0.134    1.183    0.237
+    ECS__   (ac_l)                     0.065    0.146    0.446    0.656
+    age_c                             -0.001    0.004   -0.146    0.884
+    gndr_                              0.060    0.090    0.668    0.504
+    edct_                              0.013    0.051    0.256    0.798
+    incm_                              0.045    0.034    1.328    0.184
+    mrtl_                             -0.045    0.106   -0.424    0.672
+    mrtl_                             -0.212    0.140   -1.514    0.130
+    mrt__                              0.209    0.290    0.721    0.471
   SVS_vitality_mean ~                                                  
-    PANAS     (c2)                     0.876    0.062   14.228    0.000
-    age_c                              0.001    0.005    0.146    0.884
-    gndr_                              0.116    0.096    1.212    0.226
-    edct_                             -0.082    0.052   -1.560    0.119
-    incm_                             -0.002    0.034   -0.067    0.946
-    mrtl_                              0.076    0.111    0.682    0.496
-    mrtl_                             -0.211    0.158   -1.339    0.181
-    mrt__                              0.160    0.263    0.606    0.545
+    PANAS     (c2)                     0.847    0.067   12.602    0.000
+    ECS__   (aw_v)                     0.139    0.127    1.096    0.273
+    ECS__   (ac_v)                    -0.037    0.139   -0.267    0.789
+    age_c                              0.001    0.005    0.148    0.883
+    gndr_                              0.112    0.095    1.177    0.239
+    edct_                             -0.079    0.052   -1.513    0.130
+    incm_                             -0.003    0.034   -0.091    0.927
+    mrtl_                              0.051    0.112    0.456    0.648
+    mrtl_                             -0.218    0.158   -1.381    0.167
+    mrt__                              0.179    0.264    0.679    0.497
   PWBS_eudaimonic_wellbeing_mean ~                                     
-    PANAS     (c3)                     0.653    0.069    9.504    0.000
-    EAC__ (drct_p)                     0.102    0.065    1.571    0.116
-    age_c                              0.000    0.004    0.079    0.937
-    gndr_                              0.092    0.089    1.033    0.302
-    edct_                              0.009    0.051    0.171    0.864
-    incm_                              0.033    0.034    0.963    0.335
-    mrtl_                             -0.004    0.107   -0.041    0.968
-    mrtl_                             -0.070    0.157   -0.445    0.656
-    mrt__                              0.130    0.239    0.544    0.587
+    PANAS     (c3)                     0.601    0.070    8.525    0.000
+    ECS__  (aw_ed)                     0.032    0.126    0.253    0.800
+    ECS__  (ac_ed)                     0.202    0.137    1.473    0.141
+    EAC__ (drct_p)                     0.087    0.068    1.283    0.199
+    age_c                              0.000    0.004    0.050    0.960
+    gndr_                              0.090    0.089    1.014    0.311
+    edct_                              0.018    0.051    0.343    0.731
+    incm_                              0.030    0.034    0.896    0.370
+    mrtl_                             -0.021    0.107   -0.199    0.843
+    mrtl_                             -0.073    0.157   -0.465    0.642
+    mrt__                              0.156    0.233    0.670    0.503
   K6_psychological_distress_total ~                                    
-    PANAS     (c4)                    -0.611    0.229   -2.665    0.008
-    CERQ_ (drct_m)                     4.898    0.372   13.170    0.000
-    age_c                             -0.030    0.014   -2.115    0.034
-    gndr_                             -0.138    0.330   -0.417    0.677
-    edct_                             -0.035    0.171   -0.206    0.837
-    incm_                              0.145    0.114    1.267    0.205
-    mrtl_                              0.754    0.411    1.832    0.067
-    mrtl_                              0.747    0.555    1.346    0.178
-    mrt__                              1.243    0.826    1.506    0.132
+    PANAS     (c4)                    -0.508    0.251   -2.021    0.043
+    ECS__  (aw_ds)                     0.606    0.413    1.468    0.142
+    ECS__  (ac_ds)                    -1.147    0.481   -2.385    0.017
+    CERQ_ (drct_m)                     4.902    0.368   13.328    0.000
+    age_c                             -0.029    0.014   -2.060    0.039
+    gndr_                             -0.149    0.328   -0.453    0.650
+    edct_                             -0.064    0.171   -0.374    0.709
+    incm_                              0.154    0.112    1.369    0.171
+    mrtl_                              0.706    0.411    1.716    0.086
+    mrtl_                              0.735    0.538    1.366    0.172
+    mrt__                              1.242    0.792    1.569    0.117
    Std.lv  Std.all
                   
    -0.040   -0.066
@@ -673,70 +700,79 @@ Regressions:
    -0.018   -0.011
     0.023    0.010
                   
-    0.294    0.216
-    0.246    0.136
-   -0.149   -0.093
-    0.044    0.057
-    0.200    0.137
-    0.004    0.081
-    0.041    0.030
-    0.046    0.066
-   -0.036   -0.097
-   -0.194   -0.133
-   -0.054   -0.025
-   -0.068   -0.022
+    0.132    0.097
+    0.205    0.169
+    0.247    0.137
+   -0.152   -0.095
+    0.032    0.042
+    0.186    0.128
+    0.004    0.082
+    0.034    0.025
+    0.045    0.064
+   -0.035   -0.093
+   -0.220   -0.152
+   -0.059   -0.027
+   -0.043   -0.014
                   
-    0.682    0.523
-   -0.001   -0.008
+    0.624    0.480
+    0.158    0.101
     0.065    0.037
-    0.005    0.006
-    0.048    0.097
-   -0.010   -0.005
-   -0.203   -0.072
-    0.177    0.045
+   -0.001   -0.009
+    0.060    0.035
+    0.013    0.014
+    0.045    0.093
+   -0.045   -0.024
+   -0.212   -0.076
+    0.209    0.053
                   
-    0.876    0.602
+    0.847    0.583
+    0.139    0.079
+   -0.037   -0.019
     0.001    0.009
-    0.116    0.059
-   -0.082   -0.080
-   -0.002   -0.004
-    0.076    0.036
-   -0.211   -0.067
-    0.160    0.036
+    0.112    0.057
+   -0.079   -0.077
+   -0.003   -0.006
+    0.051    0.024
+   -0.218   -0.069
+    0.179    0.041
                   
-    0.653    0.511
-    0.102    0.055
-    0.000    0.005
-    0.092    0.053
-    0.009    0.010
-    0.033    0.068
-   -0.004   -0.002
-   -0.070   -0.025
-    0.130    0.034
+    0.601    0.471
+    0.032    0.021
+    0.202    0.117
+    0.087    0.047
+    0.000    0.003
+    0.090    0.052
+    0.018    0.020
+    0.030    0.063
+   -0.021   -0.012
+   -0.073   -0.027
+    0.156    0.041
                   
-   -0.611   -0.120
-    4.898    0.597
-   -0.030   -0.114
-   -0.138   -0.020
-   -0.035   -0.010
-    0.145    0.075
-    0.754    0.101
-    0.747    0.067
-    1.243    0.080
+   -0.508   -0.099
+    0.606    0.098
+   -1.147   -0.166
+    4.902    0.599
+   -0.029   -0.111
+   -0.149   -0.022
+   -0.064   -0.018
+    0.154    0.080
+    0.706    0.095
+    0.735    0.067
+    1.242    0.081
 
 Covariances:
                                     Estimate  Std.Err  z-value  P(>|z|)
   ECRGO_attachment_anxiety_mean ~~                                     
     ECRGO_vdnc_f__                     0.093    0.048    1.959    0.050
  .SWLS_life_satisfaction_mean ~~                                       
-   .SVS_vitalty_mn                     0.275    0.038    7.207    0.000
-   .PWBS_dmnc_wll_                     0.408    0.039   10.356    0.000
-   .K6_psychlgcl__                    -0.365    0.119   -3.080    0.002
+   .SVS_vitalty_mn                     0.269    0.038    7.103    0.000
+   .PWBS_dmnc_wll_                     0.399    0.038   10.635    0.000
+   .K6_psychlgcl__                    -0.349    0.116   -2.997    0.003
  .SVS_vitality_mean ~~                                                 
-   .PWBS_dmnc_wll_                     0.253    0.035    7.252    0.000
-   .K6_psychlgcl__                    -0.276    0.135   -2.052    0.040
+   .PWBS_dmnc_wll_                     0.249    0.035    7.206    0.000
+   .K6_psychlgcl__                    -0.276    0.131   -2.101    0.036
  .PWBS_eudaimonic_wellbeing_mean ~~                                    
-   .K6_psychlgcl__                    -0.276    0.121   -2.283    0.022
+   .K6_psychlgcl__                    -0.249    0.119   -2.098    0.036
   age_c ~~                                                             
     gender_female                     -0.310    0.403   -0.770    0.441
     education_c                        0.790    0.743    1.063    0.288
@@ -806,14 +842,14 @@ Covariances:
                   
     0.093    0.115
                   
-    0.275    0.476
-    0.408    0.758
-   -0.365   -0.186
+    0.269    0.472
+    0.399    0.755
+   -0.349   -0.182
                   
-    0.253    0.445
-   -0.276   -0.134
+    0.249    0.445
+   -0.276   -0.135
                   
-   -0.276   -0.143
+   -0.249   -0.131
                   
    -0.310   -0.047
     0.790    0.062
@@ -884,11 +920,11 @@ Intercepts:
                    Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
    .ECS_stsfctn_w_    3.493    0.210   16.595    0.000    3.493    6.285
    .ECS_stsfctn_c_    0.930    0.102    9.095    0.000    0.930    1.870
-   .PANAS_pstv_ff_    1.647    0.538    3.063    0.002    1.647    2.436
-   .SWLS_lf_stsfc_    1.555    0.233    6.675    0.000    1.555    1.765
-   .SVS_vitalty_mn    0.748    0.231    3.241    0.001    0.748    0.760
-   .PWBS_dmnc_wll_    1.373    0.276    4.974    0.000    1.373    1.588
-   .K6_psychlgcl__   -6.108    1.562   -3.910    0.000   -6.108   -1.768
+   .PANAS_pstv_ff_    1.603    0.522    3.072    0.002    1.603    2.379
+   .SWLS_lf_stsfc_    1.087    0.321    3.385    0.001    1.087    1.242
+   .SVS_vitalty_mn    0.543    0.326    1.663    0.096    0.543    0.554
+   .PWBS_dmnc_wll_    0.892    0.320    2.786    0.005    0.892    1.039
+   .K6_psychlgcl__   -4.866    1.710   -2.846    0.004   -4.866   -1.412
     ECRGO_ttchmn__    4.121    0.056   74.119    0.000    4.121    4.545
     ECRGO_vdnc_f__    4.222    0.055   77.059    0.000    4.222    4.725
     age_c            -0.264    0.812   -0.325    0.746   -0.264   -0.020
@@ -907,11 +943,11 @@ Variances:
                    Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
    .ECS_stsfctn_w_    0.294    0.028   10.498    0.000    0.294    0.952
    .ECS_stsfctn_c_    0.104    0.009   11.062    0.000    0.104    0.419
-   .PANAS_pstv_ff_    0.380    0.035   10.828    0.000    0.380    0.832
-   .SWLS_lf_stsfc_    0.547    0.045   12.113    0.000    0.547    0.706
-   .SVS_vitalty_mn    0.607    0.049   12.353    0.000    0.607    0.628
-   .PWBS_dmnc_wll_    0.530    0.044   12.118    0.000    0.530    0.710
-   .K6_psychlgcl__    7.033    0.555   12.671    0.000    7.033    0.589
+   .PANAS_pstv_ff_    0.375    0.034   11.087    0.000    0.375    0.827
+   .SWLS_lf_stsfc_    0.536    0.043   12.393    0.000    0.536    0.700
+   .SVS_vitalty_mn    0.604    0.048   12.469    0.000    0.604    0.630
+   .PWBS_dmnc_wll_    0.520    0.042   12.449    0.000    0.520    0.705
+   .K6_psychlgcl__    6.891    0.564   12.218    0.000    6.891    0.580
     ECRGO_ttchmn__    0.822    0.069   11.841    0.000    0.822    1.000
     ECRGO_vdnc_f__    0.799    0.057   14.023    0.000    0.799    1.000
     age_c           175.556   14.057   12.489    0.000  175.556    1.000
@@ -930,36 +966,36 @@ R-Square:
                    Estimate
     ECS_stsfctn_w_    0.048
     ECS_stsfctn_c_    0.581
-    PANAS_pstv_ff_    0.168
-    SWLS_lf_stsfc_    0.294
-    SVS_vitalty_mn    0.372
-    PWBS_dmnc_wll_    0.290
-    K6_psychlgcl__    0.411
+    PANAS_pstv_ff_    0.173
+    SWLS_lf_stsfc_    0.300
+    SVS_vitalty_mn    0.370
+    PWBS_dmnc_wll_    0.295
+    K6_psychlgcl__    0.420
 
 Defined Parameters:
                    Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
-    indrct_lf_stsf    0.138    0.042    3.287    0.001    0.138    0.087
-    indirect_vtlty    0.177    0.052    3.415    0.001    0.177    0.100
-    indirect_edmnc    0.132    0.042    3.146    0.002    0.132    0.085
-    indirct_dstrss   -0.123    0.057   -2.169    0.030   -0.123   -0.020
-    ecr_nxty_ndrc_   -0.006    0.006   -0.993    0.321   -0.006   -0.006
-    ecr_nxty_ndrc_   -0.007    0.007   -1.009    0.313   -0.007   -0.007
-    ecr_nxty_ndrc_   -0.005    0.005   -0.990    0.322   -0.005   -0.006
-    ecr_nxty_ndrc_    0.005    0.006    0.903    0.367    0.005    0.001
-    ecr_vdnc_ndrc_   -0.011    0.006   -1.831    0.067   -0.011   -0.011
-    ecr_vdnc_ndrc_   -0.014    0.007   -1.882    0.060   -0.014   -0.013
-    ecr_vdnc_ndrc_   -0.010    0.006   -1.828    0.068   -0.010   -0.011
-    ecr_vdnc_ndrc_    0.010    0.006    1.506    0.132    0.010    0.003
+    indrct_lf_stsf    0.057    0.053    1.067    0.286    0.057    0.036
+    indirect_vtlty    0.077    0.072    1.067    0.286    0.077    0.044
+    indirect_edmnc    0.054    0.051    1.064    0.287    0.054    0.035
+    indirct_dstrss   -0.046    0.046   -1.007    0.314   -0.046   -0.007
+    ecr_nxty_ndrc_   -0.002    0.003   -0.760    0.447   -0.002   -0.002
+    ecr_nxty_ndrc_   -0.003    0.004   -0.765    0.444   -0.003   -0.003
+    ecr_nxty_ndrc_   -0.002    0.003   -0.760    0.447   -0.002   -0.002
+    ecr_nxty_ndrc_    0.002    0.003    0.727    0.468    0.002    0.000
+    ecr_vdnc_ndrc_   -0.004    0.005   -0.961    0.336   -0.004   -0.005
+    ecr_vdnc_ndrc_   -0.006    0.006   -0.965    0.334   -0.006   -0.006
+    ecr_vdnc_ndrc_   -0.004    0.004   -0.962    0.336   -0.004   -0.004
+    ecr_vdnc_ndrc_    0.004    0.004    0.903    0.366    0.004    0.001
 
 
 ===== enthusiasm =====
 ECS_enthusiasm_awareness_mean ~ d1*ECRGO_attachment_anxiety_mean + d2*ECRGO_avoidance_of_intimacy_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
 ECS_enthusiasm_action_mean ~ a*ECS_enthusiasm_awareness_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
-PANAS_positive_affect_mean ~ b*ECS_enthusiasm_action_mean + er_adaptive*CERQ_adaptive_mean + er_maladaptive*CERQ_maladaptive_mean + er_reappraisal*ERQ_reappraisal_mean + er_processing*EAC_emotional_processing_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
-SWLS_life_satisfaction_mean ~ c1*PANAS_positive_affect_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
-SVS_vitality_mean ~ c2*PANAS_positive_affect_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
-PWBS_eudaimonic_wellbeing_mean ~ c3*PANAS_positive_affect_mean + direct_processing*EAC_emotional_processing_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
-K6_psychological_distress_total ~ c4*PANAS_positive_affect_mean + direct_maladaptive*CERQ_maladaptive_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+PANAS_positive_affect_mean ~ b*ECS_enthusiasm_action_mean + aw_pa*ECS_enthusiasm_awareness_mean + er_adaptive*CERQ_adaptive_mean + er_maladaptive*CERQ_maladaptive_mean + er_reappraisal*ERQ_reappraisal_mean + er_processing*EAC_emotional_processing_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+SWLS_life_satisfaction_mean ~ c1*PANAS_positive_affect_mean + aw_ls*ECS_enthusiasm_awareness_mean + ac_ls*ECS_enthusiasm_action_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+SVS_vitality_mean ~ c2*PANAS_positive_affect_mean + aw_vit*ECS_enthusiasm_awareness_mean + ac_vit*ECS_enthusiasm_action_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+PWBS_eudaimonic_wellbeing_mean ~ c3*PANAS_positive_affect_mean + aw_eud*ECS_enthusiasm_awareness_mean + ac_eud*ECS_enthusiasm_action_mean + direct_processing*EAC_emotional_processing_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+K6_psychological_distress_total ~ c4*PANAS_positive_affect_mean + aw_dis*ECS_enthusiasm_awareness_mean + ac_dis*ECS_enthusiasm_action_mean + direct_maladaptive*CERQ_maladaptive_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
 ECRGO_attachment_anxiety_mean ~~ ECRGO_avoidance_of_intimacy_mean
 SWLS_life_satisfaction_mean ~~ SVS_vitality_mean + PWBS_eudaimonic_wellbeing_mean + K6_psychological_distress_total
 SVS_vitality_mean ~~ PWBS_eudaimonic_wellbeing_mean + K6_psychological_distress_total
@@ -977,11 +1013,11 @@ ecr_avoidance_indirect_vitality := d2*a*b*c2
 ecr_avoidance_indirect_eudaimonic := d2*a*b*c3
 ecr_avoidance_indirect_distress := d2*a*b*c4
 
-lavaan 0.7-3 ended normally after 336 iterations
+lavaan 0.7-3 ended normally after 486 iterations
 
   Estimator                                         ML
   Optimization method                           NLMINB
-  Number of model parameters                       165
+  Number of model parameters                       174
   Row rank of the constraints matrix                20
 
   Number of observations                           266
@@ -989,10 +1025,10 @@ lavaan 0.7-3 ended normally after 336 iterations
 
 Model Test User Model:
                                               Standard      Scaled
-  Test Statistic                               273.193     271.637
-  Degrees of freedom                                65          65
+  Test Statistic                               248.416     245.659
+  Degrees of freedom                                56          56
   P-value (Chi-square)                           0.000       0.000
-  Scaling correction factor                                  1.006
+  Scaling correction factor                                  1.011
     Yuan-Bentler correction (Mplus variant)                       
 
 Model Test Baseline Model:
@@ -1004,52 +1040,52 @@ Model Test Baseline Model:
 
 User Model versus Baseline Model:
 
-  Comparative Fit Index (CFI)                    0.830       0.830
-  Tucker-Lewis Index (TLI)                       0.646       0.647
+  Comparative Fit Index (CFI)                    0.843       0.844
+  Tucker-Lewis Index (TLI)                       0.620       0.624
                                                                   
-  Robust Comparative Fit Index (CFI)                         0.834
-  Robust Tucker-Lewis Index (TLI)                            0.656
+  Robust Comparative Fit Index (CFI)                         0.848
+  Robust Tucker-Lewis Index (TLI)                            0.633
 
 Loglikelihood and Information Criteria:
 
-  Loglikelihood user model (H0)              -5527.094   -5527.094
-  Scaling correction factor                                  1.013
+  Loglikelihood user model (H0)              -5514.705   -5514.705
+  Scaling correction factor                                  1.011
       for the MLR correction                                      
   Loglikelihood unrestricted model (H1)      -5390.497   -5390.497
   Scaling correction factor                                  1.011
       for the MLR correction                                      
                                                                   
-  Akaike (AIC)                               11384.187   11384.187
-  Bayesian (BIC)                             11975.464   11975.464
-  Sample-size adjusted Bayesian (SABIC)      11452.321   11452.321
+  Akaike (AIC)                               11377.410   11377.410
+  Bayesian (BIC)                             12000.938   12000.938
+  Sample-size adjusted Bayesian (SABIC)      11449.260   11449.260
 
 Root Mean Square Error of Approximation:
 
-  RMSEA                                          0.110       0.109
-  90 Percent confidence interval - lower         0.096       0.096
-  90 Percent confidence interval - upper         0.123       0.123
+  RMSEA                                          0.114       0.113
+  90 Percent confidence interval - lower         0.099       0.099
+  90 Percent confidence interval - upper         0.128       0.127
   P-value H_0: RMSEA <= 0.050                    0.000       0.000
   P-value H_0: RMSEA >= 0.080                    1.000       1.000
                                                                   
-  Robust RMSEA                                               0.107
-  90 Percent confidence interval - lower                     0.093
-  90 Percent confidence interval - upper                     0.122
+  Robust RMSEA                                               0.111
+  90 Percent confidence interval - lower                     0.095
+  90 Percent confidence interval - upper                     0.127
   P-value H_0: Robust RMSEA <= 0.050                         0.000
   P-value H_0: Robust RMSEA >= 0.080                         0.999
 
 Standardized Root Mean Square Residual:
 
-  SRMR                                           0.115       0.115
+  SRMR                                           0.107       0.107
 
 Goodness of Fit Index:
 
-  Goodness of Fit Index (GFI)                    0.927            
-  90 Percent confidence interval - lower         0.910            
-  90 Percent confidence interval - upper         0.943            
+  Goodness of Fit Index (GFI)                    0.933            
+  90 Percent confidence interval - lower         0.916            
+  90 Percent confidence interval - upper         0.948            
                                                                   
-  Robust GFI                                                 0.931
-  90 Percent confidence interval - lower                     0.912
-  90 Percent confidence interval - upper                     0.947
+  Robust GFI                                                 0.936
+  90 Percent confidence interval - lower                     0.917
+  90 Percent confidence interval - upper                     0.952
 
 Parameter Estimates:
 
@@ -1079,56 +1115,65 @@ Regressions:
     mrtl_                              0.093    0.084    1.105    0.269
     mrt__                             -0.054    0.078   -0.689    0.491
   PANAS_positive_affect_mean ~                                         
-    ECS__      (b)                     0.121    0.088    1.373    0.170
-    CERQ_   (er_d)                     0.285    0.144    1.987    0.047
-    CERQ_   (er_m)                    -0.126    0.099   -1.273    0.203
-    ERQ__   (er_r)                     0.054    0.065    0.828    0.408
-    EAC__   (er_p)                     0.234    0.090    2.586    0.010
-    age_c                              0.005    0.004    1.222    0.222
-    gndr_                              0.046    0.078    0.593    0.553
-    edct_                              0.039    0.049    0.793    0.428
-    incm_                             -0.038    0.030   -1.263    0.207
-    mrtl_                             -0.192    0.088   -2.168    0.030
-    mrtl_                             -0.069    0.118   -0.585    0.558
-    mrt__                             -0.084    0.161   -0.524    0.600
+    ECS__      (b)                     0.095    0.115    0.830    0.407
+    ECS__   (aw_p)                     0.033    0.104    0.314    0.754
+    CERQ_   (er_d)                     0.280    0.146    1.914    0.056
+    CERQ_   (er_m)                    -0.129    0.100   -1.291    0.197
+    ERQ__   (er_r)                     0.054    0.065    0.820    0.412
+    EAC__   (er_p)                     0.230    0.092    2.495    0.013
+    age_c                              0.005    0.004    1.239    0.215
+    gndr_                              0.044    0.079    0.553    0.580
+    edct_                              0.038    0.049    0.778    0.437
+    incm_                             -0.038    0.030   -1.262    0.207
+    mrtl_                             -0.189    0.089   -2.122    0.034
+    mrtl_                             -0.066    0.118   -0.561    0.575
+    mrt__                             -0.083    0.161   -0.519    0.604
   SWLS_life_satisfaction_mean ~                                        
-    PANAS     (c1)                     0.682    0.064   10.718    0.000
-    age_c                             -0.001    0.004   -0.130    0.897
-    gndr_                              0.065    0.092    0.711    0.477
-    edct_                              0.005    0.051    0.106    0.915
-    incm_                              0.048    0.034    1.394    0.163
-    mrtl_                             -0.010    0.106   -0.098    0.922
-    mrtl_                             -0.203    0.144   -1.409    0.159
-    mrt__                              0.177    0.300    0.589    0.556
+    PANAS     (c1)                     0.609    0.063    9.662    0.000
+    ECS__   (aw_l)                     0.237    0.116    2.042    0.041
+    ECS__   (ac_l)                     0.161    0.136    1.188    0.235
+    age_c                              0.001    0.004    0.288    0.774
+    gndr_                              0.050    0.089    0.561    0.575
+    edct_                              0.008    0.049    0.154    0.877
+    incm_                              0.038    0.034    1.120    0.263
+    mrtl_                             -0.009    0.103   -0.089    0.929
+    mrtl_                             -0.224    0.132   -1.701    0.089
+    mrt__                              0.230    0.280    0.820    0.412
   SVS_vitality_mean ~                                                  
-    PANAS     (c2)                     0.876    0.062   14.228    0.000
-    age_c                              0.001    0.005    0.146    0.884
-    gndr_                              0.116    0.096    1.212    0.226
-    edct_                             -0.082    0.052   -1.560    0.119
-    incm_                             -0.002    0.034   -0.067    0.946
-    mrtl_                              0.076    0.111    0.682    0.496
-    mrtl_                             -0.211    0.158   -1.339    0.181
-    mrt__                              0.160    0.263    0.606    0.545
+    PANAS     (c2)                     0.831    0.065   12.722    0.000
+    ECS__   (aw_v)                     0.122    0.138    0.883    0.377
+    ECS__   (ac_v)                     0.121    0.156    0.777    0.437
+    age_c                              0.002    0.005    0.351    0.726
+    gndr_                              0.108    0.094    1.146    0.252
+    edct_                             -0.080    0.052   -1.522    0.128
+    incm_                             -0.009    0.034   -0.253    0.800
+    mrtl_                              0.075    0.112    0.668    0.504
+    mrtl_                             -0.226    0.157   -1.442    0.149
+    mrt__                              0.192    0.265    0.724    0.469
   PWBS_eudaimonic_wellbeing_mean ~                                     
-    PANAS     (c3)                     0.653    0.069    9.504    0.000
-    EAC__ (drct_p)                     0.102    0.065    1.571    0.116
-    age_c                              0.000    0.004    0.079    0.937
-    gndr_                              0.092    0.089    1.033    0.302
-    edct_                              0.009    0.051    0.171    0.864
-    incm_                              0.033    0.034    0.963    0.335
-    mrtl_                             -0.004    0.107   -0.041    0.968
-    mrtl_                             -0.070    0.157   -0.445    0.656
-    mrt__                              0.130    0.239    0.544    0.587
+    PANAS     (c3)                     0.590    0.066    8.949    0.000
+    ECS__  (aw_ed)                     0.123    0.110    1.115    0.265
+    ECS__  (ac_ed)                     0.259    0.130    1.990    0.047
+    EAC__ (drct_p)                     0.076    0.071    1.061    0.289
+    age_c                              0.002    0.004    0.468    0.640
+    gndr_                              0.083    0.087    0.953    0.341
+    edct_                              0.013    0.050    0.256    0.798
+    incm_                              0.023    0.033    0.714    0.475
+    mrtl_                             -0.008    0.103   -0.082    0.935
+    mrtl_                             -0.096    0.147   -0.652    0.515
+    mrt__                              0.187    0.238    0.786    0.432
   K6_psychological_distress_total ~                                    
-    PANAS     (c4)                    -0.611    0.229   -2.665    0.008
-    CERQ_ (drct_m)                     4.898    0.372   13.170    0.000
-    age_c                             -0.030    0.014   -2.115    0.034
-    gndr_                             -0.138    0.330   -0.417    0.677
-    edct_                             -0.035    0.171   -0.206    0.837
-    incm_                              0.145    0.114    1.267    0.205
-    mrtl_                              0.754    0.411    1.832    0.067
-    mrtl_                              0.747    0.555    1.346    0.178
-    mrt__                              1.243    0.826    1.506    0.132
+    PANAS     (c4)                    -0.481    0.230   -2.089    0.037
+    ECS__  (aw_ds)                     0.029    0.454    0.065    0.949
+    ECS__  (ac_ds)                    -0.851    0.541   -1.573    0.116
+    CERQ_ (drct_m)                     4.801    0.382   12.570    0.000
+    age_c                             -0.032    0.014   -2.237    0.025
+    gndr_                             -0.133    0.323   -0.412    0.681
+    edct_                             -0.054    0.170   -0.317    0.752
+    incm_                              0.166    0.114    1.462    0.144
+    mrtl_                              0.787    0.409    1.923    0.055
+    mrtl_                              0.831    0.550    1.511    0.131
+    mrt__                              1.121    0.791    1.417    0.156
    Std.lv  Std.all
                   
    -0.075   -0.120
@@ -1150,74 +1195,83 @@ Regressions:
     0.093    0.059
    -0.054   -0.024
                   
-    0.121    0.088
-    0.285    0.156
-   -0.126   -0.077
-    0.054    0.070
-    0.234    0.159
-    0.005    0.092
-    0.046    0.034
-    0.039    0.055
+    0.095    0.069
+    0.033    0.027
+    0.280    0.153
+   -0.129   -0.080
+    0.054    0.069
+    0.230    0.156
+    0.005    0.094
+    0.044    0.032
+    0.038    0.054
    -0.038   -0.100
-   -0.192   -0.131
-   -0.069   -0.032
-   -0.084   -0.028
+   -0.189   -0.129
+   -0.066   -0.030
+   -0.083   -0.027
                   
-    0.682    0.527
-   -0.001   -0.008
-    0.065    0.037
-    0.005    0.006
-    0.048    0.097
-   -0.010   -0.005
-   -0.203   -0.072
-    0.177    0.045
+    0.609    0.479
+    0.237    0.155
+    0.161    0.092
+    0.001    0.017
+    0.050    0.029
+    0.008    0.008
+    0.038    0.078
+   -0.009   -0.005
+   -0.224   -0.080
+    0.230    0.059
                   
-    0.876    0.606
-    0.001    0.009
-    0.116    0.059
-   -0.082   -0.079
-   -0.002   -0.004
-    0.076    0.036
-   -0.211   -0.067
-    0.160    0.036
+    0.831    0.582
+    0.122    0.071
+    0.121    0.061
+    0.002    0.022
+    0.108    0.055
+   -0.080   -0.078
+   -0.009   -0.016
+    0.075    0.036
+   -0.226   -0.072
+    0.192    0.044
                   
-    0.653    0.514
-    0.102    0.054
-    0.000    0.005
-    0.092    0.053
-    0.009    0.010
-    0.033    0.067
-   -0.004   -0.002
-   -0.070   -0.025
-    0.130    0.033
+    0.590    0.472
+    0.123    0.082
+    0.259    0.150
+    0.076    0.041
+    0.002    0.026
+    0.083    0.049
+    0.013    0.014
+    0.023    0.049
+   -0.008   -0.005
+   -0.096   -0.035
+    0.187    0.049
                   
-   -0.611   -0.121
-    4.898    0.597
-   -0.030   -0.113
-   -0.138   -0.020
-   -0.035   -0.010
-    0.145    0.075
-    0.754    0.101
-    0.747    0.067
-    1.243    0.080
+   -0.481   -0.096
+    0.029    0.005
+   -0.851   -0.123
+    4.801    0.592
+   -0.032   -0.123
+   -0.133   -0.019
+   -0.054   -0.015
+    0.166    0.087
+    0.787    0.107
+    0.831    0.076
+    1.121    0.073
 
 Covariances:
                                     Estimate  Std.Err  z-value  P(>|z|)
   ECRGO_attachment_anxiety_mean ~~                                     
     ECRGO_vdnc_f__                     0.093    0.048    1.959    0.050
  .SWLS_life_satisfaction_mean ~~                                       
-   .SVS_vitalty_mn                     0.275    0.038    7.207    0.000
-   .PWBS_dmnc_wll_                     0.408    0.039   10.356    0.000
-   .K6_psychlgcl__                    -0.365    0.119   -3.080    0.002
+   .SVS_vitalty_mn                     0.252    0.036    6.940    0.000
+   .PWBS_dmnc_wll_                     0.376    0.038   10.007    0.000
+   .K6_psychlgcl__                    -0.304    0.112   -2.707    0.007
  .SVS_vitality_mean ~~                                                 
-   .PWBS_dmnc_wll_                     0.253    0.035    7.252    0.000
-   .K6_psychlgcl__                    -0.276    0.135   -2.052    0.040
+   .PWBS_dmnc_wll_                     0.234    0.033    7.025    0.000
+   .K6_psychlgcl__                    -0.236    0.131   -1.806    0.071
  .PWBS_eudaimonic_wellbeing_mean ~~                                    
-   .K6_psychlgcl__                    -0.276    0.121   -2.283    0.022
+   .K6_psychlgcl__                    -0.221    0.118   -1.880    0.060
   age_c ~~                                                             
     gender_female                     -0.310    0.403   -0.770    0.441
     education_c                        0.790    0.743    1.063    0.288
-    income_c                          10.938    1.573    6.951    0.000
+    income_c                          10.938    1.574    6.951    0.000
     marital_single                    -1.500    0.386   -3.884    0.000
     marital_partnr                    -0.788    0.289   -2.728    0.006
     mrtl_sprtd_dvr                     0.070    0.129    0.546    0.585
@@ -1228,12 +1282,12 @@ Covariances:
   gender_female ~~                                                     
     education_c                       -0.033    0.029   -1.126    0.260
     income_c                          -0.087    0.055   -1.588    0.112
-    marital_single                     0.014    0.014    0.989    0.322
+    marital_single                     0.014    0.014    0.990    0.322
     marital_partnr                     0.004    0.010    0.420    0.675
     mrtl_sprtd_dvr                    -0.001    0.007   -0.116    0.908
     CERQ_adaptv_mn                    -0.019    0.011   -1.627    0.104
     CERQ_mldptv_mn                     0.016    0.013    1.231    0.218
-    ERQ_repprsl_mn                    -0.037    0.027   -1.381    0.167
+    ERQ_repprsl_mn                    -0.037    0.027   -1.382    0.167
     EAC_mtnl_prcs_                    -0.009    0.014   -0.605    0.545
   education_c ~~                                                       
     income_c                           0.744    0.103    7.211    0.000
@@ -1248,14 +1302,14 @@ Covariances:
     marital_single                    -0.126    0.050   -2.529    0.011
     marital_partnr                    -0.084    0.034   -2.469    0.014
     mrtl_sprtd_dvr                     0.005    0.021    0.227    0.820
-    CERQ_adaptv_mn                     0.012    0.039    0.300    0.765
+    CERQ_adaptv_mn                     0.012    0.039    0.300    0.764
     CERQ_mldptv_mn                    -0.021    0.046   -0.446    0.656
     ERQ_repprsl_mn                     0.088    0.093    0.940    0.347
     EAC_mtnl_prcs_                     0.091    0.050    1.828    0.068
   marital_single ~~                                                    
     marital_partnr                    -0.034    0.006   -5.648    0.000
     mrtl_sprtd_dvr                    -0.017    0.004   -3.827    0.000
-    CERQ_adaptv_mn                     0.004    0.011    0.350    0.727
+    CERQ_adaptv_mn                     0.004    0.011    0.349    0.727
     CERQ_mldptv_mn                    -0.004    0.012   -0.324    0.746
     ERQ_repprsl_mn                    -0.016    0.025   -0.623    0.533
     EAC_mtnl_prcs_                     0.000    0.014    0.029    0.977
@@ -1276,21 +1330,21 @@ Covariances:
     EAC_mtnl_prcs_                     0.076    0.010    7.229    0.000
   CERQ_maladaptive_mean ~~                                             
     ERQ_repprsl_mn                    -0.111    0.025   -4.420    0.000
-    EAC_mtnl_prcs_                    -0.036    0.013   -2.769    0.006
+    EAC_mtnl_prcs_                    -0.036    0.013   -2.768    0.006
   ERQ_reappraisal_mean ~~                                              
     EAC_mtnl_prcs_                     0.200    0.026    7.586    0.000
    Std.lv  Std.all
                   
     0.093    0.115
                   
-    0.275    0.476
-    0.408    0.758
-   -0.365   -0.186
+    0.252    0.458
+    0.376    0.744
+   -0.304   -0.162
                   
-    0.253    0.445
-   -0.276   -0.134
+    0.234    0.428
+   -0.236   -0.117
                   
-   -0.276   -0.143
+   -0.221   -0.119
                   
    -0.310   -0.047
     0.790    0.062
@@ -1361,11 +1415,11 @@ Intercepts:
                    Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
    .ECS_nthssm_wr_    3.707    0.222   16.702    0.000    3.707    6.521
    .ECS_nthssm_ct_    0.965    0.106    9.094    0.000    0.965    1.953
-   .PANAS_pstv_ff_    1.862    0.540    3.444    0.001    1.862    2.726
-   .SWLS_lf_stsfc_    1.555    0.233    6.675    0.000    1.555    1.760
-   .SVS_vitalty_mn    0.748    0.231    3.241    0.001    0.748    0.757
-   .PWBS_dmnc_wll_    1.373    0.276    4.974    0.000    1.373    1.582
-   .K6_psychlgcl__   -6.108    1.562   -3.910    0.000   -6.108   -1.767
+   .PANAS_pstv_ff_    1.879    0.546    3.438    0.001    1.879    2.754
+   .SWLS_lf_stsfc_    0.637    0.326    1.953    0.051    0.637    0.734
+   .SVS_vitalty_mn    0.186    0.310    0.598    0.550    0.186    0.191
+   .PWBS_dmnc_wll_    0.536    0.332    1.615    0.106    0.536    0.627
+   .K6_psychlgcl__   -3.872    1.879   -2.061    0.039   -3.872   -1.133
     ECRGO_ttchmn__    4.121    0.056   74.119    0.000    4.121    4.545
     ECRGO_vdnc_f__    4.222    0.055   77.059    0.000    4.222    4.725
     age_c            -0.264    0.812   -0.325    0.746   -0.264   -0.020
@@ -1384,14 +1438,14 @@ Variances:
                    Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
    .ECS_nthssm_wr_    0.300    0.025   12.179    0.000    0.300    0.930
    .ECS_nthssm_ct_    0.102    0.009   11.520    0.000    0.102    0.420
-   .PANAS_pstv_ff_    0.396    0.035   11.351    0.000    0.396    0.848
-   .SWLS_lf_stsfc_    0.547    0.045   12.113    0.000    0.547    0.702
-   .SVS_vitalty_mn    0.607    0.049   12.353    0.000    0.607    0.623
-   .PWBS_dmnc_wll_    0.530    0.044   12.118    0.000    0.530    0.705
-   .K6_psychlgcl__    7.033    0.555   12.671    0.000    7.033    0.589
+   .PANAS_pstv_ff_    0.396    0.035   11.376    0.000    0.396    0.850
+   .SWLS_lf_stsfc_    0.510    0.042   12.002    0.000    0.510    0.677
+   .SVS_vitalty_mn    0.594    0.048   12.349    0.000    0.594    0.624
+   .PWBS_dmnc_wll_    0.501    0.042   11.960    0.000    0.501    0.687
+   .K6_psychlgcl__    6.887    0.572   12.034    0.000    6.887    0.589
     ECRGO_ttchmn__    0.822    0.069   11.841    0.000    0.822    1.000
     ECRGO_vdnc_f__    0.799    0.057   14.023    0.000    0.799    1.000
-    age_c           175.556   14.057   12.489    0.000  175.556    1.000
+    age_c           175.557   14.057   12.489    0.000  175.557    1.000
     gender_female     0.250    0.001  271.023    0.000    0.250    1.000
     education_c       0.924    0.053   17.382    0.000    0.924    1.000
     income_c          3.231    0.247   13.059    0.000    3.231    1.000
@@ -1407,36 +1461,36 @@ R-Square:
                    Estimate
     ECS_nthssm_wr_    0.070
     ECS_nthssm_ct_    0.580
-    PANAS_pstv_ff_    0.152
-    SWLS_lf_stsfc_    0.298
-    SVS_vitalty_mn    0.377
-    PWBS_dmnc_wll_    0.295
+    PANAS_pstv_ff_    0.150
+    SWLS_lf_stsfc_    0.323
+    SVS_vitalty_mn    0.376
+    PWBS_dmnc_wll_    0.313
     K6_psychlgcl__    0.411
 
 Defined Parameters:
                    Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
-    indrct_lf_stsf    0.054    0.040    1.361    0.174    0.054    0.035
-    indirect_vtlty    0.070    0.050    1.386    0.166    0.070    0.040
-    indirect_edmnc    0.052    0.039    1.346    0.178    0.052    0.034
-    indirct_dstrss   -0.049    0.043   -1.141    0.254   -0.049   -0.008
-    ecr_nxty_ndrc_   -0.004    0.004   -1.045    0.296   -0.004   -0.004
-    ecr_nxty_ndrc_   -0.005    0.005   -1.062    0.288   -0.005   -0.005
-    ecr_nxty_ndrc_   -0.004    0.004   -1.038    0.299   -0.004   -0.004
-    ecr_nxty_ndrc_    0.004    0.004    0.925    0.355    0.004    0.001
-    ecr_vdnc_ndrc_   -0.006    0.005   -1.154    0.248   -0.006   -0.006
-    ecr_vdnc_ndrc_   -0.007    0.006   -1.175    0.240   -0.007   -0.007
-    ecr_vdnc_ndrc_   -0.005    0.005   -1.146    0.252   -0.005   -0.006
-    ecr_vdnc_ndrc_    0.005    0.005    0.996    0.319    0.005    0.001
+    indrct_lf_stsf    0.038    0.046    0.838    0.402    0.038    0.025
+    indirect_vtlty    0.052    0.063    0.835    0.404    0.052    0.030
+    indirect_edmnc    0.037    0.044    0.840    0.401    0.037    0.025
+    indirct_dstrss   -0.030    0.041   -0.745    0.456   -0.030   -0.005
+    ecr_nxty_ndrc_   -0.003    0.004   -0.773    0.439   -0.003   -0.003
+    ecr_nxty_ndrc_   -0.004    0.005   -0.771    0.441   -0.004   -0.004
+    ecr_nxty_ndrc_   -0.003    0.004   -0.773    0.439   -0.003   -0.003
+    ecr_nxty_ndrc_    0.002    0.003    0.695    0.487    0.002    0.001
+    ecr_vdnc_ndrc_   -0.004    0.005   -0.771    0.441   -0.004   -0.004
+    ecr_vdnc_ndrc_   -0.005    0.007   -0.771    0.441   -0.005   -0.005
+    ecr_vdnc_ndrc_   -0.004    0.005   -0.772    0.440   -0.004   -0.004
+    ecr_vdnc_ndrc_    0.003    0.005    0.692    0.489    0.003    0.001
 
 
 ===== pride =====
 ECS_pride_awareness_mean ~ d1*ECRGO_attachment_anxiety_mean + d2*ECRGO_avoidance_of_intimacy_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
 ECS_pride_action_mean ~ a*ECS_pride_awareness_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
-PANAS_positive_affect_mean ~ b*ECS_pride_action_mean + er_adaptive*CERQ_adaptive_mean + er_maladaptive*CERQ_maladaptive_mean + er_reappraisal*ERQ_reappraisal_mean + er_processing*EAC_emotional_processing_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
-SWLS_life_satisfaction_mean ~ c1*PANAS_positive_affect_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
-SVS_vitality_mean ~ c2*PANAS_positive_affect_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
-PWBS_eudaimonic_wellbeing_mean ~ c3*PANAS_positive_affect_mean + direct_processing*EAC_emotional_processing_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
-K6_psychological_distress_total ~ c4*PANAS_positive_affect_mean + direct_maladaptive*CERQ_maladaptive_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+PANAS_positive_affect_mean ~ b*ECS_pride_action_mean + aw_pa*ECS_pride_awareness_mean + er_adaptive*CERQ_adaptive_mean + er_maladaptive*CERQ_maladaptive_mean + er_reappraisal*ERQ_reappraisal_mean + er_processing*EAC_emotional_processing_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+SWLS_life_satisfaction_mean ~ c1*PANAS_positive_affect_mean + aw_ls*ECS_pride_awareness_mean + ac_ls*ECS_pride_action_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+SVS_vitality_mean ~ c2*PANAS_positive_affect_mean + aw_vit*ECS_pride_awareness_mean + ac_vit*ECS_pride_action_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+PWBS_eudaimonic_wellbeing_mean ~ c3*PANAS_positive_affect_mean + aw_eud*ECS_pride_awareness_mean + ac_eud*ECS_pride_action_mean + direct_processing*EAC_emotional_processing_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+K6_psychological_distress_total ~ c4*PANAS_positive_affect_mean + aw_dis*ECS_pride_awareness_mean + ac_dis*ECS_pride_action_mean + direct_maladaptive*CERQ_maladaptive_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
 ECRGO_attachment_anxiety_mean ~~ ECRGO_avoidance_of_intimacy_mean
 SWLS_life_satisfaction_mean ~~ SVS_vitality_mean + PWBS_eudaimonic_wellbeing_mean + K6_psychological_distress_total
 SVS_vitality_mean ~~ PWBS_eudaimonic_wellbeing_mean + K6_psychological_distress_total
@@ -1454,11 +1508,11 @@ ecr_avoidance_indirect_vitality := d2*a*b*c2
 ecr_avoidance_indirect_eudaimonic := d2*a*b*c3
 ecr_avoidance_indirect_distress := d2*a*b*c4
 
-lavaan 0.7-3 ended normally after 307 iterations
+lavaan 0.7-3 ended normally after 271 iterations
 
   Estimator                                         ML
   Optimization method                           NLMINB
-  Number of model parameters                       165
+  Number of model parameters                       174
   Row rank of the constraints matrix                20
 
   Number of observations                           266
@@ -1466,10 +1520,10 @@ lavaan 0.7-3 ended normally after 307 iterations
 
 Model Test User Model:
                                               Standard      Scaled
-  Test Statistic                               281.744     276.146
-  Degrees of freedom                                65          65
+  Test Statistic                               257.392     254.921
+  Degrees of freedom                                56          56
   P-value (Chi-square)                           0.000       0.000
-  Scaling correction factor                                  1.020
+  Scaling correction factor                                  1.010
     Yuan-Bentler correction (Mplus variant)                       
 
 Model Test Baseline Model:
@@ -1481,52 +1535,52 @@ Model Test Baseline Model:
 
 User Model versus Baseline Model:
 
-  Comparative Fit Index (CFI)                    0.825       0.829
-  Tucker-Lewis Index (TLI)                       0.636       0.645
+  Comparative Fit Index (CFI)                    0.837       0.839
+  Tucker-Lewis Index (TLI)                       0.607       0.612
                                                                   
-  Robust Comparative Fit Index (CFI)                         0.830
-  Robust Tucker-Lewis Index (TLI)                            0.647
+  Robust Comparative Fit Index (CFI)                         0.843
+  Robust Tucker-Lewis Index (TLI)                            0.620
 
 Loglikelihood and Information Criteria:
 
-  Loglikelihood user model (H0)              -5520.317   -5520.317
-  Scaling correction factor                                  1.005
+  Loglikelihood user model (H0)              -5508.141   -5508.141
+  Scaling correction factor                                  1.009
       for the MLR correction                                      
   Loglikelihood unrestricted model (H1)      -5379.445   -5379.445
   Scaling correction factor                                  1.009
       for the MLR correction                                      
                                                                   
-  Akaike (AIC)                               11370.635   11370.635
-  Bayesian (BIC)                             11961.912   11961.912
-  Sample-size adjusted Bayesian (SABIC)      11438.769   11438.769
+  Akaike (AIC)                               11364.283   11364.283
+  Bayesian (BIC)                             11987.811   11987.811
+  Sample-size adjusted Bayesian (SABIC)      11436.133   11436.133
 
 Root Mean Square Error of Approximation:
 
-  RMSEA                                          0.112       0.111
-  90 Percent confidence interval - lower         0.099       0.097
-  90 Percent confidence interval - upper         0.126       0.124
+  RMSEA                                          0.116       0.116
+  90 Percent confidence interval - lower         0.102       0.101
+  90 Percent confidence interval - upper         0.131       0.130
   P-value H_0: RMSEA <= 0.050                    0.000       0.000
   P-value H_0: RMSEA >= 0.080                    1.000       1.000
                                                                   
-  Robust RMSEA                                               0.109
-  90 Percent confidence interval - lower                     0.095
-  90 Percent confidence interval - upper                     0.124
+  Robust RMSEA                                               0.113
+  90 Percent confidence interval - lower                     0.097
+  90 Percent confidence interval - upper                     0.129
   P-value H_0: Robust RMSEA <= 0.050                         0.000
-  P-value H_0: Robust RMSEA >= 0.080                         0.999
+  P-value H_0: Robust RMSEA >= 0.080                         1.000
 
 Standardized Root Mean Square Residual:
 
-  SRMR                                           0.117       0.117
+  SRMR                                           0.111       0.111
 
 Goodness of Fit Index:
 
-  Goodness of Fit Index (GFI)                    0.925            
-  90 Percent confidence interval - lower         0.907            
-  90 Percent confidence interval - upper         0.940            
+  Goodness of Fit Index (GFI)                    0.930            
+  90 Percent confidence interval - lower         0.913            
+  90 Percent confidence interval - upper         0.945            
                                                                   
-  Robust GFI                                                 0.928
-  90 Percent confidence interval - lower                     0.909
-  90 Percent confidence interval - upper                     0.945
+  Robust GFI                                                 0.933
+  90 Percent confidence interval - lower                     0.914
+  90 Percent confidence interval - upper                     0.950
 
 Parameter Estimates:
 
@@ -1556,56 +1610,65 @@ Regressions:
     mrtl_                             -0.068    0.069   -0.989    0.323
     mrt__                             -0.093    0.080   -1.162    0.245
   PANAS_positive_affect_mean ~                                         
-    ECS__      (b)                     0.283    0.083    3.405    0.001
-    CERQ_   (er_d)                     0.248    0.145    1.704    0.088
-    CERQ_   (er_m)                    -0.134    0.098   -1.374    0.169
-    ERQ__   (er_r)                     0.037    0.065    0.564    0.573
-    EAC__   (er_p)                     0.182    0.094    1.930    0.054
-    age_c                              0.005    0.004    1.305    0.192
-    gndr_                              0.035    0.077    0.455    0.649
-    edct_                              0.039    0.047    0.835    0.404
-    incm_                             -0.039    0.029   -1.336    0.181
-    mrtl_                             -0.173    0.088   -1.959    0.050
-    mrtl_                             -0.039    0.116   -0.336    0.737
-    mrt__                             -0.077    0.151   -0.513    0.608
+    ECS__      (b)                     0.240    0.116    2.080    0.038
+    ECS__   (aw_p)                     0.058    0.114    0.503    0.615
+    CERQ_   (er_d)                     0.247    0.146    1.695    0.090
+    CERQ_   (er_m)                    -0.138    0.098   -1.409    0.159
+    ERQ__   (er_r)                     0.033    0.065    0.504    0.615
+    EAC__   (er_p)                     0.176    0.096    1.824    0.068
+    age_c                              0.005    0.004    1.307    0.191
+    gndr_                              0.036    0.077    0.464    0.643
+    edct_                              0.038    0.047    0.808    0.419
+    incm_                             -0.038    0.029   -1.322    0.186
+    mrtl_                             -0.180    0.088   -2.041    0.041
+    mrtl_                             -0.042    0.116   -0.364    0.716
+    mrt__                             -0.082    0.150   -0.545    0.586
   SWLS_life_satisfaction_mean ~                                        
-    PANAS     (c1)                     0.682    0.064   10.718    0.000
-    age_c                             -0.001    0.004   -0.130    0.897
-    gndr_                              0.065    0.092    0.711    0.477
-    edct_                              0.005    0.051    0.106    0.915
-    incm_                              0.048    0.034    1.394    0.163
-    mrtl_                             -0.010    0.106   -0.098    0.922
-    mrtl_                             -0.203    0.144   -1.409    0.159
-    mrt__                              0.177    0.300    0.589    0.556
+    PANAS     (c1)                     0.590    0.068    8.630    0.000
+    ECS__   (aw_l)                     0.364    0.118    3.080    0.002
+    ECS__   (ac_l)                     0.016    0.139    0.116    0.907
+    age_c                              0.000    0.004    0.110    0.912
+    gndr_                              0.068    0.088    0.773    0.440
+    edct_                              0.005    0.049    0.100    0.920
+    incm_                              0.041    0.033    1.253    0.210
+    mrtl_                             -0.055    0.104   -0.530    0.596
+    mrtl_                             -0.225    0.140   -1.609    0.108
+    mrt__                              0.150    0.302    0.495    0.621
   SVS_vitality_mean ~                                                  
-    PANAS     (c2)                     0.876    0.062   14.228    0.000
-    age_c                              0.001    0.005    0.146    0.884
-    gndr_                              0.116    0.096    1.212    0.226
-    edct_                             -0.082    0.052   -1.560    0.119
-    incm_                             -0.002    0.034   -0.067    0.946
-    mrtl_                              0.076    0.111    0.682    0.496
-    mrtl_                             -0.211    0.158   -1.339    0.181
-    mrt__                              0.160    0.263    0.606    0.545
+    PANAS     (c2)                     0.823    0.070   11.833    0.000
+    ECS__   (aw_v)                     0.231    0.128    1.809    0.070
+    ECS__   (ac_v)                    -0.011    0.140   -0.082    0.935
+    age_c                              0.001    0.005    0.260    0.795
+    gndr_                              0.118    0.094    1.252    0.211
+    edct_                             -0.082    0.051   -1.603    0.109
+    incm_                             -0.006    0.034   -0.174    0.862
+    mrtl_                              0.047    0.110    0.432    0.666
+    mrtl_                             -0.226    0.160   -1.415    0.157
+    mrt__                              0.141    0.270    0.524    0.601
   PWBS_eudaimonic_wellbeing_mean ~                                     
-    PANAS     (c3)                     0.653    0.069    9.504    0.000
-    EAC__ (drct_p)                     0.102    0.065    1.571    0.116
-    age_c                              0.000    0.004    0.079    0.937
-    gndr_                              0.092    0.089    1.033    0.302
-    edct_                              0.009    0.051    0.171    0.864
-    incm_                              0.033    0.034    0.963    0.335
-    mrtl_                             -0.004    0.107   -0.041    0.968
-    mrtl_                             -0.070    0.157   -0.445    0.656
-    mrt__                              0.130    0.239    0.544    0.587
+    PANAS     (c3)                     0.584    0.071    8.195    0.000
+    ECS__  (aw_ed)                     0.341    0.118    2.879    0.004
+    ECS__  (ac_ed)                    -0.043    0.153   -0.279    0.780
+    EAC__ (drct_p)                     0.094    0.073    1.290    0.197
+    age_c                              0.001    0.004    0.277    0.781
+    gndr_                              0.095    0.087    1.098    0.272
+    edct_                              0.007    0.050    0.139    0.890
+    incm_                              0.028    0.033    0.863    0.388
+    mrtl_                             -0.045    0.105   -0.433    0.665
+    mrtl_                             -0.091    0.159   -0.572    0.567
+    mrt__                              0.104    0.252    0.412    0.680
   K6_psychological_distress_total ~                                    
-    PANAS     (c4)                    -0.611    0.229   -2.665    0.008
-    CERQ_ (drct_m)                     4.898    0.372   13.170    0.000
-    age_c                             -0.030    0.014   -2.115    0.034
-    gndr_                             -0.138    0.330   -0.417    0.677
-    edct_                             -0.035    0.171   -0.206    0.837
-    incm_                              0.145    0.114    1.267    0.205
-    mrtl_                              0.754    0.411    1.832    0.067
-    mrtl_                              0.747    0.555    1.346    0.178
-    mrt__                              1.243    0.826    1.506    0.132
+    PANAS     (c4)                    -0.408    0.248   -1.648    0.099
+    ECS__  (aw_ds)                     0.117    0.439    0.267    0.790
+    ECS__  (ac_ds)                    -0.957    0.494   -1.939    0.052
+    CERQ_ (drct_m)                     4.830    0.381   12.661    0.000
+    age_c                             -0.032    0.014   -2.247    0.025
+    gndr_                             -0.116    0.328   -0.353    0.724
+    edct_                             -0.056    0.172   -0.325    0.745
+    incm_                              0.167    0.112    1.489    0.136
+    mrtl_                              0.734    0.401    1.832    0.067
+    mrtl_                              0.713    0.552    1.293    0.196
+    mrt__                              1.194    0.842    1.418    0.156
    Std.lv  Std.all
                   
    -0.056   -0.093
@@ -1627,74 +1690,83 @@ Regressions:
    -0.068   -0.042
    -0.093   -0.041
                   
-    0.283    0.212
-    0.248    0.137
-   -0.134   -0.084
-    0.037    0.048
-    0.182    0.125
-    0.005    0.099
-    0.035    0.026
-    0.039    0.056
-   -0.039   -0.104
-   -0.173   -0.120
-   -0.039   -0.018
-   -0.077   -0.026
+    0.240    0.180
+    0.058    0.047
+    0.247    0.137
+   -0.138   -0.086
+    0.033    0.043
+    0.176    0.121
+    0.005    0.100
+    0.036    0.026
+    0.038    0.055
+   -0.038   -0.103
+   -0.180   -0.124
+   -0.042   -0.020
+   -0.082   -0.027
                   
-    0.682    0.522
-   -0.001   -0.008
-    0.065    0.037
-    0.005    0.006
-    0.048    0.098
-   -0.010   -0.005
-   -0.203   -0.072
-    0.177    0.045
+    0.590    0.457
+    0.364    0.228
+    0.016    0.009
+    0.000    0.006
+    0.068    0.039
+    0.005    0.005
+    0.041    0.085
+   -0.055   -0.029
+   -0.225   -0.081
+    0.150    0.038
                   
-    0.876    0.600
-    0.001    0.009
-    0.116    0.059
-   -0.082   -0.080
-   -0.002   -0.004
-    0.076    0.036
-   -0.211   -0.067
-    0.160    0.036
+    0.823    0.568
+    0.231    0.129
+   -0.011   -0.006
+    0.001    0.016
+    0.118    0.061
+   -0.082   -0.081
+   -0.006   -0.011
+    0.047    0.023
+   -0.226   -0.072
+    0.141    0.032
                   
-    0.653    0.510
-    0.102    0.055
-    0.000    0.005
-    0.092    0.053
-    0.009    0.010
-    0.033    0.068
-   -0.004   -0.002
-   -0.070   -0.025
-    0.130    0.034
+    0.584    0.459
+    0.341    0.217
+   -0.043   -0.025
+    0.094    0.051
+    0.001    0.016
+    0.095    0.056
+    0.007    0.008
+    0.028    0.059
+   -0.045   -0.025
+   -0.091   -0.033
+    0.104    0.027
                   
-   -0.611   -0.119
-    4.898    0.598
-   -0.030   -0.114
-   -0.138   -0.020
-   -0.035   -0.010
-    0.145    0.075
-    0.754    0.102
-    0.747    0.067
-    1.243    0.080
+   -0.408   -0.080
+    0.117    0.019
+   -0.957   -0.141
+    4.830    0.595
+   -0.032   -0.122
+   -0.116   -0.017
+   -0.056   -0.016
+    0.167    0.088
+    0.734    0.100
+    0.713    0.065
+    1.194    0.078
 
 Covariances:
                                     Estimate  Std.Err  z-value  P(>|z|)
   ECRGO_attachment_anxiety_mean ~~                                     
     ECRGO_vdnc_f__                     0.093    0.048    1.959    0.050
  .SWLS_life_satisfaction_mean ~~                                       
-   .SVS_vitalty_mn                     0.275    0.038    7.207    0.000
-   .PWBS_dmnc_wll_                     0.408    0.039   10.356    0.000
-   .K6_psychlgcl__                    -0.365    0.119   -3.080    0.002
+   .SVS_vitalty_mn                     0.252    0.038    6.688    0.000
+   .PWBS_dmnc_wll_                     0.378    0.040    9.502    0.000
+   .K6_psychlgcl__                    -0.315    0.113   -2.798    0.005
  .SVS_vitality_mean ~~                                                 
-   .PWBS_dmnc_wll_                     0.253    0.035    7.252    0.000
-   .K6_psychlgcl__                    -0.276    0.135   -2.052    0.040
+   .PWBS_dmnc_wll_                     0.235    0.035    6.671    0.000
+   .K6_psychlgcl__                    -0.247    0.132   -1.872    0.061
  .PWBS_eudaimonic_wellbeing_mean ~~                                    
-   .K6_psychlgcl__                    -0.276    0.121   -2.283    0.022
+   .K6_psychlgcl__                    -0.243    0.116   -2.095    0.036
   age_c ~~                                                             
     gender_female                     -0.310    0.403   -0.770    0.441
     education_c                        0.790    0.743    1.063    0.288
-    income_c                          10.938    1.573    6.951    0.000
+    income_c                          10.938    1.574    6.951    0.000
     marital_single                    -1.500    0.386   -3.884    0.000
     marital_partnr                    -0.788    0.289   -2.728    0.006
     mrtl_sprtd_dvr                     0.070    0.129    0.546    0.585
@@ -1705,7 +1777,7 @@ Covariances:
   gender_female ~~                                                     
     education_c                       -0.033    0.029   -1.126    0.260
     income_c                          -0.087    0.055   -1.588    0.112
-    marital_single                     0.014    0.014    0.989    0.322
+    marital_single                     0.014    0.014    0.990    0.322
     marital_partnr                     0.004    0.010    0.420    0.675
     mrtl_sprtd_dvr                    -0.001    0.007   -0.116    0.908
     CERQ_adaptv_mn                    -0.019    0.011   -1.627    0.104
@@ -1760,14 +1832,14 @@ Covariances:
                   
     0.093    0.115
                   
-    0.275    0.476
-    0.408    0.758
-   -0.365   -0.186
+    0.252    0.459
+    0.378    0.744
+   -0.315   -0.168
                   
-    0.253    0.445
-   -0.276   -0.134
+    0.235    0.428
+   -0.247   -0.122
                   
-   -0.276   -0.143
+   -0.243   -0.130
                   
    -0.310   -0.047
     0.790    0.062
@@ -1838,11 +1910,11 @@ Intercepts:
                    Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
    .ECS_prd_wrnss_    3.533    0.222   15.949    0.000    3.533    6.488
    .ECS_prd_ctn_mn    0.868    0.110    7.854    0.000    0.868    1.721
-   .PANAS_pstv_ff_    1.717    0.521    3.299    0.001    1.717    2.551
-   .SWLS_lf_stsfc_    1.555    0.233    6.675    0.000    1.555    1.767
-   .SVS_vitalty_mn    0.748    0.231    3.241    0.001    0.748    0.761
-   .PWBS_dmnc_wll_    1.373    0.276    4.974    0.000    1.373    1.590
-   .K6_psychlgcl__   -6.108    1.562   -3.910    0.000   -6.108   -1.769
+   .PANAS_pstv_ff_    1.714    0.522    3.284    0.001    1.714    2.548
+   .SWLS_lf_stsfc_    0.758    0.316    2.401    0.016    0.758    0.872
+   .SVS_vitalty_mn    0.287    0.302    0.950    0.342    0.287    0.295
+   .PWBS_dmnc_wll_    0.760    0.333    2.283    0.022    0.760    0.890
+   .K6_psychlgcl__   -4.136    1.840   -2.247    0.025   -4.136   -1.210
     ECRGO_ttchmn__    4.121    0.056   74.119    0.000    4.121    4.545
     ECRGO_vdnc_f__    4.222    0.055   77.059    0.000    4.222    4.725
     age_c            -0.264    0.812   -0.325    0.746   -0.264   -0.020
@@ -1861,14 +1933,14 @@ Variances:
                    Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
    .ECS_prd_wrnss_    0.283    0.026   10.997    0.000    0.283    0.955
    .ECS_prd_ctn_mn    0.107    0.009   12.255    0.000    0.107    0.419
-   .PANAS_pstv_ff_    0.383    0.034   11.166    0.000    0.383    0.846
-   .SWLS_lf_stsfc_    0.547    0.045   12.113    0.000    0.547    0.707
-   .SVS_vitalty_mn    0.607    0.049   12.353    0.000    0.607    0.630
-   .PWBS_dmnc_wll_    0.530    0.044   12.118    0.000    0.530    0.712
-   .K6_psychlgcl__    7.033    0.555   12.671    0.000    7.033    0.590
+   .PANAS_pstv_ff_    0.383    0.034   11.188    0.000    0.383    0.846
+   .SWLS_lf_stsfc_    0.510    0.044   11.561    0.000    0.510    0.675
+   .SVS_vitalty_mn    0.594    0.048   12.404    0.000    0.594    0.627
+   .PWBS_dmnc_wll_    0.505    0.045   11.244    0.000    0.505    0.692
+   .K6_psychlgcl__    6.870    0.546   12.581    0.000    6.870    0.588
     ECRGO_ttchmn__    0.822    0.069   11.841    0.000    0.822    1.000
     ECRGO_vdnc_f__    0.799    0.057   14.023    0.000    0.799    1.000
-    age_c           175.556   14.057   12.489    0.000  175.556    1.000
+    age_c           175.557   14.057   12.489    0.000  175.557    1.000
     gender_female     0.250    0.001  271.023    0.000    0.250    1.000
     education_c       0.924    0.053   17.382    0.000    0.924    1.000
     income_c          3.231    0.247   13.059    0.000    3.231    1.000
@@ -1885,35 +1957,35 @@ R-Square:
     ECS_prd_wrnss_    0.045
     ECS_prd_ctn_mn    0.581
     PANAS_pstv_ff_    0.154
-    SWLS_lf_stsfc_    0.293
-    SVS_vitalty_mn    0.370
-    PWBS_dmnc_wll_    0.288
-    K6_psychlgcl__    0.410
+    SWLS_lf_stsfc_    0.325
+    SVS_vitalty_mn    0.373
+    PWBS_dmnc_wll_    0.308
+    K6_psychlgcl__    0.412
 
 Defined Parameters:
                    Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
-    indrct_lf_stsf    0.136    0.042    3.216    0.001    0.136    0.084
-    indirect_vtlty    0.175    0.052    3.327    0.001    0.175    0.097
-    indirect_edmnc    0.130    0.041    3.193    0.001    0.130    0.082
-    indirct_dstrss   -0.122    0.055   -2.216    0.027   -0.122   -0.019
-    ecr_nxty_ndrc_   -0.008    0.006   -1.337    0.181   -0.008   -0.008
-    ecr_nxty_ndrc_   -0.010    0.007   -1.371    0.170   -0.010   -0.009
-    ecr_nxty_ndrc_   -0.007    0.005   -1.338    0.181   -0.007   -0.008
-    ecr_nxty_ndrc_    0.007    0.006    1.199    0.230    0.007    0.002
-    ecr_vdnc_ndrc_   -0.012    0.007   -1.835    0.067   -0.012   -0.012
-    ecr_vdnc_ndrc_   -0.016    0.008   -1.884    0.060   -0.016   -0.014
-    ecr_vdnc_ndrc_   -0.012    0.006   -1.844    0.065   -0.012   -0.012
-    ecr_vdnc_ndrc_    0.011    0.007    1.508    0.131    0.011    0.003
+    indrct_lf_stsf    0.100    0.049    2.044    0.041    0.100    0.063
+    indirect_vtlty    0.140    0.068    2.039    0.041    0.140    0.078
+    indirect_edmnc    0.099    0.049    2.007    0.045    0.099    0.063
+    indirct_dstrss   -0.069    0.052   -1.321    0.186   -0.069   -0.011
+    ecr_nxty_ndrc_   -0.006    0.005   -1.236    0.217   -0.006   -0.006
+    ecr_nxty_ndrc_   -0.008    0.006   -1.244    0.214   -0.008   -0.007
+    ecr_nxty_ndrc_   -0.006    0.005   -1.227    0.220   -0.006   -0.006
+    ecr_nxty_ndrc_    0.004    0.004    1.006    0.314    0.004    0.001
+    ecr_vdnc_ndrc_   -0.009    0.006   -1.537    0.124   -0.009   -0.009
+    ecr_vdnc_ndrc_   -0.012    0.008   -1.547    0.122   -0.012   -0.011
+    ecr_vdnc_ndrc_   -0.009    0.006   -1.530    0.126   -0.009   -0.009
+    ecr_vdnc_ndrc_    0.006    0.005    1.128    0.259    0.006    0.002
 
 
 ===== fascination =====
 ECS_fascination_awareness_mean ~ d1*ECRGO_attachment_anxiety_mean + d2*ECRGO_avoidance_of_intimacy_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
 ECS_fascination_action_mean ~ a*ECS_fascination_awareness_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
-PANAS_positive_affect_mean ~ b*ECS_fascination_action_mean + er_adaptive*CERQ_adaptive_mean + er_maladaptive*CERQ_maladaptive_mean + er_reappraisal*ERQ_reappraisal_mean + er_processing*EAC_emotional_processing_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
-SWLS_life_satisfaction_mean ~ c1*PANAS_positive_affect_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
-SVS_vitality_mean ~ c2*PANAS_positive_affect_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
-PWBS_eudaimonic_wellbeing_mean ~ c3*PANAS_positive_affect_mean + direct_processing*EAC_emotional_processing_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
-K6_psychological_distress_total ~ c4*PANAS_positive_affect_mean + direct_maladaptive*CERQ_maladaptive_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+PANAS_positive_affect_mean ~ b*ECS_fascination_action_mean + aw_pa*ECS_fascination_awareness_mean + er_adaptive*CERQ_adaptive_mean + er_maladaptive*CERQ_maladaptive_mean + er_reappraisal*ERQ_reappraisal_mean + er_processing*EAC_emotional_processing_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+SWLS_life_satisfaction_mean ~ c1*PANAS_positive_affect_mean + aw_ls*ECS_fascination_awareness_mean + ac_ls*ECS_fascination_action_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+SVS_vitality_mean ~ c2*PANAS_positive_affect_mean + aw_vit*ECS_fascination_awareness_mean + ac_vit*ECS_fascination_action_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+PWBS_eudaimonic_wellbeing_mean ~ c3*PANAS_positive_affect_mean + aw_eud*ECS_fascination_awareness_mean + ac_eud*ECS_fascination_action_mean + direct_processing*EAC_emotional_processing_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+K6_psychological_distress_total ~ c4*PANAS_positive_affect_mean + aw_dis*ECS_fascination_awareness_mean + ac_dis*ECS_fascination_action_mean + direct_maladaptive*CERQ_maladaptive_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
 ECRGO_attachment_anxiety_mean ~~ ECRGO_avoidance_of_intimacy_mean
 SWLS_life_satisfaction_mean ~~ SVS_vitality_mean + PWBS_eudaimonic_wellbeing_mean + K6_psychological_distress_total
 SVS_vitality_mean ~~ PWBS_eudaimonic_wellbeing_mean + K6_psychological_distress_total
@@ -1931,11 +2003,11 @@ ecr_avoidance_indirect_vitality := d2*a*b*c2
 ecr_avoidance_indirect_eudaimonic := d2*a*b*c3
 ecr_avoidance_indirect_distress := d2*a*b*c4
 
-lavaan 0.7-3 ended normally after 391 iterations
+lavaan 0.7-3 ended normally after 315 iterations
 
   Estimator                                         ML
   Optimization method                           NLMINB
-  Number of model parameters                       165
+  Number of model parameters                       174
   Row rank of the constraints matrix                20
 
   Number of observations                           266
@@ -1943,10 +2015,10 @@ lavaan 0.7-3 ended normally after 391 iterations
 
 Model Test User Model:
                                               Standard      Scaled
-  Test Statistic                               269.787     264.828
-  Degrees of freedom                                65          65
+  Test Statistic                               240.730     237.540
+  Degrees of freedom                                56          56
   P-value (Chi-square)                           0.000       0.000
-  Scaling correction factor                                  1.019
+  Scaling correction factor                                  1.013
     Yuan-Bentler correction (Mplus variant)                       
 
 Model Test Baseline Model:
@@ -1958,52 +2030,52 @@ Model Test Baseline Model:
 
 User Model versus Baseline Model:
 
-  Comparative Fit Index (CFI)                    0.833       0.836
-  Tucker-Lewis Index (TLI)                       0.653       0.660
+  Comparative Fit Index (CFI)                    0.849       0.851
+  Tucker-Lewis Index (TLI)                       0.636       0.641
                                                                   
-  Robust Comparative Fit Index (CFI)                         0.838
-  Robust Tucker-Lewis Index (TLI)                            0.663
+  Robust Comparative Fit Index (CFI)                         0.854
+  Robust Tucker-Lewis Index (TLI)                            0.647
 
 Loglikelihood and Information Criteria:
 
-  Loglikelihood user model (H0)              -5525.590   -5525.590
-  Scaling correction factor                                  1.008
+  Loglikelihood user model (H0)              -5511.061   -5511.061
+  Scaling correction factor                                  1.011
       for the MLR correction                                      
   Loglikelihood unrestricted model (H1)      -5390.696   -5390.696
   Scaling correction factor                                  1.011
       for the MLR correction                                      
                                                                   
-  Akaike (AIC)                               11381.179   11381.179
-  Bayesian (BIC)                             11972.456   11972.456
-  Sample-size adjusted Bayesian (SABIC)      11449.313   11449.313
+  Akaike (AIC)                               11370.122   11370.122
+  Bayesian (BIC)                             11993.650   11993.650
+  Sample-size adjusted Bayesian (SABIC)      11441.972   11441.972
 
 Root Mean Square Error of Approximation:
 
-  RMSEA                                          0.109       0.108
-  90 Percent confidence interval - lower         0.096       0.094
-  90 Percent confidence interval - upper         0.122       0.121
+  RMSEA                                          0.111       0.110
+  90 Percent confidence interval - lower         0.097       0.096
+  90 Percent confidence interval - upper         0.126       0.125
   P-value H_0: RMSEA <= 0.050                    0.000       0.000
   P-value H_0: RMSEA >= 0.080                    1.000       1.000
                                                                   
-  Robust RMSEA                                               0.106
-  90 Percent confidence interval - lower                     0.092
-  90 Percent confidence interval - upper                     0.121
+  Robust RMSEA                                               0.109
+  90 Percent confidence interval - lower                     0.093
+  90 Percent confidence interval - upper                     0.125
   P-value H_0: Robust RMSEA <= 0.050                         0.000
-  P-value H_0: Robust RMSEA >= 0.080                         0.998
+  P-value H_0: Robust RMSEA >= 0.080                         0.999
 
 Standardized Root Mean Square Residual:
 
-  SRMR                                           0.116       0.116
+  SRMR                                           0.109       0.109
 
 Goodness of Fit Index:
 
-  Goodness of Fit Index (GFI)                    0.929            
-  90 Percent confidence interval - lower         0.911            
-  90 Percent confidence interval - upper         0.944            
+  Goodness of Fit Index (GFI)                    0.935            
+  90 Percent confidence interval - lower         0.918            
+  90 Percent confidence interval - upper         0.950            
                                                                   
-  Robust GFI                                                 0.932
-  90 Percent confidence interval - lower                     0.913
-  90 Percent confidence interval - upper                     0.948
+  Robust GFI                                                 0.938
+  90 Percent confidence interval - lower                     0.920
+  90 Percent confidence interval - upper                     0.954
 
 Parameter Estimates:
 
@@ -2019,7 +2091,7 @@ Regressions:
     age_c                             -0.006    0.003   -1.985    0.047
     gndr_                              0.017    0.068    0.244    0.807
     edct_                             -0.016    0.038   -0.418    0.676
-    incm_                              0.029    0.024    1.208    0.227
+    incm_                              0.029    0.024    1.209    0.227
     mrtl_                             -0.056    0.079   -0.713    0.476
     mrtl_                             -0.141    0.102   -1.381    0.167
     mrt__                             -0.050    0.148   -0.340    0.734
@@ -2033,56 +2105,65 @@ Regressions:
     mrtl_                             -0.064    0.071   -0.907    0.364
     mrt__                              0.037    0.084    0.436    0.663
   PANAS_positive_affect_mean ~                                         
-    ECS__      (b)                     0.267    0.087    3.058    0.002
-    CERQ_   (er_d)                     0.218    0.142    1.537    0.124
-    CERQ_   (er_m)                    -0.146    0.099   -1.476    0.140
-    ERQ__   (er_r)                     0.055    0.064    0.861    0.389
-    EAC__   (er_p)                     0.188    0.088    2.133    0.033
-    age_c                              0.005    0.004    1.274    0.203
-    gndr_                              0.051    0.077    0.662    0.508
-    edct_                              0.033    0.048    0.688    0.491
-    incm_                             -0.039    0.030   -1.303    0.193
-    mrtl_                             -0.190    0.086   -2.205    0.027
-    mrtl_                             -0.003    0.117   -0.023    0.982
-    mrt__                             -0.097    0.172   -0.560    0.575
+    ECS__      (b)                     0.138    0.124    1.110    0.267
+    ECS__   (aw_p)                     0.166    0.109    1.523    0.128
+    CERQ_   (er_d)                     0.208    0.143    1.454    0.146
+    CERQ_   (er_m)                    -0.157    0.097   -1.608    0.108
+    ERQ__   (er_r)                     0.050    0.065    0.765    0.444
+    EAC__   (er_p)                     0.166    0.087    1.907    0.056
+    age_c                              0.006    0.004    1.496    0.135
+    gndr_                              0.042    0.077    0.548    0.584
+    edct_                              0.038    0.048    0.794    0.427
+    incm_                             -0.041    0.030   -1.354    0.176
+    mrtl_                             -0.177    0.087   -2.042    0.041
+    mrtl_                              0.005    0.117    0.041    0.967
+    mrt__                             -0.084    0.175   -0.479    0.632
   SWLS_life_satisfaction_mean ~                                        
-    PANAS     (c1)                     0.682    0.064   10.718    0.000
-    age_c                             -0.001    0.004   -0.130    0.897
-    gndr_                              0.065    0.092    0.711    0.477
-    edct_                              0.005    0.051    0.106    0.915
-    incm_                              0.048    0.034    1.394    0.163
-    mrtl_                             -0.010    0.106   -0.098    0.922
-    mrtl_                             -0.203    0.144   -1.409    0.159
-    mrt__                              0.177    0.300    0.589    0.556
+    PANAS     (c1)                     0.599    0.066    9.108    0.000
+    ECS__   (aw_l)                     0.138    0.121    1.140    0.254
+    ECS__   (ac_l)                     0.197    0.146    1.352    0.176
+    age_c                              0.001    0.004    0.197    0.844
+    gndr_                              0.071    0.089    0.794    0.427
+    edct_                              0.008    0.050    0.163    0.870
+    incm_                              0.038    0.033    1.152    0.249
+    mrtl_                             -0.020    0.104   -0.197    0.844
+    mrtl_                             -0.149    0.137   -1.090    0.276
+    mrt__                              0.181    0.296    0.612    0.541
   SVS_vitality_mean ~                                                  
-    PANAS     (c2)                     0.876    0.062   14.228    0.000
-    age_c                              0.001    0.005    0.146    0.884
-    gndr_                              0.116    0.096    1.212    0.226
-    edct_                             -0.082    0.052   -1.560    0.119
-    incm_                             -0.002    0.034   -0.067    0.946
-    mrtl_                              0.076    0.111    0.682    0.496
-    mrtl_                             -0.211    0.158   -1.339    0.181
-    mrt__                              0.160    0.263    0.606    0.545
+    PANAS     (c2)                     0.771    0.064   11.960    0.000
+    ECS__   (aw_v)                     0.163    0.134    1.218    0.223
+    ECS__   (ac_v)                     0.259    0.151    1.718    0.086
+    age_c                              0.002    0.004    0.495    0.621
+    gndr_                              0.123    0.093    1.327    0.185
+    edct_                             -0.078    0.052   -1.520    0.129
+    incm_                             -0.014    0.033   -0.429    0.668
+    mrtl_                              0.062    0.109    0.572    0.567
+    mrtl_                             -0.143    0.147   -0.968    0.333
+    mrt__                              0.164    0.273    0.599    0.549
   PWBS_eudaimonic_wellbeing_mean ~                                     
-    PANAS     (c3)                     0.653    0.069    9.504    0.000
-    EAC__ (drct_p)                     0.102    0.065    1.571    0.116
-    age_c                              0.000    0.004    0.079    0.937
-    gndr_                              0.092    0.089    1.033    0.302
-    edct_                              0.009    0.051    0.171    0.864
-    incm_                              0.033    0.034    0.963    0.335
-    mrtl_                             -0.004    0.107   -0.041    0.968
-    mrtl_                             -0.070    0.157   -0.445    0.656
-    mrt__                              0.130    0.239    0.544    0.587
+    PANAS     (c3)                     0.569    0.069    8.290    0.000
+    ECS__  (aw_ed)                     0.118    0.118    1.002    0.316
+    ECS__  (ac_ed)                     0.254    0.143    1.775    0.076
+    EAC__ (drct_p)                     0.068    0.070    0.972    0.331
+    age_c                              0.002    0.004    0.430    0.667
+    gndr_                              0.099    0.086    1.151    0.250
+    edct_                              0.010    0.051    0.190    0.849
+    incm_                              0.024    0.033    0.707    0.480
+    mrtl_                             -0.014    0.106   -0.137    0.891
+    mrtl_                             -0.005    0.155   -0.036    0.972
+    mrt__                              0.139    0.234    0.594    0.553
   K6_psychological_distress_total ~                                    
-    PANAS     (c4)                    -0.611    0.229   -2.665    0.008
-    CERQ_ (drct_m)                     4.898    0.372   13.170    0.000
-    age_c                             -0.030    0.014   -2.115    0.034
-    gndr_                             -0.138    0.330   -0.417    0.677
-    edct_                             -0.035    0.171   -0.206    0.837
-    incm_                              0.145    0.114    1.267    0.205
-    mrtl_                              0.754    0.411    1.832    0.067
-    mrtl_                              0.747    0.555    1.346    0.178
-    mrt__                              1.243    0.826    1.506    0.132
+    PANAS     (c4)                    -0.368    0.244   -1.507    0.132
+    ECS__  (aw_ds)                    -0.340    0.424   -0.803    0.422
+    ECS__  (ac_ds)                    -0.659    0.468   -1.408    0.159
+    CERQ_ (drct_m)                     4.878    0.376   12.972    0.000
+    age_c                             -0.033    0.014   -2.308    0.021
+    gndr_                             -0.156    0.327   -0.477    0.633
+    edct_                             -0.041    0.171   -0.242    0.809
+    incm_                              0.172    0.114    1.503    0.133
+    mrtl_                              0.788    0.409    1.928    0.054
+    mrtl_                              0.584    0.526    1.111    0.267
+    mrt__                              1.234    0.786    1.571    0.116
    Std.lv  Std.all
                   
    -0.093   -0.149
@@ -2104,70 +2185,79 @@ Regressions:
    -0.064   -0.040
     0.037    0.016
                   
-    0.267    0.197
-    0.218    0.120
-   -0.146   -0.091
-    0.055    0.072
-    0.188    0.129
-    0.005    0.096
-    0.051    0.038
-    0.033    0.047
-   -0.039   -0.105
-   -0.190   -0.131
-   -0.003   -0.001
-   -0.097   -0.032
+    0.138    0.102
+    0.166    0.139
+    0.208    0.115
+   -0.157   -0.098
+    0.050    0.065
+    0.166    0.115
+    0.006    0.113
+    0.042    0.031
+    0.038    0.054
+   -0.041   -0.109
+   -0.177   -0.122
+    0.005    0.002
+   -0.084   -0.028
                   
-    0.682    0.523
-   -0.001   -0.008
-    0.065    0.037
-    0.005    0.006
-    0.048    0.097
-   -0.010   -0.005
-   -0.203   -0.072
-    0.177    0.045
+    0.599    0.462
+    0.138    0.089
+    0.197    0.113
+    0.001    0.011
+    0.071    0.040
+    0.008    0.009
+    0.038    0.079
+   -0.020   -0.011
+   -0.149   -0.053
+    0.181    0.046
                   
-    0.876    0.601
-    0.001    0.009
-    0.116    0.059
-   -0.082   -0.080
-   -0.002   -0.004
-    0.076    0.036
-   -0.211   -0.067
-    0.160    0.036
+    0.771    0.535
+    0.163    0.095
+    0.259    0.134
+    0.002    0.030
+    0.123    0.063
+   -0.078   -0.078
+   -0.014   -0.026
+    0.062    0.030
+   -0.143   -0.046
+    0.164    0.038
                   
-    0.653    0.510
-    0.102    0.055
-    0.000    0.005
-    0.092    0.053
-    0.009    0.010
-    0.033    0.068
-   -0.004   -0.002
-   -0.070   -0.025
-    0.130    0.034
+    0.569    0.448
+    0.118    0.078
+    0.254    0.148
+    0.068    0.037
+    0.002    0.024
+    0.099    0.058
+    0.010    0.011
+    0.024    0.050
+   -0.014   -0.008
+   -0.005   -0.002
+    0.139    0.036
                   
-   -0.611   -0.119
-    4.898    0.597
-   -0.030   -0.114
-   -0.138   -0.020
-   -0.035   -0.010
-    0.145    0.075
-    0.754    0.101
-    0.747    0.067
-    1.243    0.080
+   -0.368   -0.072
+   -0.340   -0.056
+   -0.659   -0.096
+    4.878    0.599
+   -0.033   -0.127
+   -0.156   -0.023
+   -0.041   -0.012
+    0.172    0.090
+    0.788    0.107
+    0.584    0.053
+    1.234    0.080
 
 Covariances:
                                     Estimate  Std.Err  z-value  P(>|z|)
   ECRGO_attachment_anxiety_mean ~~                                     
     ECRGO_vdnc_f__                     0.093    0.048    1.959    0.050
  .SWLS_life_satisfaction_mean ~~                                       
-   .SVS_vitalty_mn                     0.275    0.038    7.207    0.000
-   .PWBS_dmnc_wll_                     0.408    0.039   10.356    0.000
-   .K6_psychlgcl__                    -0.365    0.119   -3.080    0.002
+   .SVS_vitalty_mn                     0.245    0.038    6.396    0.000
+   .PWBS_dmnc_wll_                     0.384    0.040    9.580    0.000
+   .K6_psychlgcl__                    -0.297    0.115   -2.576    0.010
  .SVS_vitality_mean ~~                                                 
-   .PWBS_dmnc_wll_                     0.253    0.035    7.252    0.000
-   .K6_psychlgcl__                    -0.276    0.135   -2.052    0.040
+   .PWBS_dmnc_wll_                     0.222    0.035    6.399    0.000
+   .K6_psychlgcl__                    -0.189    0.126   -1.503    0.133
  .PWBS_eudaimonic_wellbeing_mean ~~                                    
-   .K6_psychlgcl__                    -0.276    0.121   -2.283    0.022
+   .K6_psychlgcl__                    -0.208    0.120   -1.733    0.083
   age_c ~~                                                             
     gender_female                     -0.310    0.403   -0.770    0.441
     education_c                        0.790    0.743    1.063    0.288
@@ -2182,12 +2272,12 @@ Covariances:
   gender_female ~~                                                     
     education_c                       -0.033    0.029   -1.126    0.260
     income_c                          -0.087    0.055   -1.588    0.112
-    marital_single                     0.014    0.014    0.989    0.322
+    marital_single                     0.014    0.014    0.990    0.322
     marital_partnr                     0.004    0.010    0.420    0.675
     mrtl_sprtd_dvr                    -0.001    0.007   -0.116    0.908
     CERQ_adaptv_mn                    -0.019    0.011   -1.627    0.104
     CERQ_mldptv_mn                     0.016    0.013    1.231    0.218
-    ERQ_repprsl_mn                    -0.037    0.027   -1.382    0.167
+    ERQ_repprsl_mn                    -0.037    0.027   -1.381    0.167
     EAC_mtnl_prcs_                    -0.009    0.014   -0.605    0.545
   education_c ~~                                                       
     income_c                           0.744    0.103    7.211    0.000
@@ -2230,21 +2320,21 @@ Covariances:
     EAC_mtnl_prcs_                     0.076    0.010    7.229    0.000
   CERQ_maladaptive_mean ~~                                             
     ERQ_repprsl_mn                    -0.111    0.025   -4.420    0.000
-    EAC_mtnl_prcs_                    -0.036    0.013   -2.769    0.006
+    EAC_mtnl_prcs_                    -0.036    0.013   -2.768    0.006
   ERQ_reappraisal_mean ~~                                              
     EAC_mtnl_prcs_                     0.200    0.026    7.586    0.000
    Std.lv  Std.all
                   
     0.093    0.115
                   
-    0.275    0.476
-    0.408    0.758
-   -0.365   -0.186
+    0.245    0.449
+    0.384    0.747
+   -0.297   -0.157
                   
-    0.253    0.445
-   -0.276   -0.134
+    0.222    0.414
+   -0.189   -0.096
                   
-   -0.276   -0.143
+   -0.208   -0.112
                   
    -0.310   -0.047
     0.790    0.062
@@ -2315,11 +2405,11 @@ Intercepts:
                    Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
    .ECS_fscntn_wr_    3.447    0.226   15.275    0.000    3.447    6.141
    .ECS_fscntn_ct_    0.925    0.114    8.105    0.000    0.925    1.854
-   .PANAS_pstv_ff_    1.804    0.544    3.318    0.001    1.804    2.674
-   .SWLS_lf_stsfc_    1.555    0.233    6.675    0.000    1.555    1.766
-   .SVS_vitalty_mn    0.748    0.231    3.241    0.001    0.748    0.761
-   .PWBS_dmnc_wll_    1.373    0.276    4.974    0.000    1.373    1.589
-   .K6_psychlgcl__   -6.108    1.562   -3.910    0.000   -6.108   -1.768
+   .PANAS_pstv_ff_    1.822    0.542    3.359    0.001    1.822    2.708
+   .SWLS_lf_stsfc_    0.853    0.322    2.650    0.008    0.853    0.979
+   .SVS_vitalty_mn   -0.137    0.327   -0.420    0.674   -0.137   -0.142
+   .PWBS_dmnc_wll_    0.649    0.327    1.986    0.047    0.649    0.758
+   .K6_psychlgcl__   -3.943    1.743   -2.263    0.024   -3.943   -1.150
     ECRGO_ttchmn__    4.121    0.056   74.119    0.000    4.121    4.545
     ECRGO_vdnc_f__    4.222    0.055   77.059    0.000    4.222    4.725
     age_c            -0.264    0.812   -0.325    0.746   -0.264   -0.020
@@ -2338,11 +2428,11 @@ Variances:
                    Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
    .ECS_fscntn_wr_    0.302    0.028   10.835    0.000    0.302    0.958
    .ECS_fscntn_ct_    0.104    0.008   12.613    0.000    0.104    0.416
-   .PANAS_pstv_ff_    0.385    0.035   10.997    0.000    0.385    0.845
-   .SWLS_lf_stsfc_    0.547    0.045   12.113    0.000    0.547    0.706
-   .SVS_vitalty_mn    0.607    0.049   12.353    0.000    0.607    0.629
-   .PWBS_dmnc_wll_    0.530    0.044   12.118    0.000    0.530    0.711
-   .K6_psychlgcl__    7.033    0.555   12.671    0.000    7.033    0.589
+   .PANAS_pstv_ff_    0.381    0.035   11.041    0.000    0.381    0.843
+   .SWLS_lf_stsfc_    0.524    0.046   11.456    0.000    0.524    0.690
+   .SVS_vitalty_mn    0.570    0.047   12.064    0.000    0.570    0.607
+   .PWBS_dmnc_wll_    0.505    0.044   11.382    0.000    0.505    0.690
+   .K6_psychlgcl__    6.827    0.537   12.713    0.000    6.827    0.581
     ECRGO_ttchmn__    0.822    0.069   11.841    0.000    0.822    1.000
     ECRGO_vdnc_f__    0.799    0.057   14.023    0.000    0.799    1.000
     age_c           175.556   14.057   12.489    0.000  175.556    1.000
@@ -2361,36 +2451,36 @@ R-Square:
                    Estimate
     ECS_fscntn_wr_    0.042
     ECS_fscntn_ct_    0.584
-    PANAS_pstv_ff_    0.155
-    SWLS_lf_stsfc_    0.294
-    SVS_vitalty_mn    0.371
-    PWBS_dmnc_wll_    0.289
-    K6_psychlgcl__    0.411
+    PANAS_pstv_ff_    0.157
+    SWLS_lf_stsfc_    0.310
+    SVS_vitalty_mn    0.393
+    PWBS_dmnc_wll_    0.310
+    K6_psychlgcl__    0.419
 
 Defined Parameters:
                    Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
-    indrct_lf_stsf    0.122    0.045    2.732    0.006    0.122    0.078
-    indirect_vtlty    0.157    0.056    2.784    0.005    0.157    0.090
-    indirect_edmnc    0.117    0.045    2.627    0.009    0.117    0.076
-    indirct_dstrss   -0.110    0.057   -1.910    0.056   -0.110   -0.018
-    ecr_nxty_ndrc_   -0.011    0.007   -1.667    0.096   -0.011   -0.012
-    ecr_nxty_ndrc_   -0.015    0.009   -1.708    0.088   -0.015   -0.013
-    ecr_nxty_ndrc_   -0.011    0.007   -1.645    0.100   -0.011   -0.011
-    ecr_nxty_ndrc_    0.010    0.007    1.391    0.164    0.010    0.003
-    ecr_vdnc_ndrc_   -0.002    0.005   -0.512    0.609   -0.002   -0.002
-    ecr_vdnc_ndrc_   -0.003    0.006   -0.514    0.607   -0.003   -0.003
-    ecr_vdnc_ndrc_   -0.002    0.005   -0.512    0.609   -0.002   -0.002
-    ecr_vdnc_ndrc_    0.002    0.004    0.500    0.617    0.002    0.001
+    indrct_lf_stsf    0.056    0.051    1.094    0.274    0.056    0.036
+    indirect_vtlty    0.072    0.065    1.095    0.273    0.072    0.041
+    indirect_edmnc    0.053    0.049    1.080    0.280    0.053    0.035
+    indirct_dstrss   -0.034    0.038   -0.910    0.363   -0.034   -0.006
+    ecr_nxty_ndrc_   -0.005    0.005   -0.970    0.332   -0.005   -0.005
+    ecr_nxty_ndrc_   -0.007    0.007   -0.973    0.330   -0.007   -0.006
+    ecr_nxty_ndrc_   -0.005    0.005   -0.960    0.337   -0.005   -0.005
+    ecr_nxty_ndrc_    0.003    0.004    0.836    0.403    0.003    0.001
+    ecr_vdnc_ndrc_   -0.001    0.002   -0.481    0.630   -0.001   -0.001
+    ecr_vdnc_ndrc_   -0.001    0.003   -0.482    0.630   -0.001   -0.001
+    ecr_vdnc_ndrc_   -0.001    0.002   -0.480    0.631   -0.001   -0.001
+    ecr_vdnc_ndrc_    0.001    0.001    0.461    0.645    0.001    0.000
 
 
 ===== being_loved =====
 ECS_being_loved_awareness_mean ~ d1*ECRGO_attachment_anxiety_mean + d2*ECRGO_avoidance_of_intimacy_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
 ECS_being_loved_action_mean ~ a*ECS_being_loved_awareness_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
-PANAS_positive_affect_mean ~ b*ECS_being_loved_action_mean + er_adaptive*CERQ_adaptive_mean + er_maladaptive*CERQ_maladaptive_mean + er_reappraisal*ERQ_reappraisal_mean + er_processing*EAC_emotional_processing_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
-SWLS_life_satisfaction_mean ~ c1*PANAS_positive_affect_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
-SVS_vitality_mean ~ c2*PANAS_positive_affect_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
-PWBS_eudaimonic_wellbeing_mean ~ c3*PANAS_positive_affect_mean + direct_processing*EAC_emotional_processing_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
-K6_psychological_distress_total ~ c4*PANAS_positive_affect_mean + direct_maladaptive*CERQ_maladaptive_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+PANAS_positive_affect_mean ~ b*ECS_being_loved_action_mean + aw_pa*ECS_being_loved_awareness_mean + er_adaptive*CERQ_adaptive_mean + er_maladaptive*CERQ_maladaptive_mean + er_reappraisal*ERQ_reappraisal_mean + er_processing*EAC_emotional_processing_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+SWLS_life_satisfaction_mean ~ c1*PANAS_positive_affect_mean + aw_ls*ECS_being_loved_awareness_mean + ac_ls*ECS_being_loved_action_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+SVS_vitality_mean ~ c2*PANAS_positive_affect_mean + aw_vit*ECS_being_loved_awareness_mean + ac_vit*ECS_being_loved_action_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+PWBS_eudaimonic_wellbeing_mean ~ c3*PANAS_positive_affect_mean + aw_eud*ECS_being_loved_awareness_mean + ac_eud*ECS_being_loved_action_mean + direct_processing*EAC_emotional_processing_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+K6_psychological_distress_total ~ c4*PANAS_positive_affect_mean + aw_dis*ECS_being_loved_awareness_mean + ac_dis*ECS_being_loved_action_mean + direct_maladaptive*CERQ_maladaptive_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
 ECRGO_attachment_anxiety_mean ~~ ECRGO_avoidance_of_intimacy_mean
 SWLS_life_satisfaction_mean ~~ SVS_vitality_mean + PWBS_eudaimonic_wellbeing_mean + K6_psychological_distress_total
 SVS_vitality_mean ~~ PWBS_eudaimonic_wellbeing_mean + K6_psychological_distress_total
@@ -2408,11 +2498,11 @@ ecr_avoidance_indirect_vitality := d2*a*b*c2
 ecr_avoidance_indirect_eudaimonic := d2*a*b*c3
 ecr_avoidance_indirect_distress := d2*a*b*c4
 
-lavaan 0.7-3 ended normally after 381 iterations
+lavaan 0.7-3 ended normally after 328 iterations
 
   Estimator                                         ML
   Optimization method                           NLMINB
-  Number of model parameters                       165
+  Number of model parameters                       174
   Row rank of the constraints matrix                20
 
   Number of observations                           266
@@ -2420,10 +2510,10 @@ lavaan 0.7-3 ended normally after 381 iterations
 
 Model Test User Model:
                                               Standard      Scaled
-  Test Statistic                               267.402     267.674
-  Degrees of freedom                                65          65
+  Test Statistic                               246.693     245.189
+  Degrees of freedom                                56          56
   P-value (Chi-square)                           0.000       0.000
-  Scaling correction factor                                  0.999
+  Scaling correction factor                                  1.006
     Yuan-Bentler correction (Mplus variant)                       
 
 Model Test Baseline Model:
@@ -2435,52 +2525,52 @@ Model Test Baseline Model:
 
 User Model versus Baseline Model:
 
-  Comparative Fit Index (CFI)                    0.834       0.835
-  Tucker-Lewis Index (TLI)                       0.656       0.657
+  Comparative Fit Index (CFI)                    0.844       0.846
+  Tucker-Lewis Index (TLI)                       0.624       0.629
                                                                   
-  Robust Comparative Fit Index (CFI)                         0.839
-  Robust Tucker-Lewis Index (TLI)                            0.666
+  Robust Comparative Fit Index (CFI)                         0.849
+  Robust Tucker-Lewis Index (TLI)                            0.636
 
 Loglikelihood and Information Criteria:
 
-  Loglikelihood user model (H0)              -5521.718   -5521.718
-  Scaling correction factor                                  1.009
+  Loglikelihood user model (H0)              -5511.363   -5511.363
+  Scaling correction factor                                  1.007
       for the MLR correction                                      
   Loglikelihood unrestricted model (H1)      -5388.017   -5388.017
   Scaling correction factor                                  1.006
       for the MLR correction                                      
                                                                   
-  Akaike (AIC)                               11373.435   11373.435
-  Bayesian (BIC)                             11964.712   11964.712
-  Sample-size adjusted Bayesian (SABIC)      11441.569   11441.569
+  Akaike (AIC)                               11370.726   11370.726
+  Bayesian (BIC)                             11994.254   11994.254
+  Sample-size adjusted Bayesian (SABIC)      11442.576   11442.576
 
 Root Mean Square Error of Approximation:
 
-  RMSEA                                          0.108       0.108
-  90 Percent confidence interval - lower         0.095       0.095
-  90 Percent confidence interval - upper         0.122       0.122
+  RMSEA                                          0.113       0.113
+  90 Percent confidence interval - lower         0.099       0.099
+  90 Percent confidence interval - upper         0.128       0.127
   P-value H_0: RMSEA <= 0.050                    0.000       0.000
   P-value H_0: RMSEA >= 0.080                    1.000       1.000
                                                                   
-  Robust RMSEA                                               0.106
-  90 Percent confidence interval - lower                     0.091
-  90 Percent confidence interval - upper                     0.120
+  Robust RMSEA                                               0.110
+  90 Percent confidence interval - lower                     0.095
+  90 Percent confidence interval - upper                     0.126
   P-value H_0: Robust RMSEA <= 0.050                         0.000
-  P-value H_0: Robust RMSEA >= 0.080                         0.998
+  P-value H_0: Robust RMSEA >= 0.080                         0.999
 
 Standardized Root Mean Square Residual:
 
-  SRMR                                           0.113       0.113
+  SRMR                                           0.106       0.106
 
 Goodness of Fit Index:
 
-  Goodness of Fit Index (GFI)                    0.929            
-  90 Percent confidence interval - lower         0.912            
-  90 Percent confidence interval - upper         0.945            
+  Goodness of Fit Index (GFI)                    0.933            
+  90 Percent confidence interval - lower         0.916            
+  90 Percent confidence interval - upper         0.948            
                                                                   
-  Robust GFI                                                 0.932
-  90 Percent confidence interval - lower                     0.914
-  90 Percent confidence interval - upper                     0.949
+  Robust GFI                                                 0.936
+  90 Percent confidence interval - lower                     0.918
+  90 Percent confidence interval - upper                     0.952
 
 Parameter Estimates:
 
@@ -2510,56 +2600,65 @@ Regressions:
     mrtl_                             -0.047    0.059   -0.784    0.433
     mrt__                             -0.021    0.089   -0.241    0.810
   PANAS_positive_affect_mean ~                                         
-    ECS__      (b)                     0.166    0.092    1.809    0.070
-    CERQ_   (er_d)                     0.252    0.144    1.749    0.080
-    CERQ_   (er_m)                    -0.137    0.099   -1.388    0.165
-    ERQ__   (er_r)                     0.057    0.066    0.860    0.390
-    EAC__   (er_p)                     0.231    0.091    2.546    0.011
-    age_c                              0.005    0.004    1.169    0.242
-    gndr_                              0.054    0.078    0.692    0.489
-    edct_                              0.048    0.049    0.980    0.327
-    incm_                             -0.042    0.030   -1.424    0.155
-    mrtl_                             -0.193    0.087   -2.213    0.027
-    mrtl_                             -0.050    0.116   -0.432    0.666
-    mrt__                             -0.102    0.166   -0.617    0.537
+    ECS__      (b)                     0.034    0.127    0.264    0.792
+    ECS__   (aw_p)                     0.171    0.107    1.595    0.111
+    CERQ_   (er_d)                     0.248    0.144    1.727    0.084
+    CERQ_   (er_m)                    -0.157    0.099   -1.591    0.112
+    ERQ__   (er_r)                     0.044    0.066    0.669    0.503
+    EAC__   (er_p)                     0.204    0.090    2.282    0.022
+    age_c                              0.004    0.004    1.041    0.298
+    gndr_                              0.051    0.078    0.657    0.511
+    edct_                              0.044    0.049    0.903    0.366
+    incm_                             -0.036    0.030   -1.193    0.233
+    mrtl_                             -0.205    0.088   -2.317    0.020
+    mrtl_                             -0.055    0.119   -0.460    0.645
+    mrt__                             -0.102    0.158   -0.644    0.520
   SWLS_life_satisfaction_mean ~                                        
-    PANAS     (c1)                     0.682    0.064   10.718    0.000
-    age_c                             -0.001    0.004   -0.130    0.897
-    gndr_                              0.065    0.092    0.711    0.477
-    edct_                              0.005    0.051    0.106    0.915
-    incm_                              0.048    0.034    1.394    0.163
-    mrtl_                             -0.010    0.106   -0.098    0.922
-    mrtl_                             -0.203    0.144   -1.409    0.159
-    mrt__                              0.177    0.300    0.589    0.556
+    PANAS     (c1)                     0.625    0.066    9.476    0.000
+    ECS__   (aw_l)                     0.036    0.135    0.266    0.790
+    ECS__   (ac_l)                     0.263    0.141    1.861    0.063
+    age_c                             -0.000    0.004   -0.105    0.917
+    gndr_                              0.081    0.089    0.904    0.366
+    edct_                              0.025    0.051    0.496    0.620
+    incm_                              0.036    0.033    1.067    0.286
+    mrtl_                             -0.029    0.106   -0.275    0.783
+    mrtl_                             -0.198    0.134   -1.480    0.139
+    mrt__                              0.176    0.296    0.593    0.553
   SVS_vitality_mean ~                                                  
-    PANAS     (c2)                     0.876    0.062   14.228    0.000
-    age_c                              0.001    0.005    0.146    0.884
-    gndr_                              0.116    0.096    1.212    0.226
-    edct_                             -0.082    0.052   -1.560    0.119
-    incm_                             -0.002    0.034   -0.067    0.946
-    mrtl_                              0.076    0.111    0.682    0.496
-    mrtl_                             -0.211    0.158   -1.339    0.181
-    mrt__                              0.160    0.263    0.606    0.545
+    PANAS     (c2)                     0.807    0.063   12.770    0.000
+    ECS__   (aw_v)                     0.105    0.124    0.843    0.399
+    ECS__   (ac_v)                     0.238    0.133    1.790    0.073
+    age_c                              0.001    0.004    0.121    0.904
+    gndr_                              0.132    0.093    1.422    0.155
+    edct_                             -0.061    0.052   -1.177    0.239
+    incm_                             -0.014    0.034   -0.402    0.688
+    mrtl_                              0.049    0.107    0.461    0.645
+    mrtl_                             -0.208    0.155   -1.345    0.179
+    mrt__                              0.156    0.260    0.601    0.548
   PWBS_eudaimonic_wellbeing_mean ~                                     
-    PANAS     (c3)                     0.653    0.069    9.504    0.000
-    EAC__ (drct_p)                     0.102    0.065    1.571    0.116
-    age_c                              0.000    0.004    0.079    0.937
-    gndr_                              0.092    0.089    1.033    0.302
-    edct_                              0.009    0.051    0.171    0.864
-    incm_                              0.033    0.034    0.963    0.335
-    mrtl_                             -0.004    0.107   -0.041    0.968
-    mrtl_                             -0.070    0.157   -0.445    0.656
-    mrt__                              0.130    0.239    0.544    0.587
+    PANAS     (c3)                     0.601    0.068    8.779    0.000
+    ECS__  (aw_ed)                     0.046    0.132    0.347    0.729
+    ECS__  (ac_ed)                     0.241    0.140    1.717    0.086
+    EAC__ (drct_p)                     0.088    0.069    1.269    0.204
+    age_c                              0.000    0.004    0.098    0.922
+    gndr_                              0.106    0.087    1.223    0.221
+    edct_                              0.027    0.052    0.522    0.602
+    incm_                              0.022    0.034    0.648    0.517
+    mrtl_                             -0.022    0.108   -0.202    0.840
+    mrtl_                             -0.063    0.152   -0.417    0.677
+    mrt__                              0.131    0.231    0.569    0.570
   K6_psychological_distress_total ~                                    
-    PANAS     (c4)                    -0.611    0.229   -2.665    0.008
-    CERQ_ (drct_m)                     4.898    0.372   13.170    0.000
-    age_c                             -0.030    0.014   -2.115    0.034
-    gndr_                             -0.138    0.330   -0.417    0.677
-    edct_                             -0.035    0.171   -0.206    0.837
-    incm_                              0.145    0.114    1.267    0.205
-    mrtl_                              0.754    0.411    1.833    0.067
-    mrtl_                              0.747    0.555    1.346    0.178
-    mrt__                              1.243    0.826    1.506    0.132
+    PANAS     (c4)                    -0.442    0.247   -1.793    0.073
+    ECS__  (aw_ds)                    -0.219    0.422   -0.520    0.603
+    ECS__  (ac_ds)                    -0.663    0.478   -1.386    0.166
+    CERQ_ (drct_m)                     4.861    0.382   12.734    0.000
+    age_c                             -0.029    0.014   -2.104    0.035
+    gndr_                             -0.179    0.323   -0.553    0.580
+    edct_                             -0.091    0.169   -0.536    0.592
+    incm_                              0.175    0.114    1.545    0.122
+    mrtl_                              0.817    0.413    1.979    0.048
+    mrtl_                              0.735    0.528    1.393    0.164
+    mrt__                              1.247    0.804    1.551    0.121
    Std.lv  Std.all
                   
    -0.041   -0.067
@@ -2581,70 +2680,79 @@ Regressions:
    -0.047   -0.029
    -0.021   -0.010
                   
-    0.166    0.120
-    0.252    0.138
-   -0.137   -0.085
-    0.057    0.073
-    0.231    0.158
-    0.005    0.088
-    0.054    0.039
-    0.048    0.067
-   -0.042   -0.111
-   -0.193   -0.132
-   -0.050   -0.023
+    0.034    0.024
+    0.171    0.141
+    0.248    0.137
+   -0.157   -0.098
+    0.044    0.058
+    0.204    0.140
+    0.004    0.077
+    0.051    0.038
+    0.044    0.063
+   -0.036   -0.096
+   -0.205   -0.141
+   -0.055   -0.025
    -0.102   -0.034
                   
-    0.682    0.526
-   -0.001   -0.008
-    0.065    0.037
-    0.005    0.006
-    0.048    0.097
-   -0.010   -0.005
-   -0.203   -0.072
-    0.177    0.045
+    0.625    0.485
+    0.036    0.023
+    0.263    0.149
+   -0.000   -0.006
+    0.081    0.046
+    0.025    0.028
+    0.036    0.074
+   -0.029   -0.016
+   -0.198   -0.071
+    0.176    0.045
                   
-    0.876    0.605
-    0.001    0.009
-    0.116    0.059
-   -0.082   -0.079
-   -0.002   -0.004
-    0.076    0.036
-   -0.211   -0.067
-    0.160    0.036
+    0.807    0.563
+    0.105    0.060
+    0.238    0.121
+    0.001    0.007
+    0.132    0.068
+   -0.061   -0.060
+   -0.014   -0.025
+    0.049    0.024
+   -0.208   -0.067
+    0.156    0.036
                   
-    0.653    0.513
-    0.102    0.055
-    0.000    0.005
-    0.092    0.053
-    0.009    0.010
-    0.033    0.067
-   -0.004   -0.002
-   -0.070   -0.025
-    0.130    0.034
+    0.601    0.475
+    0.046    0.030
+    0.241    0.139
+    0.088    0.047
+    0.000    0.006
+    0.106    0.062
+    0.027    0.030
+    0.022    0.046
+   -0.022   -0.012
+   -0.063   -0.023
+    0.131    0.034
                   
-   -0.611   -0.120
-    4.898    0.597
-   -0.030   -0.113
-   -0.138   -0.020
-   -0.035   -0.010
-    0.145    0.075
-    0.754    0.101
-    0.747    0.067
-    1.243    0.080
+   -0.442   -0.087
+   -0.219   -0.036
+   -0.663   -0.095
+    4.861    0.597
+   -0.029   -0.113
+   -0.179   -0.026
+   -0.091   -0.025
+    0.175    0.092
+    0.817    0.111
+    0.735    0.067
+    1.247    0.081
 
 Covariances:
                                     Estimate  Std.Err  z-value  P(>|z|)
   ECRGO_attachment_anxiety_mean ~~                                     
     ECRGO_vdnc_f__                     0.093    0.048    1.959    0.050
  .SWLS_life_satisfaction_mean ~~                                       
-   .SVS_vitalty_mn                     0.275    0.038    7.207    0.000
-   .PWBS_dmnc_wll_                     0.408    0.039   10.356    0.000
-   .K6_psychlgcl__                    -0.365    0.119   -3.080    0.002
+   .SVS_vitalty_mn                     0.253    0.036    6.998    0.000
+   .PWBS_dmnc_wll_                     0.391    0.039   10.085    0.000
+   .K6_psychlgcl__                    -0.311    0.113   -2.749    0.006
  .SVS_vitality_mean ~~                                                 
-   .PWBS_dmnc_wll_                     0.253    0.035    7.252    0.000
-   .K6_psychlgcl__                    -0.276    0.135   -2.052    0.040
+   .PWBS_dmnc_wll_                     0.233    0.034    6.913    0.000
+   .K6_psychlgcl__                    -0.213    0.130   -1.635    0.102
  .PWBS_eudaimonic_wellbeing_mean ~~                                    
-   .K6_psychlgcl__                    -0.276    0.121   -2.283    0.022
+   .K6_psychlgcl__                    -0.228    0.120   -1.894    0.058
   age_c ~~                                                             
     gender_female                     -0.310    0.403   -0.770    0.441
     education_c                        0.790    0.743    1.063    0.288
@@ -2679,7 +2787,7 @@ Covariances:
     marital_single                    -0.126    0.050   -2.529    0.011
     marital_partnr                    -0.084    0.034   -2.469    0.014
     mrtl_sprtd_dvr                     0.005    0.021    0.227    0.820
-    CERQ_adaptv_mn                     0.012    0.039    0.300    0.765
+    CERQ_adaptv_mn                     0.012    0.039    0.300    0.764
     CERQ_mldptv_mn                    -0.021    0.046   -0.446    0.656
     ERQ_repprsl_mn                     0.088    0.093    0.940    0.347
     EAC_mtnl_prcs_                     0.091    0.050    1.828    0.068
@@ -2714,14 +2822,14 @@ Covariances:
                   
     0.093    0.115
                   
-    0.275    0.476
-    0.408    0.758
-   -0.365   -0.186
+    0.253    0.456
+    0.391    0.750
+   -0.311   -0.164
                   
-    0.253    0.445
-   -0.276   -0.134
+    0.233    0.425
+   -0.213   -0.106
                   
-   -0.276   -0.143
+   -0.228   -0.121
                   
    -0.310   -0.047
     0.790    0.062
@@ -2792,11 +2900,11 @@ Intercepts:
                    Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
    .ECS_bng_lvd_w_    3.652    0.208   17.524    0.000    3.652    6.535
    .ECS_bng_lvd_c_    0.964    0.109    8.815    0.000    0.964    1.957
-   .PANAS_pstv_ff_    1.864    0.542    3.442    0.001    1.864    2.738
-   .SWLS_lf_stsfc_    1.555    0.233    6.675    0.000    1.555    1.762
-   .SVS_vitalty_mn    0.748    0.231    3.241    0.001    0.748    0.758
-   .PWBS_dmnc_wll_    1.373    0.276    4.974    0.000    1.373    1.584
-   .K6_psychlgcl__   -6.108    1.562   -3.910    0.000   -6.108   -1.767
+   .PANAS_pstv_ff_    1.934    0.540    3.582    0.000    1.934    2.856
+   .SWLS_lf_stsfc_    0.881    0.312    2.823    0.005    0.881    1.010
+   .SVS_vitalty_mn   -0.014    0.328   -0.041    0.967   -0.014   -0.014
+   .PWBS_dmnc_wll_    0.753    0.328    2.298    0.022    0.753    0.879
+   .K6_psychlgcl__   -4.012    1.809   -2.217    0.027   -4.012   -1.170
     ECRGO_ttchmn__    4.121    0.056   74.119    0.000    4.121    4.545
     ECRGO_vdnc_f__    4.222    0.055   77.059    0.000    4.222    4.725
     age_c            -0.264    0.812   -0.325    0.746   -0.264   -0.020
@@ -2815,11 +2923,11 @@ Variances:
                    Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
    .ECS_bng_lvd_w_    0.293    0.026   11.190    0.000    0.293    0.939
    .ECS_bng_lvd_c_    0.101    0.008   13.216    0.000    0.101    0.418
-   .PANAS_pstv_ff_    0.393    0.035   11.235    0.000    0.393    0.848
-   .SWLS_lf_stsfc_    0.547    0.045   12.113    0.000    0.547    0.703
-   .SVS_vitalty_mn    0.607    0.049   12.353    0.000    0.607    0.625
-   .PWBS_dmnc_wll_    0.530    0.044   12.118    0.000    0.530    0.706
-   .K6_psychlgcl__    7.033    0.555   12.671    0.000    7.033    0.589
+   .PANAS_pstv_ff_    0.390    0.034   11.354    0.000    0.390    0.849
+   .SWLS_lf_stsfc_    0.528    0.044   12.066    0.000    0.528    0.694
+   .SVS_vitalty_mn    0.583    0.048   12.263    0.000    0.583    0.617
+   .PWBS_dmnc_wll_    0.514    0.043   11.832    0.000    0.514    0.700
+   .K6_psychlgcl__    6.871    0.547   12.560    0.000    6.871    0.584
     ECRGO_ttchmn__    0.822    0.069   11.841    0.000    0.822    1.000
     ECRGO_vdnc_f__    0.799    0.057   14.023    0.000    0.799    1.000
     age_c           175.556   14.057   12.489    0.000  175.556    1.000
@@ -2838,36 +2946,36 @@ R-Square:
                    Estimate
     ECS_bng_lvd_w_    0.061
     ECS_bng_lvd_c_    0.582
-    PANAS_pstv_ff_    0.152
-    SWLS_lf_stsfc_    0.297
-    SVS_vitalty_mn    0.375
-    PWBS_dmnc_wll_    0.294
-    K6_psychlgcl__    0.411
+    PANAS_pstv_ff_    0.151
+    SWLS_lf_stsfc_    0.306
+    SVS_vitalty_mn    0.383
+    PWBS_dmnc_wll_    0.300
+    K6_psychlgcl__    0.416
 
 Defined Parameters:
                    Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
-    indrct_lf_stsf    0.075    0.043    1.738    0.082    0.075    0.047
-    indirect_vtlty    0.096    0.055    1.748    0.081    0.096    0.055
-    indirect_edmnc    0.072    0.041    1.730    0.084    0.072    0.046
-    indirct_dstrss   -0.067    0.046   -1.455    0.146   -0.067   -0.011
-    ecr_nxty_ndrc_   -0.003    0.003   -0.887    0.375   -0.003   -0.003
-    ecr_nxty_ndrc_   -0.004    0.004   -0.891    0.373   -0.004   -0.004
-    ecr_nxty_ndrc_   -0.003    0.003   -0.886    0.375   -0.003   -0.003
-    ecr_nxty_ndrc_    0.003    0.003    0.833    0.405    0.003    0.001
-    ecr_vdnc_ndrc_   -0.010    0.007   -1.515    0.130   -0.010   -0.010
-    ecr_vdnc_ndrc_   -0.013    0.008   -1.520    0.128   -0.013   -0.011
-    ecr_vdnc_ndrc_   -0.009    0.006   -1.508    0.132   -0.009   -0.010
-    ecr_vdnc_ndrc_    0.009    0.007    1.303    0.193    0.009    0.002
+    indrct_lf_stsf    0.014    0.053    0.263    0.792    0.014    0.009
+    indirect_vtlty    0.018    0.068    0.263    0.792    0.018    0.010
+    indirect_edmnc    0.013    0.051    0.263    0.792    0.013    0.009
+    indirct_dstrss   -0.010    0.037   -0.262    0.793   -0.010   -0.002
+    ecr_nxty_ndrc_   -0.001    0.002   -0.254    0.799   -0.001   -0.001
+    ecr_nxty_ndrc_   -0.001    0.003   -0.254    0.799   -0.001   -0.001
+    ecr_nxty_ndrc_   -0.001    0.002   -0.254    0.800   -0.001   -0.001
+    ecr_nxty_ndrc_    0.000    0.002    0.253    0.800    0.000    0.000
+    ecr_vdnc_ndrc_   -0.002    0.007   -0.262    0.793   -0.002   -0.002
+    ecr_vdnc_ndrc_   -0.002    0.009   -0.263    0.793   -0.002   -0.002
+    ecr_vdnc_ndrc_   -0.002    0.007   -0.262    0.793   -0.002   -0.002
+    ecr_vdnc_ndrc_    0.001    0.005    0.261    0.794    0.001    0.000
 
 
 ===== feeling_energetic =====
 ECS_feeling_energetic_awareness_mean ~ d1*ECRGO_attachment_anxiety_mean + d2*ECRGO_avoidance_of_intimacy_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
 ECS_feeling_energetic_action_mean ~ a*ECS_feeling_energetic_awareness_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
-PANAS_positive_affect_mean ~ b*ECS_feeling_energetic_action_mean + er_adaptive*CERQ_adaptive_mean + er_maladaptive*CERQ_maladaptive_mean + er_reappraisal*ERQ_reappraisal_mean + er_processing*EAC_emotional_processing_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
-SWLS_life_satisfaction_mean ~ c1*PANAS_positive_affect_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
-SVS_vitality_mean ~ c2*PANAS_positive_affect_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
-PWBS_eudaimonic_wellbeing_mean ~ c3*PANAS_positive_affect_mean + direct_processing*EAC_emotional_processing_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
-K6_psychological_distress_total ~ c4*PANAS_positive_affect_mean + direct_maladaptive*CERQ_maladaptive_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+PANAS_positive_affect_mean ~ b*ECS_feeling_energetic_action_mean + aw_pa*ECS_feeling_energetic_awareness_mean + er_adaptive*CERQ_adaptive_mean + er_maladaptive*CERQ_maladaptive_mean + er_reappraisal*ERQ_reappraisal_mean + er_processing*EAC_emotional_processing_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+SWLS_life_satisfaction_mean ~ c1*PANAS_positive_affect_mean + aw_ls*ECS_feeling_energetic_awareness_mean + ac_ls*ECS_feeling_energetic_action_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+SVS_vitality_mean ~ c2*PANAS_positive_affect_mean + aw_vit*ECS_feeling_energetic_awareness_mean + ac_vit*ECS_feeling_energetic_action_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+PWBS_eudaimonic_wellbeing_mean ~ c3*PANAS_positive_affect_mean + aw_eud*ECS_feeling_energetic_awareness_mean + ac_eud*ECS_feeling_energetic_action_mean + direct_processing*EAC_emotional_processing_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
+K6_psychological_distress_total ~ c4*PANAS_positive_affect_mean + aw_dis*ECS_feeling_energetic_awareness_mean + ac_dis*ECS_feeling_energetic_action_mean + direct_maladaptive*CERQ_maladaptive_mean + age_c + gender_female + education_c + income_c + marital_single + marital_partner + marital_separated_divorced
 ECRGO_attachment_anxiety_mean ~~ ECRGO_avoidance_of_intimacy_mean
 SWLS_life_satisfaction_mean ~~ SVS_vitality_mean + PWBS_eudaimonic_wellbeing_mean + K6_psychological_distress_total
 SVS_vitality_mean ~~ PWBS_eudaimonic_wellbeing_mean + K6_psychological_distress_total
@@ -2885,11 +2993,11 @@ ecr_avoidance_indirect_vitality := d2*a*b*c2
 ecr_avoidance_indirect_eudaimonic := d2*a*b*c3
 ecr_avoidance_indirect_distress := d2*a*b*c4
 
-lavaan 0.7-3 ended normally after 977 iterations
+lavaan 0.7-3 ended normally after 306 iterations
 
   Estimator                                         ML
   Optimization method                           NLMINB
-  Number of model parameters                       165
+  Number of model parameters                       174
   Row rank of the constraints matrix                20
 
   Number of observations                           266
@@ -2897,10 +3005,10 @@ lavaan 0.7-3 ended normally after 977 iterations
 
 Model Test User Model:
                                               Standard      Scaled
-  Test Statistic                               245.942     249.164
-  Degrees of freedom                                65          65
+  Test Statistic                               231.422     234.236
+  Degrees of freedom                                56          56
   P-value (Chi-square)                           0.000       0.000
-  Scaling correction factor                                  0.987
+  Scaling correction factor                                  0.988
     Yuan-Bentler correction (Mplus variant)                       
 
 Model Test Baseline Model:
@@ -2912,52 +3020,52 @@ Model Test Baseline Model:
 
 User Model versus Baseline Model:
 
-  Comparative Fit Index (CFI)                    0.850       0.849
-  Tucker-Lewis Index (TLI)                       0.689       0.686
+  Comparative Fit Index (CFI)                    0.855       0.854
+  Tucker-Lewis Index (TLI)                       0.650       0.647
                                                                   
-  Robust Comparative Fit Index (CFI)                         0.855
-  Robust Tucker-Lewis Index (TLI)                            0.698
+  Robust Comparative Fit Index (CFI)                         0.859
+  Robust Tucker-Lewis Index (TLI)                            0.661
 
 Loglikelihood and Information Criteria:
 
-  Loglikelihood user model (H0)              -5551.061   -5551.061
-  Scaling correction factor                                  1.013
+  Loglikelihood user model (H0)              -5543.801   -5543.801
+  Scaling correction factor                                  1.011
       for the MLR correction                                      
   Loglikelihood unrestricted model (H1)      -5428.090   -5428.090
   Scaling correction factor                                  1.005
       for the MLR correction                                      
                                                                   
-  Akaike (AIC)                               11432.123   11432.123
-  Bayesian (BIC)                             12023.400   12023.400
-  Sample-size adjusted Bayesian (SABIC)      11500.257   11500.257
+  Akaike (AIC)                               11435.602   11435.602
+  Bayesian (BIC)                             12059.131   12059.131
+  Sample-size adjusted Bayesian (SABIC)      11507.453   11507.453
 
 Root Mean Square Error of Approximation:
 
-  RMSEA                                          0.102       0.103
-  90 Percent confidence interval - lower         0.089       0.090
-  90 Percent confidence interval - upper         0.116       0.117
+  RMSEA                                          0.109       0.109
+  90 Percent confidence interval - lower         0.094       0.095
+  90 Percent confidence interval - upper         0.123       0.124
   P-value H_0: RMSEA <= 0.050                    0.000       0.000
-  P-value H_0: RMSEA >= 0.080                    0.997       0.997
+  P-value H_0: RMSEA >= 0.080                    0.999       1.000
                                                                   
-  Robust RMSEA                                               0.100
-  90 Percent confidence interval - lower                     0.085
-  90 Percent confidence interval - upper                     0.115
+  Robust RMSEA                                               0.106
+  90 Percent confidence interval - lower                     0.090
+  90 Percent confidence interval - upper                     0.122
   P-value H_0: Robust RMSEA <= 0.050                         0.000
-  P-value H_0: Robust RMSEA >= 0.080                         0.988
+  P-value H_0: Robust RMSEA >= 0.080                         0.996
 
 Standardized Root Mean Square Residual:
 
-  SRMR                                           0.106       0.106
+  SRMR                                           0.102       0.102
 
 Goodness of Fit Index:
 
-  Goodness of Fit Index (GFI)                    0.936            
-  90 Percent confidence interval - lower         0.920            
-  90 Percent confidence interval - upper         0.951            
+  Goodness of Fit Index (GFI)                    0.938            
+  90 Percent confidence interval - lower         0.922            
+  90 Percent confidence interval - upper         0.953            
                                                                   
-  Robust GFI                                                 0.939
-  90 Percent confidence interval - lower                     0.921
-  90 Percent confidence interval - upper                     0.955
+  Robust GFI                                                 0.941
+  90 Percent confidence interval - lower                     0.923
+  90 Percent confidence interval - upper                     0.956
 
 Parameter Estimates:
 
@@ -2987,56 +3095,65 @@ Regressions:
     mrtl_                                   0.003    0.069    0.043    0.966
     mrt__                                  -0.043    0.097   -0.450    0.653
   PANAS_positive_affect_mean ~                                              
-    ECS__      (b)                          0.156    0.081    1.919    0.055
-    CERQ_   (er_d)                          0.280    0.143    1.962    0.050
-    CERQ_   (er_m)                         -0.135    0.100   -1.351    0.177
-    ERQ__   (er_r)                          0.056    0.066    0.847    0.397
-    EAC__   (er_p)                          0.212    0.093    2.281    0.023
-    age_c                                   0.005    0.004    1.268    0.205
-    gndr_                                   0.047    0.078    0.608    0.543
-    edct_                                   0.040    0.048    0.831    0.406
-    incm_                                  -0.037    0.030   -1.234    0.217
-    mrtl_                                  -0.175    0.089   -1.964    0.050
-    mrtl_                                  -0.054    0.116   -0.460    0.646
-    mrt__                                  -0.098    0.167   -0.586    0.558
+    ECS__      (b)                          0.038    0.114    0.330    0.742
+    ECS__   (aw_p)                          0.148    0.096    1.538    0.124
+    CERQ_   (er_d)                          0.266    0.142    1.876    0.061
+    CERQ_   (er_m)                         -0.125    0.100   -1.253    0.210
+    ERQ__   (er_r)                          0.058    0.066    0.884    0.377
+    EAC__   (er_p)                          0.202    0.093    2.178    0.029
+    age_c                                   0.005    0.004    1.249    0.212
+    gndr_                                   0.047    0.077    0.609    0.543
+    edct_                                   0.042    0.048    0.869    0.385
+    incm_                                  -0.035    0.029   -1.187    0.235
+    mrtl_                                  -0.170    0.089   -1.906    0.057
+    mrtl_                                  -0.050    0.118   -0.425    0.671
+    mrt__                                  -0.104    0.165   -0.630    0.529
   SWLS_life_satisfaction_mean ~                                             
-    PANAS     (c1)                          0.682    0.064   10.718    0.000
-    age_c                                  -0.001    0.004   -0.130    0.897
-    gndr_                                   0.065    0.092    0.711    0.477
-    edct_                                   0.005    0.051    0.106    0.915
-    incm_                                   0.048    0.034    1.394    0.163
-    mrtl_                                  -0.010    0.106   -0.098    0.922
-    mrtl_                                  -0.203    0.144   -1.409    0.159
-    mrt__                                   0.177    0.300    0.589    0.556
+    PANAS     (c1)                          0.635    0.065    9.785    0.000
+    ECS__   (aw_l)                          0.042    0.105    0.399    0.690
+    ECS__   (ac_l)                          0.187    0.115    1.620    0.105
+    age_c                                   0.000    0.004    0.058    0.953
+    gndr_                                   0.067    0.091    0.742    0.458
+    edct_                                   0.013    0.050    0.251    0.802
+    incm_                                   0.044    0.034    1.297    0.195
+    mrtl_                                   0.003    0.104    0.027    0.979
+    mrtl_                                  -0.202    0.142   -1.422    0.155
+    mrt__                                   0.174    0.302    0.577    0.564
   SVS_vitality_mean ~                                                       
-    PANAS     (c2)                          0.876    0.062   14.228    0.000
-    age_c                                   0.001    0.005    0.146    0.884
-    gndr_                                   0.116    0.096    1.212    0.226
-    edct_                                  -0.082    0.052   -1.560    0.119
-    incm_                                  -0.002    0.034   -0.067    0.946
-    mrtl_                                   0.076    0.111    0.682    0.496
-    mrtl_                                  -0.211    0.158   -1.339    0.181
-    mrt__                                   0.160    0.263    0.606    0.545
+    PANAS     (c2)                          0.839    0.065   12.898    0.000
+    ECS__   (aw_v)                         -0.062    0.117   -0.532    0.595
+    ECS__   (ac_v)                          0.261    0.136    1.920    0.055
+    age_c                                   0.001    0.005    0.312    0.755
+    gndr_                                   0.117    0.095    1.233    0.218
+    edct_                                  -0.076    0.052   -1.466    0.143
+    incm_                                  -0.006    0.034   -0.185    0.853
+    mrtl_                                   0.088    0.110    0.795    0.427
+    mrtl_                                  -0.210    0.161   -1.304    0.192
+    mrt__                                   0.163    0.267    0.611    0.541
   PWBS_eudaimonic_wellbeing_mean ~                                          
-    PANAS     (c3)                          0.653    0.069    9.504    0.000
-    EAC__ (drct_p)                          0.102    0.065    1.571    0.116
-    age_c                                   0.000    0.004    0.079    0.937
-    gndr_                                   0.092    0.089    1.033    0.302
-    edct_                                   0.009    0.051    0.171    0.864
-    incm_                                   0.033    0.034    0.963    0.335
-    mrtl_                                  -0.004    0.107   -0.041    0.968
-    mrtl_                                  -0.070    0.157   -0.445    0.656
-    mrt__                                   0.130    0.239    0.544    0.587
+    PANAS     (c3)                          0.621    0.068    9.117    0.000
+    ECS__  (aw_ed)                         -0.072    0.103   -0.700    0.484
+    ECS__  (ac_ed)                          0.248    0.121    2.048    0.041
+    EAC__ (drct_p)                          0.103    0.067    1.533    0.125
+    age_c                                   0.001    0.004    0.263    0.792
+    gndr_                                   0.093    0.089    1.049    0.294
+    edct_                                   0.014    0.052    0.266    0.791
+    incm_                                   0.029    0.034    0.854    0.393
+    mrtl_                                   0.006    0.106    0.057    0.955
+    mrtl_                                  -0.069    0.156   -0.445    0.656
+    mrt__                                   0.134    0.238    0.563    0.573
   K6_psychological_distress_total ~                                         
-    PANAS     (c4)                         -0.611    0.229   -2.665    0.008
-    CERQ_ (drct_m)                          4.898    0.372   13.170    0.000
-    age_c                                  -0.030    0.014   -2.115    0.034
-    gndr_                                  -0.138    0.330   -0.417    0.677
-    edct_                                  -0.035    0.171   -0.206    0.837
-    incm_                                   0.145    0.114    1.267    0.205
-    mrtl_                                   0.754    0.411    1.833    0.067
-    mrtl_                                   0.747    0.555    1.346    0.178
-    mrt__                                   1.243    0.826    1.506    0.132
+    PANAS     (c4)                         -0.521    0.235   -2.223    0.026
+    ECS__  (aw_ds)                          0.316    0.475    0.665    0.506
+    ECS__  (ac_ds)                         -0.830    0.483   -1.717    0.086
+    CERQ_ (drct_m)                          4.898    0.375   13.060    0.000
+    age_c                                  -0.032    0.014   -2.252    0.024
+    gndr_                                  -0.139    0.328   -0.422    0.673
+    edct_                                  -0.049    0.171   -0.287    0.774
+    incm_                                   0.157    0.112    1.400    0.161
+    mrtl_                                   0.723    0.410    1.766    0.077
+    mrtl_                                   0.746    0.560    1.333    0.182
+    mrt__                                   1.225    0.807    1.517    0.129
    Std.lv  Std.all
                   
    -0.084   -0.131
@@ -3058,70 +3175,79 @@ Regressions:
     0.003    0.002
    -0.043   -0.018
                   
-    0.156    0.123
-    0.280    0.154
-   -0.135   -0.083
-    0.056    0.072
-    0.212    0.144
-    0.005    0.096
+    0.038    0.030
+    0.148    0.128
+    0.266    0.146
+   -0.125   -0.078
+    0.058    0.076
+    0.202    0.138
+    0.005    0.094
     0.047    0.035
-    0.040    0.057
-   -0.037   -0.097
-   -0.175   -0.119
-   -0.054   -0.024
-   -0.098   -0.032
+    0.042    0.059
+   -0.035   -0.092
+   -0.170   -0.116
+   -0.050   -0.023
+   -0.104   -0.034
                   
-    0.682    0.526
-   -0.001   -0.008
-    0.065    0.037
-    0.005    0.006
-    0.048    0.097
-   -0.010   -0.005
-   -0.203   -0.072
-    0.177    0.045
+    0.635    0.493
+    0.042    0.028
+    0.187    0.114
+    0.000    0.003
+    0.067    0.038
+    0.013    0.014
+    0.044    0.091
+    0.003    0.001
+   -0.202   -0.072
+    0.174    0.045
                   
-    0.876    0.605
-    0.001    0.009
-    0.116    0.059
-   -0.082   -0.079
-   -0.002   -0.004
-    0.076    0.036
-   -0.211   -0.067
-    0.160    0.036
+    0.839    0.583
+   -0.062   -0.037
+    0.261    0.143
+    0.001    0.019
+    0.117    0.060
+   -0.076   -0.075
+   -0.006   -0.012
+    0.088    0.042
+   -0.210   -0.067
+    0.163    0.037
                   
-    0.653    0.514
-    0.102    0.055
-    0.000    0.005
-    0.092    0.053
-    0.009    0.010
-    0.033    0.067
-   -0.004   -0.002
-   -0.070   -0.025
-    0.130    0.034
+    0.621    0.490
+   -0.072   -0.049
+    0.248    0.155
+    0.103    0.056
+    0.001    0.015
+    0.093    0.054
+    0.014    0.015
+    0.029    0.060
+    0.006    0.003
+   -0.069   -0.025
+    0.134    0.035
                   
-   -0.611   -0.120
-    4.898    0.597
-   -0.030   -0.113
-   -0.138   -0.020
-   -0.035   -0.010
-    0.145    0.075
-    0.754    0.101
-    0.747    0.067
-    1.243    0.080
+   -0.521   -0.103
+    0.316    0.054
+   -0.830   -0.129
+    4.898    0.599
+   -0.032   -0.122
+   -0.139   -0.020
+   -0.049   -0.014
+    0.157    0.082
+    0.723    0.098
+    0.746    0.068
+    1.225    0.079
 
 Covariances:
                                     Estimate  Std.Err  z-value  P(>|z|)
   ECRGO_attachment_anxiety_mean ~~                                     
     ECRGO_vdnc_f__                     0.093    0.048    1.959    0.050
  .SWLS_life_satisfaction_mean ~~                                       
-   .SVS_vitalty_mn                     0.275    0.038    7.207    0.000
-   .PWBS_dmnc_wll_                     0.408    0.039   10.356    0.000
-   .K6_psychlgcl__                    -0.365    0.119   -3.080    0.002
+   .SVS_vitalty_mn                     0.263    0.038    6.859    0.000
+   .PWBS_dmnc_wll_                     0.398    0.040    9.896    0.000
+   .K6_psychlgcl__                    -0.333    0.117   -2.844    0.004
  .SVS_vitality_mean ~~                                                 
-   .PWBS_dmnc_wll_                     0.253    0.035    7.252    0.000
-   .K6_psychlgcl__                    -0.276    0.135   -2.052    0.040
+   .PWBS_dmnc_wll_                     0.241    0.035    6.902    0.000
+   .K6_psychlgcl__                    -0.242    0.132   -1.830    0.067
  .PWBS_eudaimonic_wellbeing_mean ~~                                    
-   .K6_psychlgcl__                    -0.276    0.121   -2.283    0.022
+   .K6_psychlgcl__                    -0.244    0.120   -2.036    0.042
   age_c ~~                                                             
     gender_female                     -0.310    0.403   -0.770    0.441
     education_c                        0.790    0.743    1.063    0.288
@@ -3136,7 +3262,7 @@ Covariances:
   gender_female ~~                                                     
     education_c                       -0.033    0.029   -1.126    0.260
     income_c                          -0.087    0.055   -1.588    0.112
-    marital_single                     0.014    0.014    0.989    0.322
+    marital_single                     0.014    0.014    0.990    0.322
     marital_partnr                     0.004    0.010    0.420    0.675
     mrtl_sprtd_dvr                    -0.001    0.007   -0.116    0.908
     CERQ_adaptv_mn                    -0.019    0.011   -1.627    0.104
@@ -3191,14 +3317,14 @@ Covariances:
                   
     0.093    0.115
                   
-    0.275    0.476
-    0.408    0.758
-   -0.365   -0.186
+    0.263    0.466
+    0.398    0.754
+   -0.333   -0.173
                   
-    0.253    0.445
-   -0.276   -0.134
+    0.241    0.434
+   -0.242   -0.119
                   
-   -0.276   -0.143
+   -0.244   -0.129
                   
    -0.310   -0.047
     0.790    0.062
@@ -3269,11 +3395,11 @@ Intercepts:
                    Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
    .ECS_flng_nrg__    3.943    0.230   17.179    0.000    3.943    6.730
    .ECS_flng_nrg__    0.828    0.113    7.322    0.000    0.828    1.546
-   .PANAS_pstv_ff_    1.841    0.544    3.382    0.001    1.841    2.702
-   .SWLS_lf_stsfc_    1.555    0.233    6.675    0.000    1.555    1.761
-   .SVS_vitalty_mn    0.748    0.231    3.241    0.001    0.748    0.758
-   .PWBS_dmnc_wll_    1.373    0.276    4.974    0.000    1.373    1.584
-   .K6_psychlgcl__   -6.108    1.562   -3.910    0.000   -6.108   -1.767
+   .PANAS_pstv_ff_    1.769    0.549    3.222    0.001    1.769    2.607
+   .SWLS_lf_stsfc_    1.036    0.317    3.268    0.001    1.036    1.185
+   .SVS_vitalty_mn    0.292    0.329    0.886    0.376    0.292    0.298
+   .PWBS_dmnc_wll_    0.966    0.343    2.821    0.005    0.966    1.123
+   .K6_psychlgcl__   -4.925    1.818   -2.708    0.007   -4.925   -1.430
     ECRGO_ttchmn__    4.121    0.056   74.119    0.000    4.121    4.545
     ECRGO_vdnc_f__    4.222    0.055   77.059    0.000    4.222    4.725
     age_c            -0.264    0.812   -0.325    0.746   -0.264   -0.020
@@ -3292,11 +3418,11 @@ Variances:
                    Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
    .ECS_flng_nrg__    0.318    0.026   12.238    0.000    0.318    0.928
    .ECS_flng_nrg__    0.117    0.011   11.056    0.000    0.117    0.406
-   .PANAS_pstv_ff_    0.393    0.034   11.410    0.000    0.393    0.846
-   .SWLS_lf_stsfc_    0.547    0.045   12.113    0.000    0.547    0.703
-   .SVS_vitalty_mn    0.607    0.049   12.353    0.000    0.607    0.625
-   .PWBS_dmnc_wll_    0.530    0.044   12.118    0.000    0.530    0.706
-   .K6_psychlgcl__    7.033    0.555   12.671    0.000    7.033    0.588
+   .PANAS_pstv_ff_    0.390    0.035   11.283    0.000    0.390    0.846
+   .SWLS_lf_stsfc_    0.534    0.046   11.691    0.000    0.534    0.698
+   .SVS_vitalty_mn    0.595    0.047   12.584    0.000    0.595    0.623
+   .PWBS_dmnc_wll_    0.520    0.045   11.642    0.000    0.520    0.703
+   .K6_psychlgcl__    6.932    0.549   12.627    0.000    6.932    0.584
     ECRGO_ttchmn__    0.822    0.069   11.841    0.000    0.822    1.000
     ECRGO_vdnc_f__    0.799    0.057   14.023    0.000    0.799    1.000
     age_c           175.556   14.057   12.489    0.000  175.556    1.000
@@ -3316,24 +3442,24 @@ R-Square:
     ECS_flng_nrg__    0.072
     ECS_flng_nrg__    0.594
     PANAS_pstv_ff_    0.154
-    SWLS_lf_stsfc_    0.297
-    SVS_vitalty_mn    0.375
-    PWBS_dmnc_wll_    0.294
-    K6_psychlgcl__    0.412
+    SWLS_lf_stsfc_    0.302
+    SVS_vitalty_mn    0.377
+    PWBS_dmnc_wll_    0.297
+    K6_psychlgcl__    0.416
 
 Defined Parameters:
                    Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
-    indrct_lf_stsf    0.075    0.041    1.834    0.067    0.075    0.050
-    indirect_vtlty    0.096    0.051    1.895    0.058    0.096    0.057
-    indirect_edmnc    0.072    0.039    1.816    0.069    0.072    0.048
-    indirct_dstrss   -0.067    0.046   -1.468    0.142   -0.067   -0.011
-    ecr_nxty_ndrc_   -0.006    0.005   -1.322    0.186   -0.006   -0.006
-    ecr_nxty_ndrc_   -0.008    0.006   -1.360    0.174   -0.008   -0.007
-    ecr_nxty_ndrc_   -0.006    0.005   -1.318    0.188   -0.006   -0.006
-    ecr_nxty_ndrc_    0.006    0.005    1.139    0.255    0.006    0.001
-    ecr_vdnc_ndrc_   -0.010    0.006   -1.591    0.112   -0.010   -0.010
-    ecr_vdnc_ndrc_   -0.013    0.008   -1.649    0.099   -0.013   -0.012
-    ecr_vdnc_ndrc_   -0.010    0.006   -1.586    0.113   -0.010   -0.010
-    ecr_vdnc_ndrc_    0.009    0.007    1.319    0.187    0.009    0.002
+    indrct_lf_stsf    0.017    0.051    0.328    0.743    0.017    0.011
+    indirect_vtlty    0.022    0.067    0.330    0.742    0.022    0.013
+    indirect_edmnc    0.016    0.050    0.327    0.744    0.016    0.011
+    indirct_dstrss   -0.014    0.042   -0.326    0.744   -0.014   -0.002
+    ecr_nxty_ndrc_   -0.001    0.004   -0.320    0.749   -0.001   -0.001
+    ecr_nxty_ndrc_   -0.002    0.006   -0.322    0.748   -0.002   -0.002
+    ecr_nxty_ndrc_   -0.001    0.004   -0.319    0.749   -0.001   -0.001
+    ecr_nxty_ndrc_    0.001    0.004    0.318    0.750    0.001    0.000
+    ecr_vdnc_ndrc_   -0.002    0.007   -0.328    0.743   -0.002   -0.002
+    ecr_vdnc_ndrc_   -0.003    0.009   -0.330    0.741   -0.003   -0.003
+    ecr_vdnc_ndrc_   -0.002    0.007   -0.327    0.743   -0.002   -0.002
+    ecr_vdnc_ndrc_    0.002    0.006    0.326    0.744    0.002    0.000
 
 

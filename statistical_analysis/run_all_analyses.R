@@ -33,7 +33,8 @@ scripts <- c(
   "05_cfa_ecs.R",
   "06_sem_primary_model.R",
   "07_sem_emotion_specific_sensitivity.R",
-  "08_generate_sem_figures.R"
+  "08_generate_sem_figures.R",
+  "09_generate_paper_tables.R"
 )
 
 run_started <- Sys.time()

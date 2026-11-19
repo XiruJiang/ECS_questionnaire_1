@@ -1,4 +1,4 @@
-Run time: 2026-11-15 21:46:22 JST
+Run time: 2026-11-17 15:27:14 JST
 Input: C:/survey/ECS_questionnaire_1/preprocessing/03_analysis_with_scale_scores.csv
 SEM complete cases: 266 of 300
 Bootstrap draws: 0

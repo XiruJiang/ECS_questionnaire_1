@@ -201,7 +201,13 @@ fit_sem_model <- function(model_syntax, model_name) {
   )
   saveRDS(fit, file.path(output_directory, paste0("06_", model_name, "_fit.rds")))
   parameters <- lavaan::parameterEstimates(fit, standardized = TRUE, ci = TRUE)
-  selected <- parameters[parameters$op %in% c("=~", "~", ":="), ]
+  display_covariance <- parameters$op == "~~" & parameters$lhs != parameters$rhs & (
+    (parameters$lhs == "attachment_anxiety" & parameters$rhs == "intimacy_avoidance") |
+      (parameters$lhs == "life_satisfaction" & parameters$rhs %in% c("vitality", "eudaimonic", "distress")) |
+      (parameters$lhs == "vitality" & parameters$rhs %in% c("eudaimonic", "distress")) |
+      (parameters$lhs == "eudaimonic" & parameters$rhs == "distress")
+  )
+  selected <- parameters[parameters$op %in% c("=~", "~", ":=") | display_covariance, ]
   write_utf8_csv(
     round_numeric_columns(selected, 4L),
     file.path(output_directory, paste0("06_", model_name, "_parameters.csv"))

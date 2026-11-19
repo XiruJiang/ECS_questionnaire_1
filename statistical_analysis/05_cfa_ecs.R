@@ -55,8 +55,9 @@ for (scale_id in names(ecs_versions)) {
 
   parameters <- lavaan::parameterEstimates(fit_two, standardized = TRUE, ci = TRUE)
   loadings <- parameters[parameters$op == "=~", c("lhs", "rhs", "est", "se", "z", "pvalue", "ci.lower", "ci.upper", "std.all")]
+  loadings$r_squared <- loadings$std.all^2
   loadings$scale <- scale_name
-  loading_rows[[scale_name]] <- loadings[, c("scale", "lhs", "rhs", "est", "se", "z", "pvalue", "ci.lower", "ci.upper", "std.all")]
+  loading_rows[[scale_name]] <- loadings[, c("scale", "lhs", "rhs", "est", "se", "z", "pvalue", "ci.lower", "ci.upper", "std.all", "r_squared")]
 
   comparison <- tryCatch(
     suppressWarnings(lavaan::lavTestLRT(fit_one, fit_two, method = "satorra.bentler.2001")),

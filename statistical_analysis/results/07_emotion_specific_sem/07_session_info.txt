@@ -1,7 +1,8 @@
-Run time: 2026-11-15 21:48:02 JST
+Run time: 2026-11-19 16:39:58 JST
 Input: C:/survey/ECS_questionnaire_1/preprocessing/03_analysis_with_scale_scores.csv
 These are supplemental observed-score path models for the seven emotion-specific ECS versions.
 Primary chain: ECR-GO attachment anxiety / intimacy avoidance -> emotion-specific awareness -> emotion-specific action -> positive affect -> outcomes.
+As in the original paper's sensitivity analysis, direct paths from awareness to positive affect and from awareness/action to each outcome are tested; only significant additions are drawn in the merged figure.
 They replace the general awareness/action scores one version at a time while retaining both ECR-GO dimensions upstream.
 They are not substitutes for the primary latent CFA and SEM models.
 

@@ -47,11 +47,11 @@ for (scale_id in names(ecs_versions)[-1]) {
   model_lines <- c(
     paste0(awareness, " ~ d1*ECRGO_attachment_anxiety_mean + d2*ECRGO_avoidance_of_intimacy_mean + ", covariate_rhs),
     paste0(action, " ~ a*", awareness, " + ", covariate_rhs),
-    paste0("PANAS_positive_affect_mean ~ b*", action, " + er_adaptive*CERQ_adaptive_mean + er_maladaptive*CERQ_maladaptive_mean + er_reappraisal*ERQ_reappraisal_mean + er_processing*EAC_emotional_processing_mean + ", covariate_rhs),
-    paste0("SWLS_life_satisfaction_mean ~ c1*PANAS_positive_affect_mean + ", covariate_rhs),
-    paste0("SVS_vitality_mean ~ c2*PANAS_positive_affect_mean + ", covariate_rhs),
-    paste0("PWBS_eudaimonic_wellbeing_mean ~ c3*PANAS_positive_affect_mean + direct_processing*EAC_emotional_processing_mean + ", covariate_rhs),
-    paste0("K6_psychological_distress_total ~ c4*PANAS_positive_affect_mean + direct_maladaptive*CERQ_maladaptive_mean + ", covariate_rhs),
+    paste0("PANAS_positive_affect_mean ~ b*", action, " + aw_pa*", awareness, " + er_adaptive*CERQ_adaptive_mean + er_maladaptive*CERQ_maladaptive_mean + er_reappraisal*ERQ_reappraisal_mean + er_processing*EAC_emotional_processing_mean + ", covariate_rhs),
+    paste0("SWLS_life_satisfaction_mean ~ c1*PANAS_positive_affect_mean + aw_ls*", awareness, " + ac_ls*", action, " + ", covariate_rhs),
+    paste0("SVS_vitality_mean ~ c2*PANAS_positive_affect_mean + aw_vit*", awareness, " + ac_vit*", action, " + ", covariate_rhs),
+    paste0("PWBS_eudaimonic_wellbeing_mean ~ c3*PANAS_positive_affect_mean + aw_eud*", awareness, " + ac_eud*", action, " + direct_processing*EAC_emotional_processing_mean + ", covariate_rhs),
+    paste0("K6_psychological_distress_total ~ c4*PANAS_positive_affect_mean + aw_dis*", awareness, " + ac_dis*", action, " + direct_maladaptive*CERQ_maladaptive_mean + ", covariate_rhs),
     "ECRGO_attachment_anxiety_mean ~~ ECRGO_avoidance_of_intimacy_mean",
     "SWLS_life_satisfaction_mean ~~ SVS_vitality_mean + PWBS_eudaimonic_wellbeing_mean + K6_psychological_distress_total",
     "SVS_vitality_mean ~~ PWBS_eudaimonic_wellbeing_mean + K6_psychological_distress_total",
@@ -95,7 +95,17 @@ for (scale_id in names(ecs_versions)[-1]) {
     stringsAsFactors = FALSE,
     check.names = FALSE
   )
-  selected <- parameters[parameters$op %in% c("~", ":="), ]
+  display_covariance <- parameters$op == "~~" & parameters$lhs != parameters$rhs & (
+    (parameters$lhs == "ECRGO_attachment_anxiety_mean" & parameters$rhs == "ECRGO_avoidance_of_intimacy_mean") |
+      (parameters$lhs == "SWLS_life_satisfaction_mean" & parameters$rhs %in% c(
+        "SVS_vitality_mean", "PWBS_eudaimonic_wellbeing_mean", "K6_psychological_distress_total"
+      )) |
+      (parameters$lhs == "SVS_vitality_mean" & parameters$rhs %in% c(
+        "PWBS_eudaimonic_wellbeing_mean", "K6_psychological_distress_total"
+      )) |
+      (parameters$lhs == "PWBS_eudaimonic_wellbeing_mean" & parameters$rhs == "K6_psychological_distress_total")
+  )
+  selected <- parameters[parameters$op %in% c("~", ":=") | display_covariance, ]
   selected$emotion_version <- version
   parameter_rows[[version]] <- selected[, c("emotion_version", setdiff(names(selected), "emotion_version"))]
   summary_lines <- c(
@@ -117,8 +127,25 @@ for (scale_id in names(ecs_versions)[-1]) {
   )
 }
 
+combined_parameters <- do.call(rbind, parameter_rows)
+direct_path_labels <- c(
+  "aw_pa", "aw_ls", "ac_ls", "aw_vit", "ac_vit",
+  "aw_eud", "ac_eud", "aw_dis", "ac_dis"
+)
+significant_direct_paths <- combined_parameters[
+  combined_parameters$op == "~" &
+    combined_parameters$label %in% direct_path_labels &
+    !is.na(combined_parameters$pvalue) &
+    combined_parameters$pvalue < 0.05,
+  , drop = FALSE
+]
+
 write_utf8_csv(round_numeric_columns(do.call(rbind, fit_rows), 4L), file.path(output_directory, "07_emotion_specific_fit_indices.csv"))
-write_utf8_csv(round_numeric_columns(do.call(rbind, parameter_rows), 4L), file.path(output_directory, "07_emotion_specific_parameters.csv"))
+write_utf8_csv(round_numeric_columns(combined_parameters, 4L), file.path(output_directory, "07_emotion_specific_parameters.csv"))
+write_utf8_csv(
+  round_numeric_columns(significant_direct_paths, 4L),
+  file.path(output_directory, "07_emotion_specific_significant_direct_paths.csv")
+)
 write_utf8_csv(do.call(rbind, diagnostic_rows), file.path(output_directory, "07_emotion_specific_diagnostics.csv"))
 write_utf8_text(summary_lines, file.path(output_directory, "07_emotion_specific_full_summaries.txt"))
 write_analysis_session_info(
@@ -126,6 +153,7 @@ write_analysis_session_info(
   c(
     "These are supplemental observed-score path models for the seven emotion-specific ECS versions.",
     "Primary chain: ECR-GO attachment anxiety / intimacy avoidance -> emotion-specific awareness -> emotion-specific action -> positive affect -> outcomes.",
+    "As in the original paper's sensitivity analysis, direct paths from awareness to positive affect and from awareness/action to each outcome are tested; only significant additions are drawn in the merged figure.",
     "They replace the general awareness/action scores one version at a time while retaining both ECR-GO dimensions upstream.",
     "They are not substitutes for the primary latent CFA and SEM models."
   )
