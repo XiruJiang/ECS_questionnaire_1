@@ -1,2 +1,0 @@
-"participant_id","source_file","crowdworks_serial_code","exclusion_reason","failed_attention_items","attention_failed_count","all_attention_checks_failed","attention_A_13_pass","attention_H_13_pass","attention_H_23_pass"
-"861d80fb-0691-4b23-a6bd-65346e13bb43","861d80fb-0691-4b23-a6bd-65346e13bb43.csv","313672","failed_attention_check","A_13|H_13|H_23","3","TRUE","FALSE","FALSE","FALSE"

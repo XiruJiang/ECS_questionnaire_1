@@ -1,6 +1,0 @@
-model1_sequential: converged=TRUE
-model1_sequential: admissible_post_check=FALSE
-model1_sequential: negative_variances=none
-model2_er_controls: converged=TRUE
-model2_er_controls: admissible_post_check=FALSE
-model2_er_controls: negative_variances=none

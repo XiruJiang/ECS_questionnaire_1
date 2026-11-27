@@ -1,3 +1,0 @@
-"scale","model","n","converged","chisq","df","chisq_df","p_value","cfi","tli","rmsea","rmsea_ci_lower","rmsea_ci_upper","srmr","aic","bic"
-"primary_sem","model1_sequential","266","TRUE","955.3984","781","1.2233","0","0.97","0.9661","0.0279","0.0207","0.0342","0.0809","23947.2243","24692.5915"
-"primary_sem","model2_er_controls","266","TRUE","1742.737","1496","1.1649","0","0.967","0.964","0.024","0.0181","0.029","0.0799","30888.1218","31866.4163"

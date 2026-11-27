@@ -1,3 +1,0 @@
-"comparison","model","Df","AIC","BIC","Chisq","Chisq diff","Df diff","Pr(>Chisq)","note"
-"one_factor_vs_two_factor","fit_objects[[""2_factor""]]","26","5592.856","5737.3035","20.3475","","","","Robust scaled chi-square difference test; original paper reported this comparison."
-"one_factor_vs_two_factor","fit_objects[[""1_factor""]]","35","5600.9135","5712.0269","46.405","22.6085","9","0.0071","Robust scaled chi-square difference test; original paper reported this comparison."

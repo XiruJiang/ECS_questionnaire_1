@@ -1,5 +1,0 @@
-"scale","model","n","converged","chisq","df","chisq_df","p_value","cfi","tli","rmsea","rmsea_ci_lower","rmsea_ci_upper","srmr","aic","bic","requested_factors","original_paper_role","fit_interpretation","error"
-"general","1_factor","300","TRUE","47.5632","35","1.3589","0.0764","0.989","0.9859","0.034","0","0.0567","0.0279","5600.9135","5712.0269","1","primary_comparison","good_by_original_paper_thresholds",""
-"general","2_factor","300","TRUE","22.2519","26","0.8558","0.6748","1","1.0111","0","0","0.0359","0.0175","5592.856","5737.3035","2","primary_comparison","good_by_original_paper_thresholds",""
-"general","3_factor","300","TRUE","13.0339","18","0.7241","0.7896","1","1.0362","0","0","0.0418","0.012","5599.3037","5773.3815","3","attempted_but_not_identified_in_original","good_by_original_paper_thresholds",""
-"general","4_factor","300","TRUE","4.7369","11","0.4306","0.9432","","","0","","","0.0076","5606.74","5806.7443","4","attempted_but_not_identified_in_original","not_available",""
